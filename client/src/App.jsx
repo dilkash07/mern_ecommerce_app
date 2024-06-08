@@ -26,7 +26,8 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/SingleItem/:itemId" element={<SingleItem />} />
+        <Route path="/SingleItem" element={<SingleItem />} />
+        {/* <Route path="/SingleItem/:itemId" element={<SingleItem />} /> */}
         <Route path="/product" element={<Product />} />
       </Routes>
       <div>

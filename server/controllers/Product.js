@@ -2,6 +2,7 @@ const Product = require("../models/Product");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
 
+// upload product
 exports.uploadProduct = async (req, res) => {
   try {
     // fethch data from req body
@@ -73,6 +74,48 @@ exports.uploadProduct = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while uploading product",
+      error: error.message,
+    });
+  }
+};
+
+// get all product
+exports.getAllProduct = async (req, res) => {
+  try {
+    const response = await Product.find({});
+
+    res.status(200).json({
+      success: true,
+      message: "Product fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching product",
+      error: error.message,
+    });
+  }
+};
+
+// get single product
+exports.getSingleProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const response = await Product.findById({ _id: id });
+
+    res.status(200).json({
+      success: true,
+      message: "Product fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching product",
       error: error.message,
     });
   }
