@@ -60,3 +60,5 @@ export async function uploadProduct(formData) {
 
   toast.dismiss(toastId);
 }
+
+// get single product
