@@ -64,7 +64,7 @@ const User = ({ setUserProfile }) => {
         </div>
         <div className="border-t border-yellow-600 py-2">
           <div className="hover:font-bold">
-            <Link to={"/product"}>Login for Admin</Link>
+            <Link to={"/admin/dashboard"}>Login for Admin</Link>
           </div>
           {user && (
             <button className="hover:font-bold" onClick={logoutHandler}>

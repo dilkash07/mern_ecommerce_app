@@ -11,8 +11,6 @@ import { add, remove } from "../redux/slice/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import ReactImageMagnify from "react-image-magnify";
-import imag300 from "../assets/300.png";
-import imag1200 from "../assets/1200.png";
 
 const SingleItem = () => {
   // const { itemId } = useParams();

@@ -120,3 +120,5 @@ exports.getSingleProduct = async (req, res) => {
     });
   }
 };
+
+// get category wise product

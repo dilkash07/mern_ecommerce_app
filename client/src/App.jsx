@@ -11,6 +11,7 @@ import SingleItem from "./pages/SingleItem";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import Product from "./pages/Product";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/SingleItem" element={<SingleItem />} />
         {/* <Route path="/SingleItem/:itemId" element={<SingleItem />} /> */}
         <Route path="/product" element={<Product />} />
+        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
       </Routes>
       <div>
         <Footer />
