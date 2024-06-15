@@ -13,7 +13,7 @@ const WishlistItem = ({ item }) => {
 
   function moveToCart() {
     dispatch(add(item));
-    dispatch(removeWish(item.id));
+    dispatch(removeWish(item._id));
     toast.success("Item moved to cart");
 
     // if item less than 1 and navigate to cart
@@ -23,7 +23,7 @@ const WishlistItem = ({ item }) => {
   }
 
   function removeItem() {
-    dispatch(removeWish(item.id));
+    dispatch(removeWish(item._id));
     toast.error("Item removed from wishlist");
   }
   return (
@@ -35,7 +35,7 @@ const WishlistItem = ({ item }) => {
       <Link to={`/SingleItem/${item.id}`}>
         <div className=" w-60 h-64">
           <img
-            src={item.images[0]}
+            src={item.thumbnail.image_url}
             className="max-h-full  rounded-sm object-cover"
           />
         </div>
@@ -51,15 +51,13 @@ const WishlistItem = ({ item }) => {
             : item.description}
         </p>
         <p className="text-sm font-semibold">
-          ₹ {item.price}{" "}
+          ₹ {item.sellingPrice}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             MRP.
-            {Math.round(
-              item.price + (item.discountPercentage * item.price) / 100
-            )}
+            {item.price}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
-            ({item.discountPercentage}% OFF)
+            ({Math.round(item.discount)}% OFF)
           </span>
         </p>
       </div>

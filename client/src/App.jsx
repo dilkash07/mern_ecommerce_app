@@ -28,7 +28,7 @@ function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/SingleItem" element={<SingleItem />} />
-        {/* <Route path="/SingleItem/:itemId" element={<SingleItem />} /> */}
+        <Route path="/SingleItem/:itemId" element={<SingleItem />} />
         <Route path="/product" element={<Product />} />
         {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
       </Routes>

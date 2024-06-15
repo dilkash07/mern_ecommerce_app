@@ -13,12 +13,12 @@ import toast from "react-hot-toast";
 import ReactImageMagnify from "react-image-magnify";
 
 const SingleItem = () => {
-  // const { itemId } = useParams();
+  const { itemId } = useParams();
 
-  const API_URL =
-    "http://localhost:4000/api/v1/product/getSingleProduct/66651c389611987c36297f5f";
+  const API_URL = `http://localhost:4000/api/v1/product/getSingleProduct/${itemId}`;
   // const API_URL = `https://dummyjson.com/products/${itemId}`;
 
+  console.log(API_URL);
   const [items, setItems] = useState([]);
   const [activeImage, setActiveImage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -44,12 +44,12 @@ const SingleItem = () => {
     setLoading(false);
   }
 
-  useEffect(() => {
-    fetchProduct();
-  }, []);
   // useEffect(() => {
   //   fetchProduct();
-  // }, [itemId]);
+  // }, []);
+  useEffect(() => {
+    fetchProduct();
+  }, [itemId]);
 
   const setImageHandler = (e) => {
     setActiveImage(e.target.src);
@@ -78,27 +78,23 @@ const SingleItem = () => {
   return (
     <div className="min-h-screen max-w-7xl p-2 md:py-5 md:px-10  flex flex-col md:flex-row mx-auto">
       <div className="md:min-w-[450px] flex items-center md:items-start flex-col-reverse md:flex-row mt-4 ">
-        <div className="flex md:h-[400px] pt-4 gap-2 md:flex-col  items-center overflow-scroll scrollbar-none ">
+        <div className="flex w-20 h-20 md:h-96 pt-4 gap-2 md:flex-col  items-center overflow-scroll scrollbar-none ">
           {items?.images?.map((image, key) => (
-            <img
-              src={image?.image_url}
-              height={80}
-              width={80}
-              className="hover:border-2 border-orange-600"
-              key={key}
-              onClick={setImageHandler}
-              onMouseMove={setImageHandler}
-            />
+            <div className="h-20 w-20 hover:border-2 border-orange-600 flex justify-center items-center">
+              <img
+                src={image?.image_url}
+                className="max-h-full"
+                key={key}
+                onClick={setImageHandler}
+                onMouseMove={setImageHandler}
+              />
+            </div>
           ))}
         </div>
         <div className="mx-auto md:px-5">
-          <img
-            src={activeImage}
-            alt="ecommerce"
-            height={400}
-            width={400}
-            className="md:h-[400px] md:w-[400px] object-cover"
-          />
+          <div className="h-96 w-96 flex justify-center items-center">
+            <img src={activeImage} alt="ecommerce" className="max-h-full" />
+          </div>
 
           {/* <ReactImageMagnify
             className=" object-cover"
@@ -134,11 +130,6 @@ const SingleItem = () => {
             {items?.title}
           </h1>
 
-          {/* description */}
-          <p className="text-xl text-gray-600 font-normal">
-            {items?.description}
-          </p>
-
           {/* rating */}
           <p className=" w-max flex items-center gap-2 bg-gray-100  py-1 mt-3 rounded-sm text-sm font-semibold border text-gray-950 px-2">
             {items?.review?.length}{" "}
@@ -160,6 +151,10 @@ const SingleItem = () => {
               <span className="text-xs font-normal text-orange-400">
                 ({Math.round(items?.discount)}% OFF)
               </span>
+            </p>
+            {/* description */}
+            <p className="text-xl text-gray-600 font-normal">
+              {items?.description}
             </p>
           </div>
 

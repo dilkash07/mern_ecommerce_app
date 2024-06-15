@@ -10,7 +10,8 @@ import { getUserDetails } from "../services/operations/ProfileAPI";
 
 const Home = () => {
   // const API_URL = "https://fakestoreapi.com/products";
-  const API_URL = "https://dummyjson.com/products";
+  // const API_URL = "https://dummyjson.com/products"; old hai
+  const API_URL = "http://localhost:4000/api/v1/product/getAllProduct";
 
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -37,7 +38,8 @@ const Home = () => {
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
-      setItems(data.products);
+      setItems(data.response);
+      console.log("this is data hai ji: ", data.response);
     } catch (error) {
       console.log("error aa gaya jee");
       toast.error(error.message);
@@ -68,10 +70,10 @@ const Home = () => {
         // toast.loading("Loading...")
         <Spinner />
       ) : items.length > 0 ? (
-        items.map((item) => <Card item={item} key={item.id} />)
+        items.map((item) => <Card item={item} key={item._id} />)
       ) : (
-        // <div>Data Not Found</div>
-        <AddProduct />
+        <div>Data Not Found</div>
+        // <AddProduct />
       )}
     </div>
   );

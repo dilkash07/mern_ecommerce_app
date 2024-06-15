@@ -11,17 +11,17 @@ const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
   function changeHandler(e) {
-    dispatch(cartQty({ id: item.id, qty: e.target.value }));
+    dispatch(cartQty({ id: item._id, qty: e.target.value }));
   }
 
   function removeItem() {
-    dispatch(remove(item.id));
+    dispatch(remove(item._id));
     toast.error("Item removed from cart");
   }
 
   function moveToWishlist() {
     dispatch(addWish(item));
-    dispatch(remove(item.id));
+    dispatch(remove(item._id));
     toast.error("Item moved to wishlist");
   }
 
@@ -33,7 +33,7 @@ const CartItem = ({ item }) => {
       />
       <div>
         <Link to={`/singleItem/${item.id}`}>
-          <img src={item.images[0]} height={125} width={100} />
+          <img src={item.thumbnail.image_url} height={125} width={100} />
         </Link>
       </div>
       <div>
@@ -59,15 +59,13 @@ const CartItem = ({ item }) => {
           </select>
         </div>
         <p className="text-xl font-semibold">
-          Rs. {item.price}{" "}
+          Rs. {item.sellingPrice}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             Rs.
-            {Math.round(
-              item.price + (item.discountPercentage * item.price) / 100
-            )}
+            {item.price}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
-            ({item.discountPercentage}% OFF)
+            ({Math.round(item.discount)}% OFF)
           </span>
         </p>
         <button

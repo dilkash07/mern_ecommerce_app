@@ -2,11 +2,19 @@ const Product = require("../models/Product");
 
 exports.searchProduct = async (req, res) => {
   try {
-    const { query, category, minPrice, maxPrice } = req.query;
+    const {
+      query,
+      category,
+      minPrice,
+      maxPrice,
+      minRating,
+      maxRating,
+      brand,
+      minDiscount,
+      maxDiscount,
+    } = req.query;
 
     let filter = {};
-
-    const regex = { $regex: query, $options: "i" };
 
     if (query) {
       filter.title = { $regex: query, $options: "i" };
@@ -20,18 +28,30 @@ exports.searchProduct = async (req, res) => {
     if (maxPrice) {
       filter.price = { ...filter.price, $lte: Number(maxPrice) };
     }
-    // ratings remaining hai
-
-    console.log(filter);
+    if (minRating) {
+      filter.rating = { ...filter.rating, $gte: Number(minRating) };
+    }
+    if (maxRating) {
+      filter.rating = { ...filter.rating, $lte: Number(maxRating) };
+    }
+    if (brand) {
+      const brandArray = brand.split("%");
+      filter.brand = { $in: brandArray };
+    }
+    if (minDiscount) {
+      filter.discount = { ...filter.discount, $gte: Number(minDiscount) };
+    }
+    if (maxDiscount) {
+      filter.discount = { ...filter.discount, $lte: Number(maxDiscount) };
+    }
 
     const response = await Product.find(filter);
 
     res.status(200).json({
       success: true,
       length: response.length,
-      message: "Searching product fetched successfully",
+      message: "Product fetched successfully",
       response,
-      // filter,
     });
   } catch (error) {
     console.error(error);

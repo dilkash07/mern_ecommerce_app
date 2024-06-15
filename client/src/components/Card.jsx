@@ -14,13 +14,16 @@ const Card = ({ item }) => {
   const { wishlist } = useSelector((state) => state);
   const [addCart, setAddCart] = useState(false);
 
+  console.log("this is item: ", item);
+  console.log("this is item id: ", item._id);
+
   function addToCart() {
     dispatch(add(item));
     toast.success("Item added to cart");
   }
 
   function removeFromCart() {
-    dispatch(remove(item.id));
+    dispatch(remove(item._id));
     toast.error("Item removed from cart");
   }
 
@@ -30,7 +33,7 @@ const Card = ({ item }) => {
   }
 
   function removeWishlist() {
-    dispatch(removeWish(item.id));
+    dispatch(removeWish(item._id));
     toast.error("Item removed from wishlist");
   }
 
@@ -41,7 +44,7 @@ const Card = ({ item }) => {
       onMouseLeave={() => setAddCart(false)}
     >
       <div className="relative">
-        {wishlist.some((p) => p.id == item.id) ? (
+        {wishlist.some((p) => p._id == item._id) ? (
           <IoMdHeart
             className="absolute top-3 right-3  text-red-600"
             size={25}
@@ -54,11 +57,11 @@ const Card = ({ item }) => {
             onClick={addWishlist}
           />
         )}
-        <Link to={`/SingleItem/${item.id}`}>
-          <div className=" w-60 h-64">
+        <Link to={`/SingleItem/${item._id}`}>
+          <div className=" w-60 h-60 flex justify-center items-center">
             <img
-              src={item.images[0]}
-              className="max-h-full  rounded-sm object-cover"
+              src={item.thumbnail.image_url}
+              className="max-h-full rounded-sm"
             />
           </div>
         </Link>
@@ -77,15 +80,13 @@ const Card = ({ item }) => {
             : item.description}
         </p>
         <p className="text-sm font-semibold">
-          ₹ {item.price}{" "}
+          ₹ {item.sellingPrice}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             MRP.
-            {Math.round(
-              item.price + (item.discountPercentage * item.price) / 100
-            )}
+            {item.price}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
-            ({item.discountPercentage}% OFF)
+            ({Math.round(item.discount)}% OFF)
           </span>
         </p>
       </div>
