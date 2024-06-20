@@ -9,8 +9,9 @@ import { LiaBookmark } from "react-icons/lia";
 const Cart = () => {
   const { cart } = useSelector((state) => state);
   const { wishlist } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
 
-  console.log(cart);
+  console.log("this is user hai ji from cart: ", user);
 
   return (
     <div className="min-h-screen max-w-7xl mx-auto px-5">
@@ -20,10 +21,10 @@ const Cart = () => {
           <span className="text-gray-600 text-md">{cart.length} Items</span>
         </p>
       </div>
-      {cart.length > 0 ? (
+      {user?.user?.cart?.length > 0 ? (
         <div className=" max-w-7xl flex justify-center gap-10 flex-wrap">
           <div>
-            {cart.map((item) => (
+            {user?.user?.cart?.map((item) => (
               <CartItem item={item} key={item.id} />
             ))}
 
@@ -41,7 +42,7 @@ const Cart = () => {
             )}
           </div>
 
-          <div>{<PriceDetails cart={cart} />}</div>
+          <div>{<PriceDetails cart={user?.user?.Cart} />}</div>
         </div>
       ) : (
         <div className="h-[70vh] flex flex-col justify-center items-center gap-1">

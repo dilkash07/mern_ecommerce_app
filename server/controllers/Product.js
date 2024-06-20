@@ -106,6 +106,8 @@ exports.getSingleProduct = async (req, res) => {
 
     const response = await Product.findById({ _id: id });
 
+    console.log(response);
+
     res.status(200).json({
       success: true,
       message: "Product fetched successfully",

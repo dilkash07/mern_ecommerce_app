@@ -32,8 +32,8 @@ const CartItem = ({ item }) => {
         onClick={removeItem}
       />
       <div>
-        <Link to={`/singleItem/${item.id}`}>
-          <img src={item.thumbnail.image_url} height={125} width={100} />
+        <Link to={`/singleItem/${item._id}`}>
+          <img src={item.thumbnail.image_url} height={400} width={300} />
         </Link>
       </div>
       <div>
