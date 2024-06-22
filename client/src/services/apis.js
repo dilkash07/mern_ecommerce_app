@@ -16,3 +16,10 @@ export const profileEndPoints = {
 export const productEndPoints = {
   UPLOAD_PRODUCT_API: baseUrl + "/product/uploadProduct",
 };
+
+// CART ENDPOINTS
+export const cartEndPoints = {
+  ADD_CART_API: baseUrl + "/cart/addCart",
+  REMOVE_CART_API: baseUrl + "/cart/removeCart",
+  GET_CART_DEATAILS_API: baseUrl + "/cart/getCartDetails",
+};

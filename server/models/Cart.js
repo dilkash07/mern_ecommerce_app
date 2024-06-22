@@ -9,10 +9,14 @@ const cartItemSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  // },
+  price: {
+    type: Number,
+    required: true,
+  },
+  sellingPrice: {
+    type: Number,
+    required: true,
+  },
 });
 
 // cart schema

@@ -11,8 +11,6 @@ const Cart = () => {
   const { wishlist } = useSelector((state) => state);
   const { user } = useSelector((state) => state);
 
-  console.log("this is user hai ji from cart: ", user);
-
   return (
     <div className="min-h-screen max-w-7xl mx-auto px-5">
       <div className="flex gap-2 items-center border-b border-orange-100 py-4">

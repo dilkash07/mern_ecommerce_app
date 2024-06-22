@@ -5,6 +5,7 @@ const cloudinary = require("./config/cloudinary");
 const userRoutes = require("./router/User");
 const profileRoutes = require("./router/Profile");
 const productRoutes = require("./router/Product");
+const cartRoutes = require("./router/Cart");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -32,6 +33,7 @@ app.use(
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/product", productRoutes);
+app.use("/api/v1/cart", cartRoutes);
 
 database.connect();
 cloudinary.connect();

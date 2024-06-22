@@ -6,13 +6,9 @@ const {
   getSingleProduct,
   getAllProduct,
 } = require("../controllers/Product");
+
 const { searchProduct } = require("../controllers/SearchProduct");
-const {
-  addCart,
-  removeCart,
-  getCart,
-  changeCartQuantity,
-} = require("../controllers/Cart");
+const { addCart, removeCart, getCartDetails } = require("../controllers/Cart");
 const { addWishlist, removeWishlist } = require("../controllers/Wishlist");
 
 router.post("/uploadProduct", uploadProduct);
@@ -23,8 +19,7 @@ router.get("/getSearchProduct", searchProduct);
 // cart
 router.post("/addCart", addCart);
 router.delete("/removeCart", removeCart);
-router.get("/getCart", getCart);
-router.put("/changeCart", changeCartQuantity);
+router.get("/getCart", getCartDetails);
 
 // wishlist
 router.put("/addWishlist", addWishlist);
