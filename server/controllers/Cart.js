@@ -1,6 +1,7 @@
 const Cart = require("../models/Cart");
 const User = require("../models/User");
 const Product = require("../models/Product");
+const Wishlist = require("../models/Wishlist");
 
 // add to cart product
 exports.addCart = async (req, res) => {
@@ -8,11 +9,13 @@ exports.addCart = async (req, res) => {
     const { userId, productId, quantity } = req.body;
 
     const product = await Product.findById(productId);
-    const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId })
+      .populate("items.product")
+      .exec();
 
     if (cart) {
       const itemIndex = cart.items.findIndex(
-        (item) => item.product.toString() === productId
+        (item) => item.product._id.toString() === productId
       );
 
       if (itemIndex > -1) {
@@ -46,6 +49,14 @@ exports.addCart = async (req, res) => {
       );
 
       await cart.save();
+
+      cart.items[cart.items.length - 1].product = product;
+
+      res.status(200).json({
+        success: true,
+        message: "Product added to cart",
+        response: cart,
+      });
     } else {
       const newCart = new Cart({
         user: userId,
@@ -65,12 +76,15 @@ exports.addCart = async (req, res) => {
         // remaining coupon discount, shipping fee and convinience charge
       });
       await newCart.save();
+
+      newCart.items[0].product = product;
+
+      const data = res.status(200).json({
+        success: true,
+        message: "product added to cart",
+        response: newCart,
+      });
     }
-    res.status(200).json({
-      success: true,
-      message: "Product added successfully",
-      cart,
-    });
   } catch (error) {
     console.error(error);
     res.status(500).json({
@@ -85,10 +99,12 @@ exports.removeCart = async (req, res) => {
   try {
     const { userId, productId } = req.body;
 
-    const cart = await Cart.findOne({ user: userId });
+    const cart = await Cart.findOne({ user: userId })
+      .populate("items.product")
+      .exec();
 
     const itemIndex = cart.items.findIndex(
-      (item) => item.product.toString() === productId
+      (item) => item.product._id.toString() === productId
     );
 
     cart.items.splice(itemIndex, 1);
@@ -117,7 +133,7 @@ exports.removeCart = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Product removed from cart",
-      cart,
+      response: cart,
     });
   } catch (error) {
     console.error(error);
@@ -131,14 +147,15 @@ exports.removeCart = async (req, res) => {
 // get cart details
 exports.getCartDetails = async (req, res) => {
   try {
-    const { user } = req.body;
+    const { userId } = req.body;
 
-    const response = await Cart.find({ user }).populate("items.product").exec();
+    const response = await Cart.findOne({ userId })
+      .populate("items.product")
+      .exec();
 
     res.status(200).json({
-      success: false,
+      success: true,
       message: "Cart details fetched successfully",
-      length: response.length,
       response,
     });
   } catch (error) {
@@ -146,6 +163,29 @@ exports.getCartDetails = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Somethig went wrong while fetchig cart details",
+    });
+  }
+};
+
+// getWishlist product
+exports.getWishlist = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const response = await Wishlist.findOne({ user: userId })
+      .populate("items.product")
+      .exec();
+
+    res.status(200).json({
+      success: true,
+      message: "Wishlist details fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Somethig went wrong while fetchig wishlist details",
     });
   }
 };

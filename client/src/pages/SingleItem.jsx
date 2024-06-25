@@ -5,9 +5,8 @@ import { FaStar } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
-import { removeWish } from "../redux/slice/WishlistSlice";
-import { addWish } from "../redux/slice/WishlistSlice";
-import { add, remove } from "../redux/slice/CartSlice";
+import { addCart } from "../services/operations/CartAPI";
+import { setCart, setLoading } from "../redux/slice/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import ReactImageMagnify from "react-image-magnify";
@@ -16,14 +15,13 @@ const SingleItem = () => {
   const { itemId } = useParams();
 
   const API_URL = `http://localhost:4000/api/v1/product/getSingleProduct/${itemId}`;
-  // const API_URL = `https://dummyjson.com/products/${itemId}`;
 
-  console.log(API_URL);
   const [items, setItems] = useState([]);
   const [activeImage, setActiveImage] = useState("");
   const [loading, setLoading] = useState(false);
   const { wishlist } = useSelector((state) => state);
-  const { cart } = useSelector((state) => state);
+  const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -34,19 +32,13 @@ const SingleItem = () => {
       const data = await res.json();
       setItems(data?.response);
       setActiveImage(data?.response?.thumbnail?.image_url);
-      console.log("this is data 1 : ", data?.response);
-      console.log("this is data 2 : ", data.response);
     } catch (error) {
-      console.log("error aa gaya jee");
       toast.error(error);
       setItems([]);
     }
     setLoading(false);
   }
 
-  // useEffect(() => {
-  //   fetchProduct();
-  // }, []);
   useEffect(() => {
     fetchProduct();
   }, [itemId]);
@@ -65,16 +57,17 @@ const SingleItem = () => {
     toast.error("Item removed from wishlist");
   }
 
-  function addCart() {
-    dispatch(add(items));
-    toast.success("Item added to cart");
+  function addToCart() {
+    const userId = user._id;
+    const productId = itemId;
+    const quantity = 1;
+    dispatch(addCart(userId, productId, quantity));
   }
 
   function moveToCart() {
     navigate("/cart");
   }
 
-  console.log("this is items: ", items);
   return (
     <div className="min-h-screen max-w-7xl p-2 md:py-5 md:px-10  flex flex-col md:flex-row mx-auto">
       <div className="md:min-w-[450px] flex items-center md:items-start flex-col-reverse md:flex-row mt-4 ">
@@ -160,7 +153,7 @@ const SingleItem = () => {
 
           {/* add to cart & wishlist */}
           <div className="min-w-max flex gap-3 px-1 text-white mt-7 md:mt-24">
-            {cart.some((p) => p.id == items.id) ? (
+            {cart?.items?.some((p) => p.product._id == itemId) ? (
               <button
                 className="w-1/2 bg-orange-600 font-bold flex gap-1 md:gap-2 justify-center border border-gray-300 items-center py-3 rounded-md"
                 onClick={moveToCart}
@@ -170,13 +163,13 @@ const SingleItem = () => {
             ) : (
               <button
                 className="w-1/2 bg-orange-600 text-sm font-bold flex gap-1 md:gap-2 justify-center border border-gray-300 items-center py-3 rounded-md"
-                onClick={addCart}
+                onClick={addToCart}
               >
                 <MdOutlineShoppingCart size={25} /> Add to Cart
               </button>
             )}
 
-            {wishlist.some((p) => p.id == items.id) ? (
+            {wishlist?.items?.some((p) => p.product._id == itemId) ? (
               <button
                 className=" w-1/2 font-bold flex gap-1 md:gap-2 items-center justify-center border border-gray-300 py-3 rounded-md text-gray-800"
                 onClick={removeWishlist}

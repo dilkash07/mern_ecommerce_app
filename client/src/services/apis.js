@@ -23,3 +23,10 @@ export const cartEndPoints = {
   REMOVE_CART_API: baseUrl + "/cart/removeCart",
   GET_CART_DEATAILS_API: baseUrl + "/cart/getCartDetails",
 };
+
+// WISHLIST ENDPOINTS
+export const wishlistEndPoints = {
+  ADD_WISHLIST_API: baseUrl + "/wishlist/addWishlist",
+  REMOVE_WISHLIST_API: baseUrl + "/wishlist/removeWishlist",
+  GET_WISHLIST_DETAILS_API: baseUrl + "/wishlist/getWishlistDetails",
+};

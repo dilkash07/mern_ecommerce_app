@@ -39,7 +39,6 @@ const Home = () => {
       const res = await fetch(API_URL);
       const data = await res.json();
       setItems(data.response);
-      console.log("this is data hai ji: ", data.response);
     } catch (error) {
       console.log("error aa gaya jee");
       toast.error(error.message);

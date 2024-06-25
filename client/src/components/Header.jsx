@@ -14,7 +14,8 @@ import User from "./User";
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   const [Search, setSearch] = useState(false);
-  const { cart, wishlist } = useSelector((state) => state);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const { query } = useSelector((state) => state.query);
   const { user } = useSelector((state) => state.user);
@@ -27,10 +28,6 @@ const Header = () => {
     dispatch(setQuery(""));
     setSearch(false);
   }
-
-  useEffect(() => {
-    console.log("this is user", user);
-  }, [user]);
 
   const [userProfile, setUserProfile] = useState(false);
   const [profile, setProfile] = useState(false);
@@ -97,9 +94,9 @@ const Header = () => {
             <Link to={"/wishlist"}>
               <div className="relative">
                 <IoMdHeartEmpty size={25} />
-                {wishlist.length > 0 && (
+                {wishlist?.items?.length > 0 && (
                   <div className="h-4 w-4 rounded-full bg-orange-600 text-gray-100 flex justify-center items-center text-xs absolute -top-1.5 -right-1.5 ">
-                    {wishlist.length}
+                    {wishlist?.items?.length}
                   </div>
                 )}
               </div>
@@ -108,9 +105,9 @@ const Header = () => {
             <Link to={"/cart"}>
               <div className="relative">
                 <MdOutlineShoppingCart size={25} />
-                {cart.length > 0 && (
+                {cart?.items?.length > 0 && (
                   <div className="h-4 w-4 rounded-full bg-orange-600 text-gray-100 flex justify-center items-center text-xs absolute -top-1.5 -right-1.5 ">
-                    {cart.length}
+                    {cart?.items?.length}
                   </div>
                 )}
               </div>

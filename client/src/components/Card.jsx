@@ -3,58 +3,58 @@ import { FaStar } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { add, remove } from "../redux/slice/CartSlice";
-import { addWish, removeWish } from "../redux/slice/WishlistSlice";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import {
+  addWishlist,
+  removeWishlist,
+} from "../services/operations/WishlistAPI";
+import { addCart, removeCart } from "../services/operations/CartAPI";
 
 const Card = ({ item }) => {
   const dispatch = useDispatch();
-  const { cart } = useSelector((state) => state);
-  const { wishlist } = useSelector((state) => state);
-  const [addCart, setAddCart] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
+  const { user } = useSelector((state) => state.user);
 
-  console.log("this is item: ", item);
-  console.log("this is item id: ", item._id);
+  const userId = user._id;
+  const productId = item._id;
+  const quantity = 1;
 
   function addToCart() {
-    dispatch(add(item));
-    toast.success("Item added to cart");
+    dispatch(addCart(userId, productId, quantity));
   }
 
   function removeFromCart() {
-    dispatch(remove(item._id));
-    toast.error("Item removed from cart");
+    dispatch(removeCart(userId, productId));
   }
 
-  function addWishlist() {
-    dispatch(addWish(item));
-    toast.success("Item add to wishlist");
+  function addToWishlist() {
+    dispatch(addWishlist(userId, productId));
   }
 
-  function removeWishlist() {
-    dispatch(removeWish(item._id));
-    toast.error("Item removed from wishlist");
+  function removeFromWishlist() {
+    dispatch(removeWishlist(userId, productId));
   }
 
   return (
     <div
       className="p-5 w-72 border rounded-md hover:scale-105 transition duration-300 shadow-md"
-      onMouseEnter={() => setAddCart(true)}
-      onMouseLeave={() => setAddCart(false)}
+      onMouseEnter={() => setShowCart(true)}
+      onMouseLeave={() => setShowCart(false)}
     >
       <div className="relative">
-        {wishlist.some((p) => p._id == item._id) ? (
+        {wishlist?.items?.some((p) => p.product._id == item._id) ? (
           <IoMdHeart
             className="absolute top-3 right-3  text-red-600"
             size={25}
-            onClick={removeWishlist}
+            onClick={removeFromWishlist}
           />
         ) : (
           <IoMdHeartEmpty
             className="absolute top-3 right-3"
             size={25}
-            onClick={addWishlist}
+            onClick={addToWishlist}
           />
         )}
         <Link to={`/SingleItem/${item._id}`}>
@@ -91,9 +91,9 @@ const Card = ({ item }) => {
         </p>
       </div>
 
-      {/* <div className="hidden md:block">
-        {addCart &&
-          (cart.some((p) => p.id == item.id) ? (
+      <div className="hidden md:block">
+        {showCart &&
+          (cart?.items?.some((p) => p.product._id == item._id) ? (
             <button
               className="w-full bg-red-600 rounded-md py-1 px-2 mt-1"
               onClick={removeFromCart}
@@ -108,7 +108,7 @@ const Card = ({ item }) => {
               Add To Cart
             </button>
           ))}
-      </div> */}
+      </div>
     </div>
   );
 };

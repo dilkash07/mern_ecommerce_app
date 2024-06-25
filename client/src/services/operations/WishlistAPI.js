@@ -1,39 +1,19 @@
+import { setLoading, setWishlist } from "../../redux/slice/WishlistSlice";
 import { apiConnector } from "../apiConnector";
+import { wishlistEndPoints } from "../apis";
 import { cartEndPoints } from "../apis";
-import { setCart, setLoading } from "../../redux/slice/CartSlice";
-import axios from "axios";
 import toast from "react-hot-toast";
 
-const { ADD_CART_API, REMOVE_CART_API, GET_CART_DEATAILS_API } = cartEndPoints;
+const { ADD_WISHLIST_API, REMOVE_WISHLIST_API, GET_WISHLIST_DETAILS_API } =
+  wishlistEndPoints;
 
-export function addCart(userId, productId, quantity) {
+const { GET_CART_DEATAILS_API } = cartEndPoints;
+
+export function addWishlist(userId, productId) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Post", ADD_CART_API, {
-        userId,
-        productId,
-        quantity,
-      });
-      if (!response.data.success) {
-        throw new Error(response.data.message);
-      }
-
-      toast.success(response.data.message);
-
-      dispatch(setCart(response.data.response));
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-    dispatch(setLoading(false));
-  };
-}
-
-export function removeCart(userId, productId) {
-  return async (dispatch) => {
-    dispatch(setLoading(true));
-    try {
-      const response = await apiConnector("Delete", REMOVE_CART_API, {
+      const response = await apiConnector("Post", ADD_WISHLIST_API, {
         userId,
         productId,
       });
@@ -41,9 +21,10 @@ export function removeCart(userId, productId) {
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
+
       toast.success(response.data.message);
 
-      dispatch(setCart(response.data.response));
+      dispatch(setWishlist(response.data.response));
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -51,11 +32,34 @@ export function removeCart(userId, productId) {
   };
 }
 
-export function getCartDetails(userId) {
+export function removeWishlist(userId, productId) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Get", GET_CART_DEATAILS_API, {
+      const response = await apiConnector("Delete", REMOVE_WISHLIST_API, {
+        userId,
+        productId,
+      });
+
+      if (!response.data.success) {
+        throw new Error(data.response.message);
+      }
+
+      toast.success(response.data.message);
+
+      dispatch(setWishlist(response.data.response));
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+    dispatch(setLoading(false));
+  };
+}
+
+export function getWishlistDetails(userId) {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("Get", GET_WISHLIST_DETAILS_API, {
         userId,
       });
 
@@ -65,7 +69,7 @@ export function getCartDetails(userId) {
 
       toast.success(response.data.message);
 
-      dispatch(setCart(response.data.response));
+      dispatch(setWishlist(response.data.response));
     } catch (error) {
       toast.error(error.response.data.message);
     }

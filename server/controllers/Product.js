@@ -104,6 +104,8 @@ exports.getSingleProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
+    console.log("_id: ", id);
+
     const response = await Product.findById({ _id: id });
 
     console.log(response);

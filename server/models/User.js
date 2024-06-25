@@ -22,18 +22,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // cart: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Product",
-    //   },
-    // ],
-    // wishlist: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Product",
-    //   },
-    // ],
   },
   { timestamps: true }
 );

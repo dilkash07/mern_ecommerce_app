@@ -1,28 +1,35 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { useDispatch } from "react-redux";
-import { cartQty, remove } from "../redux/slice/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { setCart, setLoading } from "../redux/slice/CartSlice";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { addWish } from "../redux/slice/WishlistSlice";
+import { addCart, removeCart } from "../services/operations/CartAPI";
+import {
+  addWishlist,
+  removeWishlist,
+} from "../services/operations/WishlistAPI";
 
 const CartItem = ({ item }) => {
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const userId = user._id;
+  const productId = item.product._id;
+
   function changeHandler(e) {
-    dispatch(cartQty({ id: item._id, qty: e.target.value }));
+    const quantity = e.target.value;
+    dispatch(addCart(userId, productId, quantity));
   }
 
   function removeItem() {
-    dispatch(remove(item._id));
-    toast.error("Item removed from cart");
+    dispatch(removeCart(userId, productId));
   }
 
   function moveToWishlist() {
-    dispatch(addWish(item));
-    dispatch(remove(item._id));
-    toast.error("Item moved to wishlist");
+    dispatch(removeCart(userId, productId));
+    dispatch(addWishlist(userId, productId));
   }
 
   return (
@@ -31,17 +38,20 @@ const CartItem = ({ item }) => {
         className="absolute top-5 right-5 cursor-pointer"
         onClick={removeItem}
       />
-      <div>
-        <Link to={`/singleItem/${item._id}`}>
-          <img src={item.thumbnail.image_url} height={400} width={300} />
+      <div className=" w-1/4  flex justify-center mt-5">
+        <Link to={`/singleItem/${item.product._id}`}>
+          <img src={item?.product?.thumbnail?.image_url} className="max-h-56" />
         </Link>
       </div>
-      <div>
-        <p className=" text-lg font-semibold mb-5">{item.title}</p>
-        <p className=" font-normal text-sm text-gray-600">{item.description}</p>
+      <div className="w-3/4">
+        <p className=" text-lg font-semibold mb-5">{item?.product?.title}</p>
+        <p className=" font-normal text-sm text-gray-600">
+          {item?.product?.description}
+        </p>
         <p className="flex items-center gap-2 rounded-sm text-sm font-semibold">
-          {item.rating} <FaStar size={15} className=" text-orange-300" /> |{" "}
-          {item.stock}
+          {item?.product?.rating}{" "}
+          <FaStar size={15} className=" text-orange-300" /> |{" "}
+          {item?.product?.stock}
         </p>
         <div className="flex px-3 py-1 border border-orange-100 w-min my-2">
           <p>Qty</p>
@@ -49,7 +59,7 @@ const CartItem = ({ item }) => {
             className="outline-none"
             name="qty"
             onChange={changeHandler}
-            value={item.quantity}
+            value={item?.quantity}
           >
             <option>1</option>
             <option>2</option>
@@ -59,13 +69,13 @@ const CartItem = ({ item }) => {
           </select>
         </div>
         <p className="text-xl font-semibold">
-          Rs. {item.sellingPrice}{" "}
+          Rs. {item?.sellingPrice}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             Rs.
-            {item.price}
+            {item?.price}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
-            ({Math.round(item.discount)}% OFF)
+            ({Math.round(item?.product?.discount)}% OFF)
           </span>
         </p>
         <button
