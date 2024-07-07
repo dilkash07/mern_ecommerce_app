@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import Product from "./pages/Product";
 import AdminDashboard from "./pages/AdminDashboard";
+import FilterProduct from "./pages/FilterProduct";
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/SingleItem" element={<SingleItem />} />
         <Route path="/SingleItem/:itemId" element={<SingleItem />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/uploadProduct" element={<Product />} />
+        <Route path="/filteredProduct" element={<FilterProduct />} />
         {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
       </Routes>
       <div>

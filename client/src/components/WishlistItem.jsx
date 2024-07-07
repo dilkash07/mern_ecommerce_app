@@ -38,10 +38,10 @@ const WishlistItem = ({ item }) => {
       </div>
 
       <Link to={`/SingleItem/${item.product._id}`}>
-        <div className=" w-60 h-64">
+        <div className="w-60 h-60 flex justify-center items-center">
           <img
             src={item.product.thumbnail.image_url}
-            className="max-h-full  rounded-sm object-cover"
+            className="max-h-full rounded-sm"
           />
         </div>
       </Link>

@@ -16,3 +16,21 @@
 }
 @keyframes l3 {to{transform: rotate(1turn)}}
 
+
+
+/* style rc-slider */
+.rc-slider-rail {
+  background-color: #E5E7EB; /* Tailwind gray-200 */
+}
+
+.rc-slider-track {
+  background-color: #f05d19; /* Tailwind blue-500 */
+}
+
+.rc-slider-handle {
+  border-color: #f05d19; /* Tailwind blue-500 */
+}
+
+.rc-slider-handle:focus, .rc-slider-handle:active, .rc-slider-handle:hover {
+  border-color: #f05d19; /* Tailwind blue-600 */
+}

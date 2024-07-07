@@ -55,13 +55,18 @@ export function removeWishlist(userId, productId) {
   };
 }
 
-export function getWishlistDetails(userId) {
+export function getWishlistDetails(token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Get", GET_WISHLIST_DETAILS_API, {
-        userId,
-      });
+      const response = await apiConnector(
+        "Get",
+        GET_WISHLIST_DETAILS_API,
+        null,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
 
       if (!response.data.success) {
         throw new Error(response.data.message);

@@ -51,12 +51,12 @@ export function removeCart(userId, productId) {
   };
 }
 
-export function getCartDetails(userId) {
+export function getCartDetails(token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Get", GET_CART_DEATAILS_API, {
-        userId,
+      const response = await apiConnector("Get", GET_CART_DEATAILS_API, null, {
+        Authorization: `Bearer ${token}`,
       });
 
       if (!response.data.success) {

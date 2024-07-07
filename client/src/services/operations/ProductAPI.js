@@ -2,8 +2,14 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { productEndPoints } from "../apis";
 import axios from "axios";
+import {
+  setLoading,
+  setProduct,
+  setFilteredProduct,
+} from "../../redux/slice/ProductSlice";
 
-const { UPLOAD_PRODUCT_API } = productEndPoints;
+const { UPLOAD_PRODUCT_API, GET_ALL_PRODUCT_API, GET_FILTERED_PRODUCT_API } =
+  productEndPoints;
 
 export async function uploadImage(files) {
   const formData = new FormData();
@@ -61,4 +67,69 @@ export async function uploadProduct(formData) {
   toast.dismiss(toastId);
 }
 
-// get single product
+// get all product
+export function getAllProduct() {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector("Get", GET_ALL_PRODUCT_API);
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success(response.data.message);
+
+      dispatch(setProduct(response.data.response));
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+    dispatch(setLoading(false));
+  };
+}
+
+// get filtered product
+export function getFilteredProduct(
+  query,
+  category,
+  brand,
+  minPrice,
+  maxPrice,
+  minDiscount,
+  minRating,
+  sortOrder,
+  navigate
+) {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "Get",
+        GET_FILTERED_PRODUCT_API,
+        null,
+        null,
+        {
+          query,
+          category,
+          brand,
+          minPrice,
+          maxPrice,
+          minDiscount,
+          minRating,
+          sortOrder,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success(response.data.message);
+      dispatch(setFilteredProduct(response.data.response));
+      navigate("/filteredProduct");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+    dispatch(setLoading(false));
+  };
+}

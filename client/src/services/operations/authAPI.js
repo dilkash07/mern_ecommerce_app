@@ -4,6 +4,8 @@ import { endPoints } from "../apis";
 import { setLoading } from "../../redux/slice/AuthSlice";
 import { setToken } from "../../redux/slice/AuthSlice";
 import { setUser } from "../../redux/slice/UserSlice";
+import { setCart } from "../../redux/slice/CartSlice";
+import { setWishlist } from "../../redux/slice/WishlistSlice";
 
 const { SENDOTP_API, SIGNUP_API, LOGIN_API } = endPoints;
 
@@ -98,6 +100,8 @@ export function logout(navigate) {
   return async (dispatch) => {
     dispatch(setToken(null));
     dispatch(setUser(null));
+    dispatch(setCart(null));
+    dispatch(setWishlist(null));
     localStorage.removeItem("token");
     sessionStorage.removeItem("user");
     toast.success("logged out successfully");

@@ -9,7 +9,7 @@ import { addCart } from "../services/operations/CartAPI";
 import { setCart, setLoading } from "../redux/slice/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import ReactImageMagnify from "react-image-magnify";
+// import ReactImageMagnify from "react-image-magnify"; isko use karne ke liye packege download karna hoga!
 
 const SingleItem = () => {
   const { itemId } = useParams();
@@ -47,20 +47,19 @@ const SingleItem = () => {
     setActiveImage(e.target.src);
   };
 
+  const userId = user?._id;
+  const productId = itemId;
+  const quantity = 1;
+
   function addWishlist() {
-    dispatch(addWish(items));
-    toast.success("Item add to wishlist");
+    dispatch(addWishlist(userId, productId));
   }
 
   function removeWishlist() {
-    dispatch(removeWish(items.id));
-    toast.error("Item removed from wishlist");
+    dispatch(removeWishlist(userId, productId));
   }
 
   function addToCart() {
-    const userId = user._id;
-    const productId = itemId;
-    const quantity = 1;
     dispatch(addCart(userId, productId, quantity));
   }
 
@@ -146,7 +145,7 @@ const SingleItem = () => {
               </span>
             </p>
             {/* description */}
-            <p className="text-xl text-gray-600 font-normal">
+            <p className="text-sm text-gray-600 font-normal">
               {items?.description}
             </p>
           </div>

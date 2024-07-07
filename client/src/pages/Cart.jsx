@@ -8,18 +8,18 @@ import { LiaBookmark } from "react-icons/lia";
 import { getCartDetails } from "../services/operations/CartAPI";
 
 const Cart = () => {
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  if (user != null) {
-    const userId = user._id;
-    useEffect(() => {
-      dispatch(getCartDetails(userId));
-    }, [user]);
-  }
+  // if (user != null) {
+  //   const userId = user._id;
+  //   useEffect(() => {
+  //     dispatch(getCartDetails(userId));
+  //   }, [user]);
+  // }
 
   return (
     <div className="max-w-7xl mx-auto px-5">

@@ -104,11 +104,7 @@ exports.getSingleProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    console.log("_id: ", id);
-
     const response = await Product.findById({ _id: id });
-
-    console.log(response);
 
     res.status(200).json({
       success: true,
@@ -124,5 +120,3 @@ exports.getSingleProduct = async (req, res) => {
     });
   }
 };
-
-// get category wise product

@@ -4,6 +4,7 @@ import wishlistReducer from "./slice/WishlistSlice";
 import queryReducer from "./slice/QuerySlice";
 import authReducer from "./slice/AuthSlice";
 import userReducer from "./slice/UserSlice";
+import productReducer from "./slice/ProductSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     query: queryReducer,
     auth: authReducer,
     user: userReducer,
+    product: productReducer,
   },
 });
 

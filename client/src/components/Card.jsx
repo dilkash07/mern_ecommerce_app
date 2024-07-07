@@ -17,8 +17,8 @@ const Card = ({ item }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { user } = useSelector((state) => state.user);
 
-  const userId = user._id;
-  const productId = item._id;
+  const userId = user?._id;
+  const productId = item?._id;
   const quantity = 1;
 
   function addToCart() {
@@ -91,7 +91,8 @@ const Card = ({ item }) => {
         </p>
       </div>
 
-      <div className="hidden md:block">
+      {/* show add to cart in card product */}
+      {/* <div className="hidden md:block">
         {showCart &&
           (cart?.items?.some((p) => p.product._id == item._id) ? (
             <button
@@ -108,7 +109,7 @@ const Card = ({ item }) => {
               Add To Cart
             </button>
           ))}
-      </div>
+      </div> */}
     </div>
   );
 };

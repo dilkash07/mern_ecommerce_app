@@ -7,17 +7,11 @@ const {
   getAllProduct,
 } = require("../controllers/Product");
 
-const { searchProduct } = require("../controllers/SearchProduct");
-
-const { addWishlist, removeWishlist } = require("../controllers/Wishlist");
+const { getFilteredProduct } = require("../controllers/FilteredProduct");
 
 router.post("/uploadProduct", uploadProduct);
 router.get("/getAllProduct", getAllProduct);
 router.get("/getSingleProduct/:id", getSingleProduct);
-router.get("/getSearchProduct", searchProduct);
-
-// wishlist
-router.put("/addWishlist", addWishlist);
-router.put("/removeWishlist", removeWishlist);
+router.get("/getFilteredProduct", getFilteredProduct);
 
 module.exports = router;

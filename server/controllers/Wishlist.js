@@ -67,7 +67,6 @@ exports.removeWishlist = async (req, res) => {
     const itemIndex = wishlist.items.findIndex(
       (item) => item.product._id.toString() === productId
     );
-    // console.log(itemIndex);
 
     wishlist.items.splice(itemIndex, 1);
 
@@ -88,14 +87,11 @@ exports.removeWishlist = async (req, res) => {
 };
 
 // get wishlist product
-exports.getWishlist = async (req, res) => {
+exports.getWishlistDetails = async (req, res) => {
   try {
-    // const { userId } = req.body;
+    const { id } = req.user;
 
-    //temporary
-    const userId = "666d526c5d9f95625ffe8125";
-
-    const response = await Wishlist.findOne({ user: userId })
+    const response = await Wishlist.findOne({ user: id })
       .populate("items.product")
       .exec();
 

@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 import { getWishlistDetails } from "../services/operations/WishlistAPI";
 
 const Wishlist = () => {
-  const { user } = useSelector((state) => state.user);
+  // const { user } = useSelector((state) => state.user);
   const { wishlist } = useSelector((state) => state.wishlist);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  if (user != null) {
-    useEffect(() => {
-      const userId = user._id;
-      dispatch(getWishlistDetails(userId));
-    }, [user]);
-  }
+  // if (user != null) {
+  //   useEffect(() => {
+  //     const userId = user._id;
+  //     dispatch(getWishlistDetails(userId));
+  //   }, [user]);
+  // }
 
   return (
     <div className=" min-h-screen max-w-7xl mx-auto">

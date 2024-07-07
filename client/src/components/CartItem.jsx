@@ -34,17 +34,18 @@ const CartItem = ({ item }) => {
 
   return (
     <div className=" max-w-3xl flex mt-5 gap-5 border-b-2 border-orange-100 py-5 relative">
-      <RxCross1
-        className="absolute top-5 right-5 cursor-pointer"
-        onClick={removeItem}
-      />
-      <div className=" w-1/4  flex justify-center mt-5">
+      <div className="absolute top-5 right-5">
+        <RxCross1 className="cursor-pointer" onClick={removeItem} />
+      </div>
+      <div className=" w-1/4 flex justify-center mt-5">
         <Link to={`/singleItem/${item.product._id}`}>
           <img src={item?.product?.thumbnail?.image_url} className="max-h-56" />
         </Link>
       </div>
       <div className="w-3/4">
-        <p className=" text-lg font-semibold mb-5">{item?.product?.title}</p>
+        <p className=" text-lg font-semibold mb-5 mr-10">
+          {item?.product?.title}
+        </p>
         <p className=" font-normal text-sm text-gray-600">
           {item?.product?.description}
         </p>

@@ -147,9 +147,9 @@ exports.removeCart = async (req, res) => {
 // get cart details
 exports.getCartDetails = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { id } = req.user;
 
-    const response = await Cart.findOne({ userId })
+    const response = await Cart.findOne({ user: id })
       .populate("items.product")
       .exec();
 
@@ -163,29 +163,6 @@ exports.getCartDetails = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Somethig went wrong while fetchig cart details",
-    });
-  }
-};
-
-// getWishlist product
-exports.getWishlist = async (req, res) => {
-  try {
-    const { userId } = req.body;
-
-    const response = await Wishlist.findOne({ user: userId })
-      .populate("items.product")
-      .exec();
-
-    res.status(200).json({
-      success: true,
-      message: "Wishlist details fetched successfully",
-      response,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Somethig went wrong while fetchig wishlist details",
     });
   }
 };

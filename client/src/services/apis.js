@@ -15,6 +15,8 @@ export const profileEndPoints = {
 // PRODUCT ENDPOINTS
 export const productEndPoints = {
   UPLOAD_PRODUCT_API: baseUrl + "/product/uploadProduct",
+  GET_ALL_PRODUCT_API: baseUrl + "/product/getAllProduct",
+  GET_FILTERED_PRODUCT_API: baseUrl + "/product/getFilteredProduct",
 };
 
 // CART ENDPOINTS
