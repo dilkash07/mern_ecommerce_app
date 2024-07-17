@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^8.2.2"
-
+    "concurrently": "^8.2.2",
+    "react-star-rating-component": "^1.4.1"
   }
 }

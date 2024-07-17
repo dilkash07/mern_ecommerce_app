@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -13,8 +13,31 @@ import VerifyEmail from "./pages/VerifyEmail";
 import Product from "./pages/Product";
 import AdminDashboard from "./pages/AdminDashboard";
 import FilterProduct from "./pages/FilterProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUserDetails } from "./services/operations/ProfileAPI";
+import { getCartDetails } from "./services/operations/CartAPI";
+import { getWishlistDetails } from "./services/operations/WishlistAPI";
+import {
+  getAllProduct,
+  getProductCategory,
+} from "./services/operations/ProductAPI";
 
 function App() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getUserDetails(token, navigate));
+      dispatch(getCartDetails(token));
+      dispatch(getWishlistDetails(token));
+    }
+    dispatch(getAllProduct());
+    dispatch(getProductCategory());
+  }, []);
+
   return (
     <div>
       <div>

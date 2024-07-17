@@ -14,6 +14,7 @@ exports.getFilteredProduct = async (req, res) => {
       maxDiscount,
       sortOrder,
     } = req.query;
+    console.log("category: ", req.query);
 
     let filter = {};
 

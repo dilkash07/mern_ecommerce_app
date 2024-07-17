@@ -100,11 +100,9 @@ exports.getAllProduct = async (req, res) => {
 };
 
 // get single product
-exports.getSingleProduct = async (req, res) => {
+exports.getProductDetails = async (req, res) => {
   try {
-    const { id } = req.params;
-
-    const response = await Product.findById({ _id: id });
+    const response = await Product.findById({ _id: req.params.id });
 
     res.status(200).json({
       success: true,
@@ -117,6 +115,28 @@ exports.getSingleProduct = async (req, res) => {
       success: false,
       message: "Something went wrong while fetching product",
       error: error.message,
+    });
+  }
+};
+
+// get recommended product
+exports.getRecommendedProduct = async (req, res) => {
+  try {
+    const { category, itemId } = req.body;
+
+    const product = await Product.find({ category });
+    const response = product.filter((item) => item._id.toString() !== itemId);
+
+    res.status(200).json({
+      success: true,
+      message: "Recommended product fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching recommended product",
     });
   }
 };

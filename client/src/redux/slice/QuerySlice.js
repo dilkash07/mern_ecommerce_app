@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   query: "",
-  queries: "",
+  categoryQuery: "",
 };
 
 const querySlice = createSlice({
@@ -12,11 +12,11 @@ const querySlice = createSlice({
     setQuery: (state, action) => {
       state.query = action.payload;
     },
-    setQueries: (state, action) => {
-      state.queries = action.payload;
+    setCategoryQuery: (state, action) => {
+      state.categoryQuery = action.payload;
     },
   },
 });
 
-export const { setQuery, setQueries } = querySlice.actions;
+export const { setQuery, setCategoryQuery } = querySlice.actions;
 export default querySlice.reducer;

@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFilteredProduct } from "../services/operations/ProductAPI";
 import { useNavigate } from "react-router-dom";
-import { setQueries } from "../redux/slice/QuerySlice";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { setCategoryQuery } from "../redux/slice/QuerySlice";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { query } = useSelector((state) => state.query);
+  const { query, categoryQuery } = useSelector((state) => state.query);
   const { product } = useSelector((state) => state.product);
 
   const categoryProduct = [];
@@ -84,7 +84,7 @@ const Filter = () => {
     setMinRating(event.target.value);
   };
 
-  const clearAllHandler = (event) => {
+  const clearAllHandler = () => {
     setSortOrder("");
     setCategories([]);
     setBrands([]);
@@ -95,27 +95,46 @@ const Filter = () => {
     setMinDiscount("");
   };
 
-  const category = categories.join("%");
-  const brand = brands.join("%");
-
   useEffect(() => {
-    dispatch(
-      getFilteredProduct(
-        query,
-        category,
-        brand,
-        minPrice,
-        maxPrice,
-        minDiscount,
-        minRating,
-        sortOrder,
-        navigate
-      )
-    );
+    let category = categories.join("%");
+    let brand = brands.join("%");
+
+    if (categoryQuery) {
+      category = categoryQuery;
+      dispatch(
+        getFilteredProduct(
+          query,
+          category,
+          brand,
+          minPrice,
+          maxPrice,
+          minDiscount,
+          minRating,
+          sortOrder,
+          navigate
+        )
+      );
+      setCategories([categoryQuery]);
+      dispatch(setCategoryQuery(""));
+    } else {
+      dispatch(
+        getFilteredProduct(
+          query,
+          category,
+          brand,
+          minPrice,
+          maxPrice,
+          minDiscount,
+          minRating,
+          sortOrder,
+          navigate
+        )
+      );
+    }
   }, [
     query,
-    category,
-    brand,
+    categories,
+    brands,
     minPrice,
     maxPrice,
     minDiscount,
@@ -164,8 +183,8 @@ const Filter = () => {
           CATEGORY
         </h1>
         <div>
-          {categoryProduct.map((item) => (
-            <label className="flex gap-2" key={item.length}>
+          {categoryProduct.map((item, key) => (
+            <label className="flex gap-2" key={key}>
               <input
                 type="checkbox"
                 name={`${item}`}
@@ -177,15 +196,14 @@ const Filter = () => {
             </label>
           ))}
         </div>
-        {/* <button onClick={submitHandler}>submit</button> */}
       </div>
       <div>
         <h1 className=" font-semibold border-b border-yellow-600 mt-2">
           BRAND
         </h1>
         <div>
-          {brandProduct.map((item) => (
-            <label className="flex gap-2" key={item.length}>
+          {brandProduct.map((item, key) => (
+            <label className="flex gap-2" key={key}>
               <input
                 type="checkbox"
                 name={"brand"}

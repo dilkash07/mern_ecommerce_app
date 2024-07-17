@@ -15,8 +15,12 @@ export const profileEndPoints = {
 // PRODUCT ENDPOINTS
 export const productEndPoints = {
   UPLOAD_PRODUCT_API: baseUrl + "/product/uploadProduct",
+  ADD_PRODUCT_CATEGORY_API: baseUrl + "/product/uploadProductCategory",
+  GET_PRODUCT_CATEGORY_API: baseUrl + "/product/getProductCategory",
   GET_ALL_PRODUCT_API: baseUrl + "/product/getAllProduct",
   GET_FILTERED_PRODUCT_API: baseUrl + "/product/getFilteredProduct",
+  GET_RECOMMENDED_PRODUCT_API: baseUrl + "/product/getRecommendedProduct",
+  ADD_REVIEWS_API: baseUrl + "/product/addReviews",
 };
 
 // CART ENDPOINTS

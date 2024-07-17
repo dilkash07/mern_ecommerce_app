@@ -1,29 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Filter from "../components/Filter";
 import Card from "../components/Card";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Spinner from "../components/Spinner";
 import { getAllProduct } from "../services/operations/ProductAPI";
 
 const FilterProduct = () => {
-  const dispatch = useDispatch();
-  const { product, filteredProduct, loading } = useSelector(
-    (state) => state.product
-  );
-
-  useEffect(() => {
-    dispatch(getAllProduct());
-  }, [product.length == 0]);
-
-  console.log("product: ", product);
-  console.log("Filtered product: ", filteredProduct);
-
+  const { filteredProduct, loading } = useSelector((state) => state.product);
   return (
     <div className="h-screen w-screen gap-x-5 flex">
       <div className="h-full w-2/12">
         <Filter />
       </div>
-      <div className="h-full w-10/12 py-5 overflow-y-scroll scrollbar-none">
+      <div className="h-full w-10/12 p-5 overflow-y-scroll scrollbar-none">
+        <p className="text-lg font-semibold mb-5">
+          Search Result: {filteredProduct?.length} Items
+        </p>
         {loading ? (
           <div className="h-5/6 flex justify-center items-center">
             <Spinner />

@@ -24,7 +24,7 @@ exports.auth = async (req, res, next) => {
 
       req.user = decode;
 
-      console.log("Token vaildate successfull");
+      console.log("Token vaildate successfull", decode);
       // console.log(decode);
       // res.status(200).json({
       //   success: true,

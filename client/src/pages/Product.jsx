@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { uploadImage, uploadProduct } from "../services/operations/ProductAPI";
+import {
+  getProductCategory,
+  uploadProduct,
+} from "../services/operations/ProductAPI";
+import AddCategory from "../components/AddCategory";
+import { useDispatch, useSelector } from "react-redux";
 
 const Product = () => {
+  const { productCategories } = useSelector((state) => state.product);
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -17,12 +24,17 @@ const Product = () => {
   });
 
   const [imagesPreview, setImagesPreview] = useState([]);
+  const [showCategory, setShowCategory] = useState(false);
 
   const changeHandler = (event) => {
-    setFormData((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
+    if (event.target.value === "addCategory") {
+      setShowCategory(true);
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [event.target.name]: event.target.value,
+      }));
+    }
   };
 
   const imageHandler = (event) => {
@@ -47,8 +59,9 @@ const Product = () => {
     event.preventDefault();
     uploadProduct(formData);
   };
+
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen relative">
       <form
         className=" max-h-[90%] w-9/12 mx-auto mt-1 px-10 py-12 bg-gray-200 overflow-y-scroll grid gap-8"
         onSubmit={submitHandler}
@@ -96,14 +109,19 @@ const Product = () => {
           <p>
             Category<sup>*</sup>
           </p>
-          <input
+          <select
             className="w-full px-4 py-2"
-            placeholder="Enter category"
-            type="text"
             name="category"
             value={formData.category}
             onChange={changeHandler}
-          />
+            onClick={changeHandler}
+          >
+            <option disabled>Select Category</option>
+            {productCategories?.map((item) => (
+              <option key={item._id}>{item.categoryName}</option>
+            ))}
+            <option value={"addCategory"}>Add Category</option>
+          </select>
         </label>
         <label className="w-full">
           <p>
@@ -198,6 +216,11 @@ const Product = () => {
           Upload Product
         </button>
       </form>
+      {showCategory && (
+        <div className="h-screen w-screen grid place-items-center absolute top-0 right-0">
+          <AddCategory setShowCategory={setShowCategory} />
+        </div>
+      )}
     </div>
   );
 };

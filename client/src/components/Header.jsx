@@ -4,7 +4,7 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setQuery } from "../redux/slice/QuerySlice";
 import loginImg from "../assets/user_image.png";
 import Sidebar from "./Sidebar";
@@ -17,11 +17,13 @@ const Header = () => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { query } = useSelector((state) => state.query);
   const { user } = useSelector((state) => state.user);
 
   function changeHandler(e) {
     dispatch(setQuery(e.target.value));
+    navigate("/filteredProduct");
   }
 
   function queryHandler() {
