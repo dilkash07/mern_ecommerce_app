@@ -44,7 +44,7 @@ exports.addReviews = async (req, res) => {
       avgRating += r.rating;
     });
 
-    product.rating = avgRating / product.numOfReviews;
+    product.rating = Math.round((avgRating / product.numOfReviews) * 10) / 10;
 
     product.save();
 

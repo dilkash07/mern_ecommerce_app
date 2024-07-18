@@ -223,10 +223,7 @@ export function addReviews(productId, rating, comment, token, navigate) {
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-
-      console.log("response: ", response.data.response);
       toast.success(response.data.message);
-      dispatch(setProductDetails(response.data.response));
     } catch (error) {
       toast.error(error.response.data.message);
     }

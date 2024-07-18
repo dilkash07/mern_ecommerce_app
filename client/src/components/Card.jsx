@@ -67,7 +67,8 @@ const Card = ({ item }) => {
         </Link>
         <p className="flex items-center gap-1 bg-white bg-opacity-50 absolute bottom-1 left-0 px-0.5 rounded-sm text-sm font-semibold">
           {item.rating.toFixed(1)}
-          <FaStar size={15} className=" text-orange-300" /> | {item.stock}
+          <FaStar size={15} className=" text-orange-300" /> |{" "}
+          {item.numOfReviews}
         </p>
       </div>
       <div>

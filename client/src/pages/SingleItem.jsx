@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../services/operations/ProductAPI";
 import Card from "../components/Card";
 import AddReview from "../components/AddReview";
+import ReviewsDetails from "../components/ReviewsDetails";
 // import ReactImageMagnify from "react-image-magnify"; isko use karne ke liye packege download karna hoga!
 
 const SingleItem = () => {
@@ -54,7 +55,12 @@ const SingleItem = () => {
   }
 
   return (
-    <div className="w-screen min-h-screen ">
+    <div className="w-screen min-h-screen relative">
+      {showReview && (
+        <div className="w-full h-screen flex justify-center items-center fixed top-0 right-0 bg-gray-900 bg-opacity-50">
+          <AddReview setShowReview={setShowReview} productId={itemId} />
+        </div>
+      )}
       <div className="max-w-7xl p-2 md:py-5 md:px-10  flex flex-col md:flex-row mx-auto">
         <div className="md:min-w-[450px] flex items-center md:items-start flex-col-reverse md:flex-row mt-4 ">
           <div className="flex w-20 h-20 md:h-96 pt-4 gap-2 md:flex-col  items-center overflow-scroll scrollbar-none ">
@@ -113,10 +119,10 @@ const SingleItem = () => {
 
             {/* rating */}
             <p className=" w-max flex items-center gap-2 bg-gray-100  py-1 mt-3 rounded-sm text-sm font-semibold border text-gray-950 px-2">
-              {productDetails?.review?.length}{" "}
+              {productDetails?.rating}{" "}
               <FaStar size={15} className=" text-orange-300" />
               <span className=" font-normal border-l-2 pl-2 border-gray-300">
-                {productDetails?.rating} Ratings
+                {productDetails?.numOfReviews} Ratings
               </span>
             </p>
           </div>
@@ -141,7 +147,7 @@ const SingleItem = () => {
 
             {/* add to cart & wishlist */}
             <div className="min-w-max flex gap-3 px-1 text-white mt-7 md:mt-24">
-              {cart?.productDetails?.some((p) => p.product._id == itemId) ? (
+              {cart?.items?.some((p) => p.product._id == itemId) ? (
                 <button
                   className="w-1/2 bg-orange-600 font-bold flex gap-1 md:gap-2 justify-center border border-gray-300 items-center py-3 rounded-md"
                   onClick={moveToCart}
@@ -169,17 +175,8 @@ const SingleItem = () => {
         </div>
       </div>
 
-      <div className=" ml-20">
-        <button
-          className="bg-orange-600 text-white px-3 py-1 rounded-md text-lg font-bold bg"
-          onClick={() => setShowReview(true)}
-        >
-          Add Review
-        </button>
-
-        {showReview && (
-          <AddReview setShowReview={setShowReview} productId={itemId} />
-        )}
+      <div className="max-w-7xl flex flex-col items-end">
+        <ReviewsDetails showReview={showReview} setShowReview={setShowReview} />
       </div>
 
       {/* recommendedProduct */}

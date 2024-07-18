@@ -15,10 +15,11 @@ const AddReview = ({ setShowReview, productId }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(addReviews(productId, rating, comment, token, navigate));
+    setShowReview(false);
   };
   return (
     <form
-      className="max-w-80 bg-orange-200 p-3 rounded-lg text-sm"
+      className="w-80 bg-orange-200 p-3 rounded-lg text-sm m-5"
       onSubmit={submitHandler}
     >
       <div className="flex justify-between ">
