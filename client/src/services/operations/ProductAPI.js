@@ -206,8 +206,10 @@ export function getProductDetails(API_URL, itemId) {
 export function addReviews(productId, rating, comment, token, navigate) {
   return async (dispatch) => {
     dispatch(setLoading(true));
+    const toastId = toast.loading("Loading...");
     if (!token) {
-      toast.error("Can't add reviews please login");
+      toast.error("Can't submit review please login");
+      toast.dismiss(toastId);
       return navigate("/login");
     }
     try {
@@ -228,5 +230,6 @@ export function addReviews(productId, rating, comment, token, navigate) {
       toast.error(error.response.data.message);
     }
     dispatch(setLoading(false));
+    toast.dismiss(toastId);
   };
 }

@@ -17,6 +17,7 @@ const SingleItem = () => {
   const API_URL = `http://localhost:4000/api/v1/product/getProductDetails/${itemId}`;
   const [activeImage, setActiveImage] = useState("");
   const [showReview, setShowReview] = useState(false);
+  const [updateReview, setUpdateReview] = useState(false);
   const { cart } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
   const { productDetails, recommendedProduct, loading } = useSelector(
@@ -25,6 +26,15 @@ const SingleItem = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const isReviewd = productDetails?.reviews?.find(
+      (review) => review.user.toString() === user?._id?.toString()
+    );
+    if (isReviewd) {
+      setUpdateReview(true);
+    }
+  }, [productDetails]);
 
   useEffect(() => {
     dispatch(getProductDetails(API_URL, itemId));
@@ -57,8 +67,13 @@ const SingleItem = () => {
   return (
     <div className="w-screen min-h-screen relative">
       {showReview && (
-        <div className="w-full h-screen flex justify-center items-center fixed top-0 right-0 bg-gray-900 bg-opacity-50">
-          <AddReview setShowReview={setShowReview} productId={itemId} />
+        <div className="w-full h-screen flex justify-center items-center fixed top-0 right-0 bg-white bg-opacity-50">
+          <AddReview
+            setShowReview={setShowReview}
+            productId={itemId}
+            updateReview={updateReview}
+            setUpdateReview={setUpdateReview}
+          />
         </div>
       )}
       <div className="max-w-7xl p-2 md:py-5 md:px-10  flex flex-col md:flex-row mx-auto">
@@ -176,7 +191,11 @@ const SingleItem = () => {
       </div>
 
       <div className="max-w-7xl flex flex-col items-end">
-        <ReviewsDetails showReview={showReview} setShowReview={setShowReview} />
+        <ReviewsDetails
+          showReview={showReview}
+          setShowReview={setShowReview}
+          updateReview={updateReview}
+        />
       </div>
 
       {/* recommendedProduct */}

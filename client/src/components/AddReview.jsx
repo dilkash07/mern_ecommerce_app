@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import StarRatingComponent from "react-star-rating-component";
 import { useDispatch, useSelector } from "react-redux";
 import { addReviews } from "../services/operations/ProductAPI";
 import { useNavigate } from "react-router-dom";
 
-const AddReview = ({ setShowReview, productId }) => {
+const AddReview = ({ setShowReview, productId, updateReview }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
+  const { productDetails } = useSelector((state) => state.product);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    const isReviewd = productDetails.reviews.find(
+      (review) => review.user.toString() === user?._id?.toString()
+    );
+    if (isReviewd) {
+      setRating(isReviewd.rating);
+      setComment(isReviewd.comment);
+    }
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -23,11 +35,15 @@ const AddReview = ({ setShowReview, productId }) => {
       onSubmit={submitHandler}
     >
       <div className="flex justify-between ">
-        <p className="text-md font-bold">Add Review</p>
+        {updateReview ? (
+          <p className="text-md font-bold">Update Review</p>
+        ) : (
+          <p className="text-md font-bold">Add Review</p>
+        )}
         <RxCross1
           size={18}
           onClick={() => setShowReview(false)}
-          className="mt-1 font-bold cursor-pointer"
+          className="mt-1 cursor-pointer"
         />
       </div>
       <div>
@@ -53,9 +69,15 @@ const AddReview = ({ setShowReview, productId }) => {
         </div>
       </div>
       <div className="flex justify-end mt-2">
-        <button className="bg-orange-600 text-white rounded-full px-2 py-1">
-          Submit Review
-        </button>
+        {updateReview ? (
+          <button className="bg-orange-600 text-white rounded-full px-2 py-1">
+            Update Review
+          </button>
+        ) : (
+          <button className="bg-orange-600 text-white rounded-full px-2 py-1">
+            Submit Review
+          </button>
+        )}
       </div>
     </form>
   );

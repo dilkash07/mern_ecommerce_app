@@ -15,13 +15,13 @@ exports.addReviews = async (req, res) => {
     const product = await Product.findById(productId);
 
     if (product) {
-      const isReviewd = product.reviews.find((r) => {
-        r.user.toString() === id.toString();
-      });
+      const isReviewd = product.reviews.find(
+        (r) => r.user.toString() === id.toString()
+      );
 
       if (isReviewd) {
         product.reviews.forEach((r) => {
-          if (r.user.toString() === id.toString) {
+          if (r.user.toString() === id.toString()) {
             r.rating = rating;
             r.comment = comment;
           }
@@ -46,7 +46,7 @@ exports.addReviews = async (req, res) => {
 
     product.rating = Math.round((avgRating / product.numOfReviews) * 10) / 10;
 
-    product.save();
+    await product.save();
 
     res.status(200).json({
       success: true,

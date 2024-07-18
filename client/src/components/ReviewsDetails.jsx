@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 import ReviewsChart from "./ReviewsChart";
 import { useSelector } from "react-redux";
 
-const ReviewsDetails = ({ showReview, setShowReview }) => {
+const ReviewsDetails = ({ showReview, setShowReview, updateReview }) => {
   const { productDetails } = useSelector((state) => state.product);
 
   const dateFormatter = (createdAt) => {
@@ -34,12 +34,21 @@ const ReviewsDetails = ({ showReview, setShowReview }) => {
       </div>
       {!showReview && (
         <div className="pt-5">
-          <button
-            className="bg-orange-600 text-white px-3 py-1 rounded-md text-lg font-semibold bg"
-            onClick={() => setShowReview(true)}
-          >
-            Add Reviews
-          </button>
+          {updateReview ? (
+            <button
+              className="bg-orange-600 text-white px-3 py-1 rounded-md text-md font-semibold bg"
+              onClick={() => setShowReview(true)}
+            >
+              Update Reviews
+            </button>
+          ) : (
+            <button
+              className="bg-orange-600 text-white px-3 py-1 rounded-md text-md font-semibold bg"
+              onClick={() => setShowReview(true)}
+            >
+              Add Reviews
+            </button>
+          )}
         </div>
       )}
       <div>
