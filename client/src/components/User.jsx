@@ -39,7 +39,7 @@ const User = ({ setUserProfile }) => {
         </div>
         <div className="py-2 ">
           <p className="hover:font-bold">
-            <Link>My Profile</Link>
+            <Link to={"/myProfile"}>My Profile</Link>
           </p>
           <p className="hover:font-bold">
             <Link>Orders</Link>
@@ -60,7 +60,9 @@ const User = ({ setUserProfile }) => {
           <p className="hover:font-bold">Coupon</p>
           <p className="hover:font-bold">Saved Card</p>
           <p className="hover:font-bold">Saved Vpa</p>
-          <p className="hover:font-bold">Saved Address</p>
+          <p className="hover:font-bold">
+            <Link to={"/savedAddress"}>Saved Address</Link>
+          </p>
         </div>
         <div className="border-t border-yellow-600 py-2">
           <div className="hover:font-bold">

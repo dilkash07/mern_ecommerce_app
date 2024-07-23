@@ -22,7 +22,7 @@ exports.uploadProductCategory = async (req, res) => {
       });
     }
 
-    const img = await uploadImageToCloudinary(image, "mansurimart");
+    const img = await uploadImageToCloudinary(image, "MansuriMart/Category");
 
     await Category.create({
       categoryName,

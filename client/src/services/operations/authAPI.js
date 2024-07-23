@@ -55,12 +55,12 @@ export function signup(
       });
 
       toast.success(response.data.message);
-
       navigate("/login");
     } catch (error) {
       toast.error(error.response.data.message);
-      navigate("/signup");
-      dispatch(setLoading(false));
+      if (error.response.status === 500) {
+        navigate("/signup");
+      }
     }
     dispatch(setLoading(false));
   };

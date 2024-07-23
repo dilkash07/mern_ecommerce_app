@@ -39,20 +39,26 @@ const CartItem = ({ item }) => {
       </div>
       <div className=" w-1/4 flex justify-center mt-5">
         <Link to={`/singleItem/${item.product._id}`}>
-          <img src={item?.product?.thumbnail?.image_url} className="max-h-56" />
+          <img src={item.product.thumbnail.image_url} className="max-h-56" />
         </Link>
       </div>
       <div className="w-3/4">
         <p className=" text-lg font-semibold mb-5 mr-10">
-          {item?.product?.title}
+          {item.product.title}
         </p>
-        <p className=" font-normal text-sm text-gray-600">
-          {item?.product?.description}
-        </p>
+
+        {item.product.description.length > 400 ? (
+          <p className=" font-normal text-sm text-gray-600">
+            {item.product.description.split(" ").slice(0, 40).join(" ") + "..."}
+          </p>
+        ) : (
+          item.product.description
+        )}
+
         <p className="flex items-center gap-2 rounded-sm text-sm font-semibold">
-          {item?.product?.rating}{" "}
+          {item.product.rating}{" "}
           <FaStar size={15} className=" text-orange-300" /> |{" "}
-          {item?.product?.stock}
+          {item.product.stock}
         </p>
         <div className="flex px-3 py-1 border border-orange-100 w-min my-2">
           <p>Qty</p>
@@ -60,7 +66,7 @@ const CartItem = ({ item }) => {
             className="outline-none"
             name="qty"
             onChange={changeHandler}
-            value={item?.quantity}
+            value={item.quantity}
           >
             <option>1</option>
             <option>2</option>
@@ -70,13 +76,13 @@ const CartItem = ({ item }) => {
           </select>
         </div>
         <p className="text-xl font-semibold">
-          Rs. {item?.sellingPrice}{" "}
+          Rs. {item.sellingPrice}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             Rs.
-            {item?.price}
+            {item.price}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
-            ({Math.round(item?.product?.discount)}% OFF)
+            ({Math.round(item.product.discount)}% OFF)
           </span>
         </p>
         <button

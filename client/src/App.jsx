@@ -22,6 +22,9 @@ import {
   getAllProduct,
   getProductCategory,
 } from "./services/operations/ProductAPI";
+import MyProfile from "./pages/MyProfile";
+import Setting from "./pages/Setting";
+import SavedAddress from "./pages/SavedAddress";
 
 function App() {
   const navigate = useNavigate();
@@ -51,11 +54,12 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/SingleItem" element={<SingleItem />} />
         <Route path="/SingleItem/:itemId" element={<SingleItem />} />
         <Route path="/uploadProduct" element={<Product />} />
         <Route path="/filteredProduct" element={<FilterProduct />} />
-        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
+        <Route path="/dashboard/settings" element={<Setting />} />
+        <Route path="/myProfile" element={<MyProfile />} />
+        <Route path="/savedAddress" element={<SavedAddress />} />
       </Routes>
       <div>
         <Footer />

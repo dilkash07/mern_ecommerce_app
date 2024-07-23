@@ -11,6 +11,8 @@ import Card from "../components/Card";
 import AddReview from "../components/AddReview";
 import ReviewsDetails from "../components/ReviewsDetails";
 // import ReactImageMagnify from "react-image-magnify"; isko use karne ke liye packege download karna hoga!
+import ImageMagnify from "../components/ImageMagnify";
+import ReactImageMagnify from "react-image-magnify";
 
 const SingleItem = () => {
   const { itemId } = useParams();
@@ -98,26 +100,26 @@ const SingleItem = () => {
               <img src={activeImage} alt="ecommerce" className="max-h-full" />
             </div>
 
-            {/* <ReactImageMagnify
-            className=" object-cover"
-            {...{
-              smallImage: {
-                alt: "Wristwatch by Ted Baker London",
-                isFluidWidth: true,
-                src: activeImage,
-              },
-              largeImage: {
-                src: activeImage,
-                width: 1500,
-                height: 1800,
-              },
+            {/* <ImageMagnify imageSrc={activeImage} imageAlt={"ecommerce"} /> */}
 
-              enlargedImageContainerDimensions: {
-                width: "150%",
-                height: "120%",
-              },
-            }}
-          /> */}
+            {/* <div className="h-96 flex justify-center items-center">
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: "Product Image",
+                    isFluidWidth: true,
+                    src: activeImage,
+                  },
+                  largeImage: {
+                    src: activeImage,
+                    width: 1200,
+                    height: 1200,
+                  },
+                  lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
+                }}
+                style={{ borderRadius: "0.5rem", overflow: "hidden" }}
+              />
+            </div> */}
           </div>
         </div>
         <div className="min-w-[312px] md:max-w-[640px] mt-12">
@@ -161,7 +163,7 @@ const SingleItem = () => {
             </div>
 
             {/* add to cart & wishlist */}
-            <div className="min-w-max flex gap-3 px-1 text-white mt-7 md:mt-24">
+            <div className="min-w-max flex gap-3 text-white my-5">
               {cart?.items?.some((p) => p.product._id == itemId) ? (
                 <button
                   className="w-1/2 bg-orange-600 font-bold flex gap-1 md:gap-2 justify-center border border-gray-300 items-center py-3 rounded-md"
@@ -186,16 +188,20 @@ const SingleItem = () => {
                 Buy Now
               </button>
             </div>
+
+            <div className="mt-10">
+              <p>{productDetails?.warrantyInformation}</p>
+              <p>{productDetails?.returnPolicy}</p>
+            </div>
+            <div className="flex flex-col">
+              <ReviewsDetails
+                showReview={showReview}
+                setShowReview={setShowReview}
+                updateReview={updateReview}
+              />
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="max-w-7xl flex flex-col items-end">
-        <ReviewsDetails
-          showReview={showReview}
-          setShowReview={setShowReview}
-          updateReview={updateReview}
-        />
       </div>
 
       {/* recommendedProduct */}

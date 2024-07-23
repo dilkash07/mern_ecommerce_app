@@ -10,6 +10,8 @@ export const endPoints = {
 // PROFILE ENDPOINTS
 export const profileEndPoints = {
   GET_USER_DETAILS_API: baseUrl + "/profile/getUserDetails",
+  UPDATE_PROFILE_PICTURE_API: baseUrl + "/profile/updateProfilePicture",
+  UPDATE_PROFILE_API: baseUrl + "/profile/updateProfile",
 };
 
 // PRODUCT ENDPOINTS
@@ -35,4 +37,10 @@ export const wishlistEndPoints = {
   ADD_WISHLIST_API: baseUrl + "/wishlist/addWishlist",
   REMOVE_WISHLIST_API: baseUrl + "/wishlist/removeWishlist",
   GET_WISHLIST_DETAILS_API: baseUrl + "/wishlist/getWishlistDetails",
+};
+
+// SETTING ENDPOINTS
+export const settingEndPoints = {
+  UPDATE_PASSWORD_API: baseUrl + "/user/changePassword",
+  DELETE_ACCOUNT_API: baseUrl + "/user/deleteAccount",
 };

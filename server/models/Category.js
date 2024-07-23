@@ -4,6 +4,7 @@ const productCategorySchema = new mongoose.Schema({
   categoryName: {
     type: String,
     required: true,
+    trim: true,
   },
   categoryImage: {
     public_id: {

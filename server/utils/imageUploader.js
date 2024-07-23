@@ -15,3 +15,7 @@ exports.uploadImageToCloudinary = async (file, folder, height, quality) => {
 
   return await cloudinary.uploader.upload(file.tempFilePath, options);
 };
+
+exports.removeImageFromCloudinary = async (public_id) => {
+  return await cloudinary.uploader.destroy(public_id);
+};

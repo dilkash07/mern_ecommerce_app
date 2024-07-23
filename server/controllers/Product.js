@@ -40,7 +40,10 @@ exports.uploadProduct = async (req, res) => {
     // upload images
     const imagesLink = [];
     for (let i = 0; i < images.length; i++) {
-      const response = await uploadImageToCloudinary(images[i], "mansurimart");
+      const response = await uploadImageToCloudinary(
+        images[i],
+        "MansuriMart/Product"
+      );
       imagesLink.push({
         public_id: response.public_id,
         image_url: response.secure_url,

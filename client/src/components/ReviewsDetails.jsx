@@ -1,23 +1,15 @@
 import React from "react";
 import { GoStarFill } from "react-icons/go";
-import { FaStar } from "react-icons/fa";
+import { MdOutlineStarPurple500 } from "react-icons/md";
 import ReviewsChart from "./ReviewsChart";
 import { useSelector } from "react-redux";
+import { formattedDate } from "../utils.jsx/dateFormatter";
 
 const ReviewsDetails = ({ showReview, setShowReview, updateReview }) => {
   const { productDetails } = useSelector((state) => state.product);
 
-  const dateFormatter = (createdAt) => {
-    const date = new Date(createdAt);
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
-      date
-    );
-    return formattedDate;
-  };
-
   return (
-    <div className="h-fit max-w-2xl px-5">
+    <div className="h-fit">
       <p className="text-2xl font-bold my-5">Ratings & Reviews</p>
       <div className="border-b border-gray-300 my-2 flex gap-5 mb-2">
         <div className=" h-28 flex flex-col items-left gap-x-2 border-r pr-10 ">
@@ -57,15 +49,15 @@ const ReviewsDetails = ({ showReview, setShowReview, updateReview }) => {
         </p>
         {productDetails?.reviews?.map((review, key) => (
           <div className="border-b flex gap-x-3 py-5" key={key}>
-            <p className="w-fit h-fit rounded-sm flex px-0.5 items-center text-white bg-orange-600">
-              {review.rating} <FaStar size={15} />
+            <p className="w-fit h-fit text-sm rounded-sm flex px-0.5 items-center text-white bg-orange-600">
+              {review.rating} <MdOutlineStarPurple500 />
             </p>
             <div>
-              <p className="text-lg font-normal text-gray-900">
+              <p className="text-md font-normal text-gray-900">
                 {review.comment}
               </p>
               <p className="text-sm text-gray-600 mt-3">
-                {review.name} | {dateFormatter(review.createdAt)}
+                {review.name} | {formattedDate(review.createdAt)}
               </p>
             </div>
           </div>

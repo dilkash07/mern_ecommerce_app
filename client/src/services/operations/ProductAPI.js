@@ -139,7 +139,6 @@ export function getFilteredProduct(
 ) {
   return async (dispatch) => {
     dispatch(setLoading(true));
-    console.log("category: productapi", category);
     try {
       const response = await apiConnector(
         "Get",
@@ -161,8 +160,6 @@ export function getFilteredProduct(
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-
-      console.log("response: ", response.data.response);
 
       toast.success(response.data.message);
       dispatch(setFilteredProduct(response.data.response));

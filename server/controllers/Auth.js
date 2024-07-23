@@ -3,6 +3,10 @@ const OTP = require("../models/OTP");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpGenrator = require("otp-generator");
+const Profile = require("../models/Profile");
+const Cart = require("../models/Cart");
+const Wishlist = require("../models/Wishlist");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 // signup
@@ -64,13 +68,24 @@ exports.signup = async (req, res) => {
     // password hashed
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // create the additional details
+    const profileDetails = await Profile.create({
+      gender: null,
+      dateOfBirth: null,
+      about: null,
+      contactNumber: null,
+    });
+
     // create entry in database
     const response = await User.create({
       firstName,
       lastName,
       email,
       password: hashedPassword,
-      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      additionalDetails: profileDetails._id,
+      image: {
+        image_url: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      },
     });
 
     res.status(200).json({
@@ -210,6 +225,64 @@ exports.sendOtp = async (req, res) => {
       success: false,
       message: "Something went wrong while sending OTP",
       error: error.message,
+    });
+  }
+};
+
+// update password
+exports.changePassword = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { oldPassword, newPassword } = req.body;
+
+    const user = await User.findOne({ _id: id });
+
+    console.log("user:=====", user);
+
+    if (await bcrypt.compare(oldPassword, user.password)) {
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = hashedPassword;
+    } else {
+      return res.status(401).json({
+        success: false,
+        message: "Password not match",
+      });
+    }
+
+    const response = await user.save();
+    res.status(200).json({
+      success: true,
+      message: "Password changed successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while changing password",
+    });
+  }
+};
+
+exports.deleteAccount = async (req, res) => {
+  try {
+    const { id } = req.user;
+    await Cart.findOneAndDelete({ user: id });
+    await Wishlist.findOneAndDelete({ user: id });
+    const user = await User.findOneAndDelete({ _id: id });
+    await Profile.findOneAndDelete({
+      _id: new mongoose.Types.ObjectId(user.additionalDetails),
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Account deleted successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while deleting account",
     });
   }
 };

@@ -63,7 +63,7 @@ const Product = () => {
   return (
     <div className="h-screen w-screen relative">
       <form
-        className=" max-h-[90%] w-9/12 mx-auto mt-1 px-10 py-12 bg-gray-200 overflow-y-scroll grid gap-8"
+        className="max-h-[90%] w-9/12 mx-auto mt-1 px-10 py-12 bg-orange-200 border rounded-lg overflow-y-scroll grid gap-8"
         onSubmit={submitHandler}
       >
         <label className="w-full">
@@ -71,7 +71,7 @@ const Product = () => {
             Title<sup>*</sup>
           </p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter title"
             type="text"
             name="title"
@@ -83,21 +83,21 @@ const Product = () => {
           <p>
             Description<sup>*</sup>
           </p>
-          <input
-            className="w-full px-4 py-2"
-            placeholder="Enter description"
-            type="text"
+          <textarea
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             name="description"
+            placeholder="Enter description..."
             value={formData.description}
+            rows={4}
             onChange={changeHandler}
-          />
+          ></textarea>
         </label>
         <label className="w-full">
           <p>
             Brand<sup>*</sup>
           </p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter brand"
             type="text"
             name="brand"
@@ -110,7 +110,7 @@ const Product = () => {
             Category<sup>*</sup>
           </p>
           <select
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             name="category"
             value={formData.category}
             onChange={changeHandler}
@@ -128,7 +128,7 @@ const Product = () => {
             Price<sup>*</sup>
           </p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter price"
             type="number"
             name="price"
@@ -141,7 +141,7 @@ const Product = () => {
             Selling Price<sup>*</sup>
           </p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter selling price"
             type="number"
             name="sellingPrice"
@@ -154,7 +154,7 @@ const Product = () => {
             Quantity<sup>*</sup>
           </p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter quantity"
             type="number"
             name="quantity"
@@ -193,7 +193,7 @@ const Product = () => {
         <label className="w-full">
           <p>Warranty</p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter warranty"
             type="text"
             name="warranty"
@@ -204,7 +204,7 @@ const Product = () => {
         <label className="w-full">
           <p>Return Policy</p>
           <input
-            className="w-full px-4 py-2"
+            className="w-full px-3 py-2 text-gray-700 border border-gray-500 rounded-lg focus:outline-none"
             placeholder="Enter return policy"
             type="text"
             name="returnPolicy"
@@ -212,12 +212,12 @@ const Product = () => {
             onChange={changeHandler}
           />
         </label>
-        <button className="bg-orange-600 rounded px-4 py-2">
+        <button className="bg-orange-600 rounded-lg px-4 py-2">
           Upload Product
         </button>
       </form>
       {showCategory && (
-        <div className="h-screen w-screen grid place-items-center absolute top-0 right-0">
+        <div className="h-screen w-screen grid place-items-center bg-white bg-opacity-50 fixed top-0 right-0">
           <AddCategory setShowCategory={setShowCategory} />
         </div>
       )}

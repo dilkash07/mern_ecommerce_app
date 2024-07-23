@@ -28,30 +28,34 @@ const AddCategory = ({ setShowCategory }) => {
 
   return (
     <form
-      className="w-80 bg-green-300 p-5 rounded-lg text-sm"
+      className="w-80 bg-orange-200 p-3 rounded-lg text-sm m-5"
       onSubmit={submitHandler}
     >
       <div className="flex justify-between">
         <p className="text-md font-bold">Add Category</p>
-        <RxCross1 onClick={removeCategoryHandler} />
+        <RxCross1
+          size={18}
+          onClick={removeCategoryHandler}
+          className="cursor-pointer"
+        />
       </div>
       <div>
         <label className="w-full">
-          <p>
-            Category Name<sup>*</sup>
+          <p className="mt-1">
+            Category Name<sup className="text-red-600">*</sup>
           </p>
           <input
             type="text"
             className="w-full px-4 py-1 rounded-md"
-            placeholder="enter category"
+            placeholder="Enter category"
             name="category"
             value={categoryName}
             onChange={categoryNameHandler}
           />
         </label>
         <label className="w-full cursor-pointer">
-          <p>
-            Category Image<sup>*</sup>
+          <p className="mt-2">
+            Category Image<sup className="text-red-600">*</sup>
           </p>
           <div className="w-full border border-gray-500 rounded-md px-4 py-2 flex flex-col justify-center items-center">
             <FaCloudUploadAlt size={60} />
@@ -65,8 +69,8 @@ const AddCategory = ({ setShowCategory }) => {
           />
         </label>
       </div>
-      <div className="flex justify-end">
-        <button className="bg-red-400 rounded-full px-2 py-1">
+      <div className="flex justify-end mt-2">
+        <button className="bg-orange-600 text-white rounded-full px-2 py-1">
           Add Category
         </button>
       </div>

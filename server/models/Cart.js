@@ -30,31 +30,37 @@ const cartSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0,
+    trim: true,
   },
   discountOnMrp: {
     type: Number,
     required: true,
     default: 0,
+    trim: true,
   },
   couponDiscount: {
     type: Number,
     required: true,
     default: 0,
+    trim: true,
   },
   shippingFee: {
     type: Number,
     required: true,
     default: 0,
+    trim: true,
   },
   convinienceCharge: {
     type: Number,
     required: true,
     default: 0,
+    trim: true,
   },
   totalAmount: {
     type: Number,
     required: true,
     default: 0,
+    trim: true,
   },
 });
 

@@ -79,7 +79,7 @@ const Header = () => {
             </div>
 
             <img
-              src={user ? user.image : loginImg}
+              src={user ? user.image.image_url : loginImg}
               className=" rounded-full h-6 w-6 hidden md:block"
               onClick={() => setUserProfile(!userProfile)}
               onMouseEnter={() => setProfile(true)}
