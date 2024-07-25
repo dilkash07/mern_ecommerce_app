@@ -18,7 +18,7 @@ export default function EditProfile() {
     formState: { errors },
   } = useForm();
 
-  const submitProfileForm = async (data) => {
+  const submitProfileForm = (data) => {
     dispatch(updateProfile(token, data));
   };
 
@@ -26,10 +26,8 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">
-            Profile Information
-          </h2>
+        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-orange-600 bg-orange-200 p-8 px-12 ">
+          <h2 className="text-lg font-semibold">Profile Information</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
             <div className="flex flex-col gap-2 lg:w-[48%]">
               <label htmlFor="firstName" className="lable-style">
@@ -40,12 +38,12 @@ export default function EditProfile() {
                 name="firstName"
                 id="firstName"
                 placeholder="Enter first name"
-                className="form-style"
+                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
                 {...register("firstName", { required: true })}
                 defaultValue={user?.firstName}
               />
               {errors.firstName && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-600">
                   Please enter your first name.
                 </span>
               )}
@@ -59,12 +57,12 @@ export default function EditProfile() {
                 name="lastName"
                 id="lastName"
                 placeholder="Enter first name"
-                className="form-style"
+                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
                 {...register("lastName", { required: true })}
                 defaultValue={user?.lastName}
               />
               {errors.lastName && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-600">
                   Please enter your last name.
                 </span>
               )}
@@ -80,7 +78,7 @@ export default function EditProfile() {
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
-                className="form-style"
+                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -94,7 +92,7 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.dateOfBirth}
               />
               {errors.dateOfBirth && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-600">
                   {errors.dateOfBirth.message}
                 </span>
               )}
@@ -107,7 +105,7 @@ export default function EditProfile() {
                 type="text"
                 name="gender"
                 id="gender"
-                className="form-style"
+                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
                 {...register("gender", { required: true })}
                 defaultValue={user?.additionalDetails?.gender}
               >
@@ -120,7 +118,7 @@ export default function EditProfile() {
                 })}
               </select>
               {errors.gender && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-600">
                   Please enter your Date of Birth.
                 </span>
               )}
@@ -137,7 +135,7 @@ export default function EditProfile() {
                 name="contactNumber"
                 id="contactNumber"
                 placeholder="Enter Contact Number"
-                className="form-style"
+                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
                 {...register("contactNumber", {
                   required: {
                     value: true,
@@ -149,7 +147,7 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.contactNumber}
               />
               {errors.contactNumber && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-600">
                   {errors.contactNumber.message}
                 </span>
               )}
@@ -163,12 +161,12 @@ export default function EditProfile() {
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                className="form-style"
+                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
                 {...register("about", { required: true })}
                 defaultValue={user?.additionalDetails?.about}
               />
               {errors.about && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="-mt-1 text-[12px] text-red-600">
                   Please enter your About.
                 </span>
               )}

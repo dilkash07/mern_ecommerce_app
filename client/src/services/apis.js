@@ -44,3 +44,12 @@ export const settingEndPoints = {
   UPDATE_PASSWORD_API: baseUrl + "/user/changePassword",
   DELETE_ACCOUNT_API: baseUrl + "/user/deleteAccount",
 };
+
+// ADDRESS ENDPOINTS
+export const addressEndPoints = {
+  ADD_ADDRESS_API: baseUrl + "/address/addAddress",
+  GET_ADDRESS_API: baseUrl + "/address/getAddress",
+  REMOVE_ADDRESS_API: baseUrl + "/address/removeAddress",
+  UPDATE_ADDRESS_API: baseUrl + "/address/updateAddress",
+  MAKE_DEFAULT_ADDRESS_API: baseUrl + "/address/makeDefaultAddress",
+};

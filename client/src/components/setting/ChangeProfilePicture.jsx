@@ -9,56 +9,43 @@ export default function ChangeProfilePicture() {
   const { token } = useSelector((state) => state.auth);
   const { user, loading } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
-  const [imageFile, setImageFile] = useState(null);
-  const [previewSource, setPreviewSource] = useState(null);
-
   const fileInputRef = useRef(null);
+  const [preview, setPreview] = useState(null);
 
-  const handleClick = () => {
+  const clickHandler = () => {
     fileInputRef.current.click();
   };
 
-  const changeHandler = (e) => {
-    const file = e.target.files[0];
+  const changeHandler = () => {
+    const file = fileInputRef.current.files[0];
     if (file) {
-      setImageFile(file);
-      previewFile(file);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setPreview(reader.result);
+      };
     }
-  };
-
-  const previewFile = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
   };
 
   const fileUploadHandler = () => {
-    if (imageFile) {
-      dispatch(updateProfilePicture(token, imageFile));
+    const file = fileInputRef.current.files[0];
+    if (file) {
+      dispatch(updateProfilePicture(token, file));
     }
   };
 
-  useEffect(() => {
-    if (imageFile) {
-      previewFile(imageFile);
-    }
-  }, [imageFile]);
-
   return (
     <>
-      <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12 text-richblack-5">
+      <div className="flex items-center justify-between rounded-md border-[1px] border-orange-600 bg-orange-200 p-8 px-12">
         <div className="flex items-center gap-x-4">
           <div className="relative">
             <img
-              src={previewSource || user?.image?.image_url}
+              src={preview || user?.image?.image_url}
               alt={`profile-${user?.firstName}`}
               className="aspect-square w-[78px] rounded-full object-cover"
             />
             <button
-              onClick={handleClick}
+              onClick={clickHandler}
               disabled={loading}
               className="h-6 w-6 grid place-items-center cursor-pointer rounded-full bg-gray-200 absolute bottom-0 -right-1.5"
             >
@@ -81,9 +68,7 @@ export default function ChangeProfilePicture() {
                 onclick={fileUploadHandler}
                 className="md:"
               >
-                {!loading && (
-                  <FiUpload className="text-lg text-richblack-900" />
-                )}
+                {!loading && <FiUpload className="text-lg" />}
               </IconBtn>
             </div>
           </div>

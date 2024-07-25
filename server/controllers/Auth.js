@@ -6,7 +6,6 @@ const otpGenrator = require("otp-generator");
 const Profile = require("../models/Profile");
 const Cart = require("../models/Cart");
 const Wishlist = require("../models/Wishlist");
-const mongoose = require("mongoose");
 require("dotenv").config();
 
 // signup
@@ -203,16 +202,7 @@ exports.sendOtp = async (req, res) => {
       });
     }
 
-    // this side from remaining work
-    // const existingOtp = await OTP.find({ email });
-
-    // if (existingOtp) {
-
-    // }
-
-    const otpBody = await OTP.create({ email, otp });
-
-    console.log(otpBody);
+    await OTP.create({ email, otp });
 
     res.status(200).json({
       success: true,
@@ -236,8 +226,6 @@ exports.changePassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body;
 
     const user = await User.findOne({ _id: id });
-
-    console.log("user:=====", user);
 
     if (await bcrypt.compare(oldPassword, user.password)) {
       const hashedPassword = await bcrypt.hash(newPassword, 10);
@@ -271,7 +259,7 @@ exports.deleteAccount = async (req, res) => {
     await Wishlist.findOneAndDelete({ user: id });
     const user = await User.findOneAndDelete({ _id: id });
     await Profile.findOneAndDelete({
-      _id: new mongoose.Types.ObjectId(user.additionalDetails),
+      _id: user.additionalDetails,
     });
 
     res.status(200).json({

@@ -1,4 +1,3 @@
-const Mongoose = require("mongoose");
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const {
@@ -90,7 +89,7 @@ exports.updateProfile = async (req, res) => {
       { new: true }
     );
     const profile = await Profile.findOneAndUpdate(
-      { _id: new Mongoose.Types.ObjectId(user.additionalDetails) },
+      { _id: user.additionalDetails },
       {
         dateOfBirth,
         gender,
@@ -100,6 +99,7 @@ exports.updateProfile = async (req, res) => {
       { new: true }
     );
 
+    console.log("profile: ", profile);
     user.additionalDetails = profile;
     res.status(200).json({
       success: true,

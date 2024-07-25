@@ -25,6 +25,7 @@ import {
 import MyProfile from "./pages/MyProfile";
 import Setting from "./pages/Setting";
 import SavedAddress from "./pages/SavedAddress";
+import { getAddress } from "./services/operations/AddressAPI";
 
 function App() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ function App() {
       dispatch(getUserDetails(token, navigate));
       dispatch(getCartDetails(token));
       dispatch(getWishlistDetails(token));
+      dispatch(getAddress(token));
     }
     dispatch(getAllProduct());
     dispatch(getProductCategory());
