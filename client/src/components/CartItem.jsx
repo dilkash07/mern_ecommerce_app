@@ -1,35 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaStar } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart, setLoading } from "../redux/slice/CartSlice";
 import { Link } from "react-router-dom";
-import toast from "react-hot-toast";
 import { addCart, removeCart } from "../services/operations/CartAPI";
-import {
-  addWishlist,
-  removeWishlist,
-} from "../services/operations/WishlistAPI";
+import { moveToWishlist } from "../services/operations/WishlistAPI";
+import { formattedINR } from "../utils.jsx/inrFormatter";
 
 const CartItem = ({ item }) => {
-  const { user } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const userId = user._id;
   const productId = item.product._id;
 
   function changeHandler(e) {
     const quantity = e.target.value;
-    dispatch(addCart(userId, productId, quantity));
+    dispatch(addCart(productId, quantity, token));
   }
 
   function removeItem() {
-    dispatch(removeCart(userId, productId));
+    dispatch(removeCart(productId, token));
   }
 
-  function moveToWishlist() {
-    dispatch(removeCart(userId, productId));
-    dispatch(addWishlist(userId, productId));
+  function moveWishlist() {
+    dispatch(moveToWishlist(productId, token));
   }
 
   return (
@@ -76,10 +70,10 @@ const CartItem = ({ item }) => {
           </select>
         </div>
         <p className="text-xl font-semibold">
-          Rs. {item.sellingPrice}{" "}
+          Rs. {formattedINR(item.sellingPrice)}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             Rs.
-            {item.price}
+            {formattedINR(item.price)}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
             ({Math.round(item.product.discount)}% OFF)
@@ -87,7 +81,7 @@ const CartItem = ({ item }) => {
         </p>
         <button
           className="text-orange-600 underline hover:text-gray-800 cursor-pointer"
-          onClick={moveToWishlist}
+          onClick={moveWishlist}
         >
           Move to Wishlist
         </button>

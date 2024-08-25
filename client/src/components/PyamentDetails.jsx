@@ -4,23 +4,16 @@ import easyReturn from "../assets/easyReturn.webp";
 import securePayment from "../assets/securePayment.webp";
 import { TfiEmail } from "react-icons/tfi";
 import { FiPhone } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { formattedINR } from "../utils.jsx/inrFormatter";
-import { useDispatch } from "react-redux";
 
-const PriceDetails = ({ cart }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch;
-
-  const checkoutHandler = () => {
-    navigate("/checkout/address");
-  };
+const PyamentDetails = () => {
+  const { cart } = useSelector((state) => state.cart);
 
   return (
-    <div className=" min-w-80 py-10 leading-8">
-      <div className="leading-10">
-        <h1 className="text-xl font-semibold">ORDER SUMMARY</h1>
-        <p className="text-gray-700">
+    <div className="min-w-80 py-5 leading-8">
+      <div className="mb-2">
+        <p className="text-gray-700 text-xs font-bold">
           PRICE DETAILS ({cart?.items?.length} Items)
         </p>
       </div>
@@ -56,13 +49,6 @@ const PriceDetails = ({ cart }) => {
         <h1>Total Amount</h1>
         <p>₹{formattedINR(cart.totalAmount)}</p>
       </div>
-
-      <button
-        className=" bg-orange-600 w-full px-5 py-2 text-white text-xl"
-        onClick={checkoutHandler}
-      >
-        Place Order
-      </button>
 
       <div className="flex justify-between items-center py-3 border-b border-orange-100">
         <div className="h-[106px] w-[106px] flex justify-center items-center flex-col gap-3">
@@ -107,4 +93,4 @@ const PriceDetails = ({ cart }) => {
   );
 };
 
-export default PriceDetails;
+export default PyamentDetails;

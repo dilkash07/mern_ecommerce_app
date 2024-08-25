@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Card from "../components/Card";
-import Spinner from "../components/Spinner";
+import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getFilteredProduct } from "../services/operations/ProductAPI";
@@ -12,9 +12,8 @@ const Home = () => {
   const navigate = useNavigate();
 
   const { query } = useSelector((state) => state.query);
-  const { product, productCategories, loading } = useSelector(
-    (state) => state.product
-  );
+  const { product, productCategories } = useSelector((state) => state.product);
+  const { loading } = useSelector((state) => state.loader);
 
   useEffect(() => {
     if (query) {
@@ -24,24 +23,29 @@ const Home = () => {
 
   return (
     <div className="min-h-screen w-screen">
-      <div className="w-full flex justify-between overflow-x-scroll scrollbar-none gap-5 mt-5 px-10">
-        {productCategories?.map((item) => (
-          <CategorySlider item={item} key={item._id} />
-        ))}
-      </div>
-      <div>
-        <BannerSlider />
-      </div>
-      <div className=" w-full flex justify-center items-center flex-wrap gap-5 py-5 -z-10">
-        {/* <Filter /> */}
-        {loading ? (
-          <Spinner />
-        ) : product.length > 0 ? (
-          product.map((item) => <Card item={item} key={item._id} />)
-        ) : (
-          <div>Data Not Found</div>
-        )}
-      </div>
+      {loading ? (
+        <div className="h-screen w-full grid place-items-center">
+          <div className="loader"></div>
+        </div>
+      ) : (
+        <div>
+          <div className="w-full flex justify-between overflow-x-scroll scrollbar-none gap-5 mt-5 px-10">
+            {productCategories?.map((item) => (
+              <CategorySlider item={item} key={item._id} />
+            ))}
+          </div>
+          <div>
+            <BannerSlider />
+          </div>
+          <div className=" w-full flex justify-center items-center flex-wrap gap-5 py-5 -z-10">
+            {product.length > 0 ? (
+              product.map((item) => <Card item={item} key={item._id} />)
+            ) : (
+              <div>Data Not Found</div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

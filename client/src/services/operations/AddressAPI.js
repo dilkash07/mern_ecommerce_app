@@ -1,4 +1,5 @@
-import { setAddress, setLoading } from "../../redux/slice/UserSlice";
+import { setAddress } from "../../redux/slice/UserSlice";
+import { setLoading } from "../../redux/slice/LoaderSlice";
 import { apiConnector } from "../apiConnector";
 import { addressEndPoints } from "../apis";
 import toast from "react-hot-toast";
@@ -43,8 +44,6 @@ export function getAddress(token) {
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-
-      toast.success(response.data.message);
       dispatch(setAddress(response.data.response));
     } catch (error) {
       toast.error(error.response.data.message);

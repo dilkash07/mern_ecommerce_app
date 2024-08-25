@@ -42,7 +42,7 @@ const User = ({ setUserProfile }) => {
             <Link to={"/myProfile"}>My Profile</Link>
           </p>
           <p className="hover:font-bold">
-            <Link>Orders</Link>
+            <Link to={"/order/confirm"}>Orders</Link>
           </p>
           <p className="hover:font-bold">
             <Link to={"/wishlist"}>Wishlist</Link>

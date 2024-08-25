@@ -19,6 +19,7 @@ const AddAddress = ({ setShowAddress, address }) => {
         ? updateAddress(token, data, address._id)
         : addAddress(token, data)
     );
+    setShowAddress(false);
   };
 
   return (
@@ -26,16 +27,9 @@ const AddAddress = ({ setShowAddress, address }) => {
       className="h-4/5 max-w-md bg-orange-200 rounded-lg p-5 overflow-y-scroll scrollbar-none"
       onSubmit={handleSubmit(submitAddress)}
     >
-      <div className="flex justify-between mb-4">
-        <h1 className="text-lg font-bold">
-          {address ? "Edit Address" : "Add Address"}
-        </h1>
-        <RxCross1
-          size={18}
-          onClick={() => setShowAddress(false)}
-          className="cursor-pointer"
-        />
-      </div>
+      <h1 className="text-lg font-bold mb-4">
+        {address ? "Update Address" : "Add Address"}
+      </h1>
       <div className="w-full flex flex-col gap-2">
         <label className="w-full">
           <p className="text-[0.875rem] pl-[2px] mb-1 leading-[1.375rem]">
@@ -208,9 +202,17 @@ const AddAddress = ({ setShowAddress, address }) => {
           <span>Make this as my default address</span>
         </label>
       </div>
-      <button className="bg-orange-600 py-2 px-5 text-lg font-semibold rounded-[8px] my-6 w-full text-white">
-        {address ? "Edit Address" : "Add Address"}
-      </button>
+      <div className="w-full flex gap-2 mt-10">
+        <button
+          className="border-2 border-orange-500 py-2 px-5 text-lg font-semibold rounded-[8px] w-full text-orange-500"
+          onClick={() => setShowAddress(false)}
+        >
+          Cencel
+        </button>
+        <button className="bg-orange-500 py-2 px-5 text-lg font-semibold rounded-[8px] w-full text-white">
+          {address ? "Update" : "Save"}
+        </button>
+      </div>
     </form>
   );
 };

@@ -1,14 +1,16 @@
 const Wishlist = require("../models/Wishlist");
 const Product = require("../models/Product");
 const Cart = require("../models/Cart");
+const { priceDetailsCalculator } = require("../utils/priceDetailsCalculator");
 
 // add to wishlist product
 exports.addWishlist = async (req, res) => {
   try {
-    const { userId, productId } = req.body;
+    const { id } = req.user;
+    const { productId } = req.body;
 
     const product = await Product.findById(productId);
-    const wishlist = await Wishlist.findOne({ user: userId })
+    const wishlist = await Wishlist.findOne({ user: id })
       .populate("items.product")
       .exec();
 
@@ -28,7 +30,7 @@ exports.addWishlist = async (req, res) => {
       });
     } else {
       const newWishlist = new Wishlist({
-        user: userId,
+        user: id,
         items: [
           {
             product: productId,
@@ -58,9 +60,10 @@ exports.addWishlist = async (req, res) => {
 // remove from wishlist product
 exports.removeWishlist = async (req, res) => {
   try {
-    const { userId, productId } = req.body;
+    const { id } = req.user;
+    const { productId } = req.body;
 
-    const wishlist = await Wishlist.findOne({ user: userId })
+    const wishlist = await Wishlist.findOne({ user: id })
       .populate("items.product")
       .exec();
 
@@ -105,6 +108,83 @@ exports.getWishlistDetails = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Somethig went wrong while fetchig wishlist details",
+    });
+  }
+};
+
+// move to wishlist
+exports.moveToWishlist = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { productId } = req.body;
+
+    const product = await Product.findById(productId);
+    const wishlist = await Wishlist.findOne({ user: id })
+      .populate("items.product")
+      .exec();
+    const cart = await Cart.findOne({ user: id })
+      .populate("items.product")
+      .exec();
+
+    // remove cart item
+    const itemIndex = cart.items.findIndex(
+      (item) => item.product._id.toString() === productId
+    );
+
+    cart.items.splice(itemIndex, 1);
+    priceDetailsCalculator(cart);
+    await cart.save();
+
+    // add wishlist items
+    if (wishlist) {
+      const itemIndex = wishlist.items.findIndex(
+        (item) => item.product._id.toString() === productId
+      );
+
+      if (itemIndex > -1) {
+        res.status(200).json({
+          success: true,
+          cart,
+          wishlist,
+        });
+      } else {
+        wishlist.items.push({
+          product: productId,
+        });
+        await wishlist.save();
+        wishlist.items[wishlist.items.length - 1].product = product;
+        res.status(200).json({
+          success: true,
+          message: "Moved to wishlist successfully",
+          cart,
+          wishlist,
+        });
+      }
+    } else {
+      const newWishlist = new Wishlist({
+        user: id,
+        items: [
+          {
+            product: productId,
+          },
+        ],
+      });
+
+      await newWishlist.save();
+
+      newWishlist.items[0].product = product;
+      res.status(200).json({
+        success: true,
+        message: "Moved to wishlist successfully",
+        cart,
+        wishlist: newWishlist,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while move to cart",
     });
   }
 };

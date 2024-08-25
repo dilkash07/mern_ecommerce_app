@@ -1,6 +1,7 @@
 import { apiConnector } from "../apiConnector";
 import { profileEndPoints } from "../apis";
-import { setUser, setLoading } from "../../redux/slice/UserSlice";
+import { setUser } from "../../redux/slice/UserSlice";
+import { setLoading } from "../../redux/slice/LoaderSlice";
 import toast from "react-hot-toast";
 import { logout } from "./authAPI";
 

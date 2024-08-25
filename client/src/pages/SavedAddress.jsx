@@ -31,8 +31,10 @@ const SavedAddress = () => {
   };
 
   return (
-    <div className="p-5 relative">
-      <h1 className="mb-14 text-3xl font-medium">Saved Address</h1>
+    <div className="max-w-7xl mx-auto px-5 relative">
+      <div className="border-b border-orange-100 py-4 mb-10">
+        <h1 className="italic text-3xl mb-3">Saved Address</h1>
+      </div>
       <button
         className="flex items-center font-bold px-5 py-2 border text-orange-600 border-orange-600 rounded-md mb-10"
         onClick={addHandler}

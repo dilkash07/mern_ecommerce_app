@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Filter from "../components/Filter";
 import Card from "../components/Card";
 import { useSelector } from "react-redux";
-import Spinner from "../components/Spinner";
-import { getAllProduct } from "../services/operations/ProductAPI";
 
 const FilterProduct = () => {
-  const { filteredProduct, loading } = useSelector((state) => state.product);
+  const { filteredProduct } = useSelector((state) => state.product);
+  const { loading } = useSelector((state) => state.loader);
   return (
     <div className="h-screen w-screen gap-x-5 flex">
       <div className="h-full w-2/12">
@@ -17,8 +16,8 @@ const FilterProduct = () => {
           Search Result: {filteredProduct?.length} Items
         </p>
         {loading ? (
-          <div className="h-5/6 flex justify-center items-center">
-            <Spinner />
+          <div className="h-5/6 grid place-items-center">
+            <div className="loader"></div>
           </div>
         ) : filteredProduct.length > 0 ? (
           <div className="flex flex-wrap items-start gap-5">

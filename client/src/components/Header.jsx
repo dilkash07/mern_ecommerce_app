@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import loginImg from "../assets/user_image.png";
 import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from "react-redux";
 import User from "./User";
+import { FaRegHeart } from "react-icons/fa";
 
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -95,7 +95,7 @@ const Header = () => {
 
             <Link to={"/wishlist"}>
               <div className="relative">
-                <IoMdHeartEmpty size={25} />
+                <FaRegHeart size={23} />
                 {wishlist?.items?.length > 0 && (
                   <div className="h-4 w-4 rounded-full bg-orange-600 text-gray-100 flex justify-center items-center text-xs absolute -top-1.5 -right-1.5 ">
                     {wishlist?.items?.length}

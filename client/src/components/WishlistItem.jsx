@@ -4,31 +4,32 @@ import { Link, useNavigate } from "react-router-dom";
 import { setCart, setLoading } from "../redux/slice/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
-import { addCart } from "../services/operations/CartAPI";
+import { addCart, moveToCart } from "../services/operations/CartAPI";
 import { removeWishlist } from "../services/operations/WishlistAPI";
+import { formattedINR } from "../utils.jsx/inrFormatter";
 
 const WishlistItem = ({ item }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { wishlist } = useSelector((state) => state);
-  const { user } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.auth);
 
-  const userId = user._id;
   const productId = item.product._id;
-  const quantity = 1;
 
-  function moveToCart() {
-    dispatch(addCart(userId, productId, quantity));
-    dispatch(removeWishlist(userId, productId));
+  function moveCart() {
+    // dispatch(addCart(productId, quantity, token));
+    // dispatch(removeWishlist(productId, token));
 
-    // if item less than 1 and navigate to cart
-    if (wishlist?.items?.length <= 1) {
-      navigate("/cart");
-    }
+    // // if item less than 1 and navigate to cart
+    // if (wishlist?.items?.length <= 1) {
+    //   navigate("/cart");
+    // }
+
+    dispatch(moveToCart(productId, 1, token, navigate));
   }
 
   function removeItem() {
-    dispatch(removeWishlist(userId, productId));
+    dispatch(removeWishlist(productId, token));
   }
 
   return (
@@ -56,10 +57,10 @@ const WishlistItem = ({ item }) => {
             : item.product.description}
         </p>
         <p className="text-sm font-semibold">
-          ₹ {item.product.sellingPrice}{" "}
+          ₹ {formattedINR(item.product.sellingPrice)}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             MRP.
-            {item.product.price}
+            {formattedINR(item.product.price)}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
             ({Math.round(item.product.discount)}% OFF)
@@ -68,7 +69,7 @@ const WishlistItem = ({ item }) => {
       </div>
       <button
         className="border text-sm px-5 py-2 rounded-md font-semibold text-orange-600"
-        onClick={moveToCart}
+        onClick={moveCart}
       >
         MOVE TO CART
       </button>

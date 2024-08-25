@@ -9,8 +9,10 @@ export default function MyProfile() {
   const navigate = useNavigate();
 
   return (
-    <div className="p-5">
-      <h1 className="mb-14 text-3xl font-medium">My Profile</h1>
+    <div className="max-w-7xl mx-auto px-5">
+      <div className="border-b border-orange-100 py-4 mb-10">
+        <h1 className="italic text-3xl mb-3">My Profile</h1>
+      </div>
       <div className="flex items-center justify-between rounded-md border-[1px] p-8 px-12">
         <div className="flex items-center gap-x-4">
           <img

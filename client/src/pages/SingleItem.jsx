@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { BsFillLightningChargeFill } from "react-icons/bs";
 import { addCart } from "../services/operations/CartAPI";
+import {
+  addWishlist,
+  removeWishlist,
+} from "../services/operations/WishlistAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../services/operations/ProductAPI";
 import Card from "../components/Card";
@@ -13,6 +16,8 @@ import ReviewsDetails from "../components/ReviewsDetails";
 // import ReactImageMagnify from "react-image-magnify"; isko use karne ke liye packege download karna hoga!
 import ImageMagnify from "../components/ImageMagnify";
 import ReactImageMagnify from "react-image-magnify";
+import { formattedINR } from "../utils.jsx/inrFormatter";
+import Loader from "../components/Loader";
 
 const SingleItem = () => {
   const { itemId } = useParams();
@@ -20,9 +25,12 @@ const SingleItem = () => {
   const [activeImage, setActiveImage] = useState("");
   const [showReview, setShowReview] = useState(false);
   const [updateReview, setUpdateReview] = useState(false);
+  const { loading } = useSelector((state) => state.loader);
   const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
   const { user } = useSelector((state) => state.user);
-  const { productDetails, recommendedProduct, loading } = useSelector(
+  const { token } = useSelector((state) => state.auth);
+  const { productDetails, recommendedProduct } = useSelector(
     (state) => state.product
   );
 
@@ -55,19 +63,30 @@ const SingleItem = () => {
   const quantity = 1;
 
   function buyNow() {
-    console.log("Buy Now");
+    // dispatch(setCheckout(productDetails));
+    navigate("/checkout/address");
   }
 
   function addToCart() {
-    dispatch(addCart(userId, productId, quantity));
+    dispatch(addCart(productId, quantity, token));
   }
 
   function moveToCart() {
     navigate("/cart");
   }
 
+  function addToWishlist() {
+    dispatch(addWishlist(productId, token));
+  }
+
+  function removeToWishlist() {
+    dispatch(removeWishlist(productId, token));
+  }
+
+  console.log();
   return (
     <div className="w-screen min-h-screen relative">
+      {loading && <Loader />}
       {showReview && (
         <div className="w-full h-screen flex justify-center items-center fixed top-0 right-0 bg-white bg-opacity-50">
           <AddReview
@@ -147,10 +166,9 @@ const SingleItem = () => {
           <div>
             <div>
               <p className="title-font font-medium text-2xl text-black">
-                ₹ {productDetails.sellingPrice}{" "}
+                ₹ {formattedINR(productDetails?.sellingPrice)}{" "}
                 <span className="text-xs font-normal text-gray-600 line-through">
-                  MRP.
-                  {productDetails?.price}
+                  MRP {formattedINR(productDetails?.price)}
                 </span>{" "}
                 <span className="text-xs font-normal text-orange-400">
                   ({Math.round(productDetails?.discount)}% OFF)
@@ -180,13 +198,29 @@ const SingleItem = () => {
                 </button>
               )}
 
-              <button
+              {wishlist?.items?.some((p) => p.product._id == itemId) ? (
+                <button
+                  className=" w-1/2 font-bold flex gap-1 md:gap-2 items-center justify-center border border-gray-300 py-3 rounded-md text-gray-800"
+                  onClick={removeToWishlist}
+                >
+                  <FaHeart size={20} className="text-red-600" /> Wishlist
+                </button>
+              ) : (
+                <button
+                  className=" w-1/2 font-bold flex gap-1 md:gap-2 items-center justify-center border border-gray-300 py-3 rounded-md text-gray-800"
+                  onClick={addToWishlist}
+                >
+                  <FaRegHeart size={20} /> Wishlist
+                </button>
+              )}
+
+              {/* <button
                 className=" w-1/2 min-w-fit font-bold flex gap-1 md:gap-2 items-center justify-center border border-gray-300 py-3 rounded-md text-gray-800"
                 onClick={buyNow}
               >
                 <BsFillLightningChargeFill size={20} className="text-red-600" />{" "}
-                Buy Now
-              </button>
+                Wishlist
+              </button> */}
             </div>
 
             <div className="mt-10">

@@ -30,6 +30,8 @@ export const cartEndPoints = {
   ADD_CART_API: baseUrl + "/cart/addCart",
   REMOVE_CART_API: baseUrl + "/cart/removeCart",
   GET_CART_DEATAILS_API: baseUrl + "/cart/getCartDetails",
+  MOVE_TO_CART_API: baseUrl + "/cart/moveToCart",
+  RESET_CART_API: baseUrl + "/cart/resetCart",
 };
 
 // WISHLIST ENDPOINTS
@@ -37,6 +39,7 @@ export const wishlistEndPoints = {
   ADD_WISHLIST_API: baseUrl + "/wishlist/addWishlist",
   REMOVE_WISHLIST_API: baseUrl + "/wishlist/removeWishlist",
   GET_WISHLIST_DETAILS_API: baseUrl + "/wishlist/getWishlistDetails",
+  MOVE_TO_WISHLIST_API: baseUrl + "/wishlist/moveToWishlist",
 };
 
 // SETTING ENDPOINTS
@@ -52,4 +55,14 @@ export const addressEndPoints = {
   REMOVE_ADDRESS_API: baseUrl + "/address/removeAddress",
   UPDATE_ADDRESS_API: baseUrl + "/address/updateAddress",
   MAKE_DEFAULT_ADDRESS_API: baseUrl + "/address/makeDefaultAddress",
+};
+
+// ORDERS ENDPOINTS
+export const orderEndpoints = {
+  NEW_ORDER_API: baseUrl + "/order/newOrder",
+};
+
+// PAYMENT ENDPOINTS
+export const paymentEndpoints = {
+  PROCESS_PAYMENT_API: baseUrl + "/payment/processPayment",
 };

@@ -9,32 +9,32 @@ import {
   removeWishlist,
 } from "../services/operations/WishlistAPI";
 import { addCart, removeCart } from "../services/operations/CartAPI";
+import { formattedINR } from "../utils.jsx/inrFormatter";
 
 const Card = ({ item }) => {
   const dispatch = useDispatch();
   const [showCart, setShowCart] = useState(false);
+  const { token } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
-  const { user } = useSelector((state) => state.user);
 
-  const userId = user?._id;
   const productId = item?._id;
   const quantity = 1;
 
   function addToCart() {
-    dispatch(addCart(userId, productId, quantity));
+    dispatch(addCart(productId, quantity, token));
   }
 
   function removeFromCart() {
-    dispatch(removeCart(userId, productId));
+    dispatch(removeCart(productId, token));
   }
 
   function addToWishlist() {
-    dispatch(addWishlist(userId, productId));
+    dispatch(addWishlist(productId, token));
   }
 
   function removeFromWishlist() {
-    dispatch(removeWishlist(userId, productId));
+    dispatch(removeWishlist(productId, token));
   }
 
   return (
@@ -81,10 +81,10 @@ const Card = ({ item }) => {
             : item.description}
         </p>
         <p className="text-sm font-semibold">
-          ₹ {item.sellingPrice}{" "}
+          ₹ {formattedINR(item.sellingPrice)}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">
             MRP.
-            {item.price}
+            {formattedINR(item.price)}
           </span>{" "}
           <span className="text-xs font-normal text-orange-400">
             ({Math.round(item.discount)}% OFF)

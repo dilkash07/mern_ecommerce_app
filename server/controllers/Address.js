@@ -40,6 +40,17 @@ exports.addAddress = async (req, res) => {
 
     isAddress.push(newAddress);
 
+    const defaultIndex = isAddress.findIndex(
+      (address) => address.defaultAddress === true
+    );
+
+    if (defaultIndex !== -1 && isAddress[0].defaultAddress !== true) {
+      [isAddress[0], isAddress[defaultIndex]] = [
+        isAddress[defaultIndex],
+        isAddress[0],
+      ];
+    }
+
     res.status(200).json({
       success: true,
       message: "Address added successfully",
@@ -59,6 +70,17 @@ exports.getAddress = async (req, res) => {
     const { id } = req.user;
 
     const response = await Address.find({ user: id });
+
+    const defaultIndex = response.findIndex(
+      (address) => address.defaultAddress === true
+    );
+
+    if (defaultIndex !== -1 && response[0].defaultAddress !== true) {
+      [response[0], response[defaultIndex]] = [
+        response[defaultIndex],
+        response[0],
+      ];
+    }
 
     res.status(200).json({
       success: true,
@@ -91,6 +113,17 @@ exports.removeAddress = async (req, res) => {
         isAddress[0].defaultAddress = true;
         isAddress[0].save();
       }
+    }
+
+    const defaultIndex = isAddress.findIndex(
+      (address) => address.defaultAddress === true
+    );
+
+    if (defaultIndex !== -1 && isAddress[0].defaultAddress !== true) {
+      [isAddress[0], isAddress[defaultIndex]] = [
+        isAddress[defaultIndex],
+        isAddress[0],
+      ];
     }
 
     res.status(200).json({
@@ -130,7 +163,6 @@ exports.updateAddress = async (req, res) => {
     isAddress.filter((address) => {
       if (address.defaultAddress === true && defaultAddress === true) {
         address.defaultAddress = false;
-        address.save();
       }
       if (address._id.toString() === addressId.toString()) {
         address.name = name;
@@ -142,9 +174,20 @@ exports.updateAddress = async (req, res) => {
         address.city = city;
         address.addressType = addressType;
         address.defaultAddress = defaultAddress;
-        address.save();
       }
+      address.save();
     });
+
+    const defaultIndex = isAddress.findIndex(
+      (address) => address.defaultAddress === true
+    );
+
+    if (defaultIndex !== -1 && isAddress[0].defaultAddress !== true) {
+      [isAddress[0], isAddress[defaultIndex]] = [
+        isAddress[defaultIndex],
+        isAddress[0],
+      ];
+    }
 
     res.status(200).json({
       success: true,
@@ -177,6 +220,17 @@ exports.makeDefaultAddress = async (req, res) => {
         address.save();
       }
     });
+
+    const defaultIndex = isAddress.findIndex(
+      (address) => address.defaultAddress === true
+    );
+
+    if (defaultIndex !== -1 && isAddress[0].defaultAddress !== true) {
+      [isAddress[0], isAddress[defaultIndex]] = [
+        isAddress[defaultIndex],
+        isAddress[0],
+      ];
+    }
 
     res.status(200).json({
       success: true,

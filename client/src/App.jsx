@@ -26,6 +26,9 @@ import MyProfile from "./pages/MyProfile";
 import Setting from "./pages/Setting";
 import SavedAddress from "./pages/SavedAddress";
 import { getAddress } from "./services/operations/AddressAPI";
+import CheckoutAddress from "./pages/CheckoutAddress";
+import CheckoutPayment from "./pages/CheckoutPayment";
+import OrderConfirm from "./pages/OrderConfirm";
 
 function App() {
   const navigate = useNavigate();
@@ -62,6 +65,9 @@ function App() {
         <Route path="/dashboard/settings" element={<Setting />} />
         <Route path="/myProfile" element={<MyProfile />} />
         <Route path="/savedAddress" element={<SavedAddress />} />
+        <Route path="/checkout/address" element={<CheckoutAddress />} />
+        <Route path="/checkout/payment" element={<CheckoutPayment />} />
+        <Route path="/order/confirm" element={<OrderConfirm />} />
       </Routes>
       <div>
         <Footer />

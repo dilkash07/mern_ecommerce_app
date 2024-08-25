@@ -12,3 +12,11 @@ export function formattedDate(date) {
   );
   return formattedDate;
 }
+
+export function estimatedDate(date) {
+  const currentDate = new Date();
+  const estDate = new Date(currentDate);
+  estDate.setDate(currentDate.getDate() + date);
+  const estimatedDate = formattedDate(estDate);
+  return estimatedDate;
+}

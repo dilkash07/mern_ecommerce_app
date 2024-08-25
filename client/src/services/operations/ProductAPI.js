@@ -2,8 +2,8 @@ import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { productEndPoints } from "../apis";
 import axios from "axios";
+import { setLoading } from "../../redux/slice/LoaderSlice";
 import {
-  setLoading,
   setProduct,
   setFilteredProduct,
   setProductCategories,
@@ -96,7 +96,6 @@ export function getProductCategory() {
         throw new Error(response.data.message);
       }
 
-      toast.success(response.data.message);
       dispatch(setProductCategories(response.data.response));
     } catch (error) {
       toast.error(error.response.data.message);
@@ -114,8 +113,6 @@ export function getAllProduct() {
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-
-      toast.success(response.data.message);
 
       dispatch(setProduct(response.data.response));
     } catch (error) {
@@ -161,7 +158,6 @@ export function getFilteredProduct(
         throw new Error(response.data.message);
       }
 
-      toast.success(response.data.message);
       dispatch(setFilteredProduct(response.data.response));
     } catch (error) {
       toast.error(error.response.data.message);

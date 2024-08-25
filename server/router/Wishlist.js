@@ -6,10 +6,12 @@ const {
   addWishlist,
   removeWishlist,
   getWishlistDetails,
+  moveToWishlist,
 } = require("../controllers/Wishlist");
 
-router.post("/addWishlist", addWishlist);
-router.delete("/removeWishlist", removeWishlist);
+router.post("/addWishlist", auth, addWishlist);
+router.delete("/removeWishlist", auth, removeWishlist);
 router.get("/getWishlistDetails", auth, getWishlistDetails);
+router.put("/moveToWishlist", auth, moveToWishlist);
 
 module.exports = router;

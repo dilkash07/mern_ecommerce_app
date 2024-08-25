@@ -8,6 +8,8 @@ const productRoutes = require("./router/Product");
 const cartRoutes = require("./router/Cart");
 const wishlistRoutes = require("./router/Wishlist");
 const addressRoutes = require("./router/Address");
+const orderRoutes = require("./router/Order");
+const paymentRoutes = require("./router/Payment");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -38,6 +40,8 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/wishlist", wishlistRoutes);
 app.use("/api/v1/address", addressRoutes);
+app.use("/api/v1/order", orderRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 database.connect();
 cloudinary.connect();
