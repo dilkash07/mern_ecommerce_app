@@ -7,7 +7,8 @@ import { updateProfilePicture } from "../../services/operations/ProfileAPI";
 
 export default function ChangeProfilePicture() {
   const { token } = useSelector((state) => state.auth);
-  const { user, loading } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
+  const { loading } = useSelector((state) => state.loader);
   const dispatch = useDispatch();
   const fileInputRef = useRef(null);
   const [preview, setPreview] = useState(null);
@@ -36,7 +37,7 @@ export default function ChangeProfilePicture() {
 
   return (
     <>
-      <div className="flex items-center justify-between rounded-md border-[1px] border-orange-600 bg-orange-200 p-8 px-12">
+      <div className="flex items-center justify-between bg-gray-100 rounded-md border p-8 px-12">
         <div className="flex items-center gap-x-4">
           <div className="relative">
             <img

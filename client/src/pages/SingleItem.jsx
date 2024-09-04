@@ -10,7 +10,6 @@ import {
 } from "../services/operations/WishlistAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../services/operations/ProductAPI";
-import Card from "../components/Card";
 import AddReview from "../components/AddReview";
 import ReviewsDetails from "../components/ReviewsDetails";
 // import ReactImageMagnify from "react-image-magnify"; isko use karne ke liye packege download karna hoga!
@@ -18,6 +17,7 @@ import ImageMagnify from "../components/ImageMagnify";
 import ReactImageMagnify from "react-image-magnify";
 import { formattedINR } from "../utils.jsx/inrFormatter";
 import Loader from "../components/Loader";
+import RecommendedCard from "../components/RecommendedCard";
 
 const SingleItem = () => {
   const { itemId } = useParams();
@@ -240,11 +240,11 @@ const SingleItem = () => {
 
       {/* recommendedProduct */}
       {recommendedProduct?.length > 0 && (
-        <div className="max-w-7xl mx-auto mt-10">
-          <p className="font font-bold text-xl">Recommended Product</p>
-          <div className="w-full flex gap-5 py-5 overflow-x-scroll scrollbar-none">
+        <div className="max-w-7xl mx-auto my-10">
+          <h1 className="text-xl font-bold my-2 mt-4">Recommended Products</h1>
+          <div className="w-full flex gap-5 overflow-x-scroll py-2">
             {recommendedProduct?.map((item) => (
-              <Card item={item} key={item._id} />
+              <RecommendedCard item={item} />
             ))}
           </div>
         </div>

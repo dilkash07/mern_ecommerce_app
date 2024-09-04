@@ -60,6 +60,7 @@ export const addressEndPoints = {
 // ORDERS ENDPOINTS
 export const orderEndpoints = {
   NEW_ORDER_API: baseUrl + "/order/newOrder",
+  GET_ORDER_API: baseUrl + "/order/getOrder",
 };
 
 // PAYMENT ENDPOINTS

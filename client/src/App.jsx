@@ -29,6 +29,9 @@ import { getAddress } from "./services/operations/AddressAPI";
 import CheckoutAddress from "./pages/CheckoutAddress";
 import CheckoutPayment from "./pages/CheckoutPayment";
 import OrderConfirm from "./pages/OrderConfirm";
+import Order from "./pages/Order";
+import OrderDetails from "./pages/OrderDetails";
+import { getOrder } from "./services/operations/OrderAPI";
 
 function App() {
   const navigate = useNavigate();
@@ -41,6 +44,7 @@ function App() {
       dispatch(getCartDetails(token));
       dispatch(getWishlistDetails(token));
       dispatch(getAddress(token));
+      dispatch(getOrder(token));
     }
     dispatch(getAllProduct());
     dispatch(getProductCategory());
@@ -67,7 +71,9 @@ function App() {
         <Route path="/savedAddress" element={<SavedAddress />} />
         <Route path="/checkout/address" element={<CheckoutAddress />} />
         <Route path="/checkout/payment" element={<CheckoutPayment />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/order/confirm" element={<OrderConfirm />} />
+        <Route path="/order/details/:id" element={<OrderDetails />} />
       </Routes>
       <div>
         <Footer />

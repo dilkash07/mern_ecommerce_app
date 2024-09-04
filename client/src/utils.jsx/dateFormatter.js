@@ -20,3 +20,10 @@ export function estimatedDate(date) {
   const estimatedDate = formattedDate(estDate);
   return estimatedDate;
 }
+
+export function deliveryDate(orderAt, estimatedDay) {
+  const parseDate = new Date(orderAt);
+  parseDate.setDate(parseDate.getDate() + estimatedDay);
+  const deliveryDate = formattedDate(parseDate);
+  return deliveryDate;
+}

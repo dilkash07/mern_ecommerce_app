@@ -9,7 +9,9 @@ import deliverBoy from "../assets/delivery_boy.png";
 import { useSelector } from "react-redux";
 
 const OrderConfirm = () => {
-  const { shippingInfo } = useSelector((state) => state.order);
+  // const { shippingInfo } = useSelector((state) => state.order);
+
+  const shippingInfo = JSON.parse(sessionStorage.getItem("shippingInfo"));
   return (
     <div className="max-w-7xl mx-auto px-5 py-20">
       <div className="w-10/12 md:w-1/2 mx-auto">

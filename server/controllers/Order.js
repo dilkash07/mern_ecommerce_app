@@ -48,3 +48,48 @@ exports.newOrder = async (req, res) => {
     });
   }
 };
+
+exports.getOrder = async (req, res) => {
+  try {
+    const { id } = req.user;
+
+    const response = await (
+      await Order.find({ user: id }).populate("user").exec()
+    ).reverse();
+
+    res.status(200).json({
+      success: true,
+      message: "Order details fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching order details",
+    });
+  }
+};
+
+exports.getOrderDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const response = await Order.findById(id)
+      .populate("user")
+      .populate("orderItem.product")
+      .exec();
+
+    res.status(200).json({
+      success: true,
+      message: "Order details fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching order details",
+    });
+  }
+};

@@ -27,10 +27,10 @@ export default function ChangePassword() {
   return (
     <>
       <form onSubmit={handleSubmit(submitPasswordForm)}>
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-orange-600 bg-orange-200 p-8 px-12">
+        <div className="my-10 flex flex-col gap-y-6 bg-gray-100 rounded-md border p-8 px-12">
           <h2 className="text-lg font-semibold text-richblack-5">Password</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="relative flex flex-col gap-2 lg:w-[48%]">
+            <div className="relative flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="oldPassword" className="lable-style">
                 Current Password
               </label>
@@ -39,7 +39,7 @@ export default function ChangePassword() {
                 name="oldPassword"
                 id="oldPassword"
                 placeholder="Enter Current Password"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("oldPassword", { required: true })}
               />
               <span
@@ -58,7 +58,7 @@ export default function ChangePassword() {
                 </span>
               )}
             </div>
-            <div className="relative flex flex-col gap-2 lg:w-[48%]">
+            <div className="relative flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="newPassword" className="lable-style">
                 New Password
               </label>
@@ -67,7 +67,7 @@ export default function ChangePassword() {
                 name="newPassword"
                 id="newPassword"
                 placeholder="Enter New Password"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("newPassword", { required: true })}
               />
               <span

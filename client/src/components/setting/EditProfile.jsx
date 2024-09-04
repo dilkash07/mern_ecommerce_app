@@ -26,10 +26,10 @@ export default function EditProfile() {
     <>
       <form onSubmit={handleSubmit(submitProfileForm)}>
         {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-orange-600 bg-orange-200 p-8 px-12 ">
+        <div className="my-10 flex flex-col gap-y-6 bg-gray-100 rounded-md border p-8 px-12 ">
           <h2 className="text-lg font-semibold">Profile Information</h2>
           <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="firstName" className="lable-style">
                 First Name
               </label>
@@ -38,7 +38,7 @@ export default function EditProfile() {
                 name="firstName"
                 id="firstName"
                 placeholder="Enter first name"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("firstName", { required: true })}
                 defaultValue={user?.firstName}
               />
@@ -48,7 +48,7 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="lastName" className="lable-style">
                 Last Name
               </label>
@@ -57,7 +57,7 @@ export default function EditProfile() {
                 name="lastName"
                 id="lastName"
                 placeholder="Enter first name"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("lastName", { required: true })}
                 defaultValue={user?.lastName}
               />
@@ -70,7 +70,7 @@ export default function EditProfile() {
           </div>
 
           <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="dateOfBirth" className="lable-style">
                 Date of Birth
               </label>
@@ -78,7 +78,7 @@ export default function EditProfile() {
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -97,7 +97,7 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="gender" className="lable-style">
                 Gender
               </label>
@@ -105,7 +105,7 @@ export default function EditProfile() {
                 type="text"
                 name="gender"
                 id="gender"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("gender", { required: true })}
                 defaultValue={user?.additionalDetails?.gender}
               >
@@ -126,7 +126,7 @@ export default function EditProfile() {
           </div>
 
           <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="contactNumber" className="lable-style">
                 Contact Number
               </label>
@@ -135,7 +135,7 @@ export default function EditProfile() {
                 name="contactNumber"
                 id="contactNumber"
                 placeholder="Enter Contact Number"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("contactNumber", {
                   required: {
                     value: true,
@@ -152,7 +152,7 @@ export default function EditProfile() {
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
+            <div className="flex flex-col gap-2 lg:w-[50%]">
               <label htmlFor="about" className="lable-style">
                 About
               </label>
@@ -161,7 +161,7 @@ export default function EditProfile() {
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                className=" rounded-md px-2 py-1  border-b outline-none shadow-sm shadow-red-400 focus:shadow-red-600"
+                className=" rounded-md px-2 py-1  border outline-none border-gray-400 focus:border-gray-600"
                 {...register("about", { required: true })}
                 defaultValue={user?.additionalDetails?.about}
               />

@@ -14,7 +14,7 @@ export default function DeleteAccount() {
 
   return (
     <>
-      <div className="my-10 flex flex-row gap-x-5 rounded-md border-[1px] border-orange-600 bg-orange-200 p-8 md:px-12">
+      <div className="my-10 flex flex-row gap-x-5 rounded-md border border-orange-500 bg-orange-100 p-8 md:px-12">
         <div className="h-14 min-w-14 flex items-center justify-center rounded-full text-white bg-orange-600">
           <FiTrash2 size={30} />
         </div>
