@@ -3,9 +3,11 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 exports.processPayment = async (req, res) => {
   try {
     const { amount } = req.body;
+
     response = await stripe.paymentIntents.create({
       amount,
       currency: "inr",
+      payment_method_types: ["card"],
       metadata: {
         company: "MansuriMart",
       },

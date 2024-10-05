@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -32,6 +32,12 @@ import OrderConfirm from "./pages/OrderConfirm";
 import Order from "./pages/Order";
 import OrderDetails from "./pages/OrderDetails";
 import { getOrder } from "./services/operations/OrderAPI";
+import Admin from "./pages/Admin/Admin";
+import Dashboard from "./pages/Admin/Dashboard";
+import AddItem from "./pages/Admin/AddItem";
+import ListItems from "./pages/Admin/ListItems";
+import Orders from "./pages/Admin/Orders";
+import Users from "./pages/Admin/Users";
 
 function App() {
   const navigate = useNavigate();
@@ -65,6 +71,14 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/SingleItem/:itemId" element={<SingleItem />} />
         <Route path="/uploadProduct" element={<Product />} />
+        <Route path="/admin/" element={<Admin />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="" element={<Navigate to={"Dashboard"} />} />
+          <Route path="addItems" element={<AddItem />} />
+          <Route path="listItems" element={<ListItems />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="users" element={<Users />} />
+        </Route>
         <Route path="/filteredProduct" element={<FilterProduct />} />
         <Route path="/dashboard/settings" element={<Setting />} />
         <Route path="/myProfile" element={<MyProfile />} />

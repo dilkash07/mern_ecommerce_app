@@ -9,7 +9,7 @@ exports.auth = async (req, res, next) => {
       req.body.token ||
       req.header("Authorization").replace("Bearer ", "");
 
-    console.log("Token:    ", token);
+    // console.log("Token:    ", token);
     // check jwt token missing
     if (!token) {
       return res.status(401).json({
@@ -24,7 +24,7 @@ exports.auth = async (req, res, next) => {
 
       req.user = decode;
 
-      console.log("Token vaildate successfull", decode);
+      // console.log("Token vaildate successfull", decode);
       // console.log(decode);
       // res.status(200).json({
       //   success: true,

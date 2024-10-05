@@ -6,18 +6,17 @@ import { IoMdCash } from "react-icons/io";
 import { newOrder } from "../services/operations/OrderAPI";
 import CardForm from "../components/CardForm";
 import CashForm from "../components/CashForm";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 const CheckoutPayment = () => {
-  const [paymentMode, setPaymentMode] = useState("cash");
+  const [paymentMode, setPaymentMode] = useState("Cash");
+  const stripePromise = loadStripe(
+    "pk_test_51PlSbhRpMSThw0NkAkUxqyrFvmPZEvpxYWC7IY3VCkShjgonjXF5K06vnknMZiclz5zIrGmBRTFWRNQ8WbLW4iKn00T0DGNHub"
+  );
 
-  // console.log("orderItem: ", orderItem);
-  // order item {title,brand,price,quantity,thumbnail,product}
   const submitHandler = (data) => {
-    // // console.log("pay now: ", data);
-    // console.log("token: ", token);
-    // console.log("cart: ", cart);
-    // console.log("shippingInfo: ", shippingInfo);
-    // dispatch(newOrder(shippingInfo, orderItem, PaymentIfno, token));
+    console.log("hello jee");
   };
 
   return (
@@ -63,11 +62,13 @@ const CheckoutPayment = () => {
               <div className="border-t"></div>
             </div>
             <div className="w-[28rem]">
-              {paymentMode === "cash" && (
+              {paymentMode === "Cash" && (
                 <CashForm paymentMethod={paymentMode} />
               )}
-              {paymentMode === "card" && (
-                <CardForm paymentMethod={paymentMode} />
+              {paymentMode === "Card" && (
+                <Elements stripe={stripePromise}>
+                  <CardForm paymentMethod={paymentMode} />
+                </Elements>
               )}
             </div>
           </div>

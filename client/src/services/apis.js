@@ -67,3 +67,8 @@ export const orderEndpoints = {
 export const paymentEndpoints = {
   PROCESS_PAYMENT_API: baseUrl + "/payment/processPayment",
 };
+
+// ADMIN ENDPOINTS
+export const adminEndpoints = {
+  GET_ORDERS_API: baseUrl + "/order/getOrders",
+};

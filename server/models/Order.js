@@ -46,13 +46,13 @@ const orderSchema = new mongoose.Schema(
       status: {
         type: String,
         required: true,
-        default: "pending",
+        default: "Pending",
       },
     },
     paymentMethod: {
       type: String,
       required: true,
-      enum: ["cash", "card"],
+      enum: ["Cash", "Card"],
     },
     paidAt: {
       type: Date,
@@ -62,9 +62,16 @@ const orderSchema = new mongoose.Schema(
     orderStatus: {
       type: String,
       required: true,
+      enum: [
+        "Processing",
+        "Shipped",
+        "Out For Delivery",
+        "Delivered",
+        "Cancelled",
+      ],
       default: "Processing",
     },
-    deliverdAt: {
+    deliveredAt: {
       type: Date,
     },
   },

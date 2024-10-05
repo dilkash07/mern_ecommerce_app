@@ -27,3 +27,18 @@ export function deliveryDate(orderAt, estimatedDay) {
   const deliveryDate = formattedDate(parseDate);
   return deliveryDate;
 }
+
+export function formattedNumericDate(date) {
+  const parseDate = new Date(date);
+  if (isNaN(parseDate)) {
+    return;
+  }
+  if (date === null) {
+    return;
+  }
+  const options = { year: "numeric", month: "numeric", day: "numeric" };
+  const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(
+    parseDate
+  );
+  return formattedDate;
+}
