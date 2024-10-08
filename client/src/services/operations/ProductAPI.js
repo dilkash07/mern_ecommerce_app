@@ -1,7 +1,6 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { productEndPoints } from "../apis";
-import axios from "axios";
 import { setLoading } from "../../redux/slice/LoaderSlice";
 import {
   setProduct,
@@ -20,88 +19,6 @@ const {
   GET_RECOMMENDED_PRODUCT_API,
   ADD_REVIEWS_API,
 } = productEndPoints;
-
-// product listing
-export async function uploadProduct(formData) {
-  const toastId = toast.loading("Product uploading...");
-  const newForm = new FormData();
-  newForm.set("title", formData.title);
-  newForm.set("description", formData.description);
-  newForm.set("brand", formData.brand);
-  newForm.set("category", formData.category);
-  newForm.set("price", formData.price);
-  newForm.set("sellingPrice", formData.sellingPrice);
-  newForm.set("quantity", formData.quantity);
-  newForm.set("warrantyInformation", formData.warranty);
-  newForm.set("returnPolicy", formData.returnPolicy);
-
-  formData.images.forEach((image) => newForm.append("images", image));
-
-  try {
-    const response = await axios.post(UPLOAD_PRODUCT_API, newForm, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
-    toast.success(response.data.message);
-  } catch (error) {
-    toast.error(error.response.data.message);
-  }
-
-  toast.dismiss(toastId);
-}
-
-// add product category
-export function addProductCategory(categoryName, categoryImage) {
-  const newForm = new FormData();
-  newForm.set("categoryName", categoryName);
-  newForm.append("categoryImage", categoryImage);
-
-  return async (dispatch) => {
-    dispatch(setLoading(true));
-    const toastId = toast.loading("Uploading category...");
-    try {
-      const response = await apiConnector(
-        "Post",
-        ADD_PRODUCT_CATEGORY_API,
-        newForm,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-
-      if (!response.data.success) {
-        throw new Error(response.data.message);
-      }
-
-      toast.success(response.data.message);
-      dispatch(setProductCategories(response.data.response));
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-    dispatch(setLoading(false));
-    toast.remove(toastId);
-  };
-}
-
-// get product category
-export function getProductCategory() {
-  return async (dispatch) => {
-    try {
-      const response = await apiConnector("Get", GET_PRODUCT_CATEGORY_API);
-
-      if (!response.data.success) {
-        throw new Error(response.data.message);
-      }
-
-      dispatch(setProductCategories(response.data.response));
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
-}
 
 // get all product
 export function getAllProduct() {

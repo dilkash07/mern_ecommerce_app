@@ -6,6 +6,8 @@ import PriceDetails from "../components/PriceDetails";
 import { IoIosArrowForward } from "react-icons/io";
 import { LiaBookmark } from "react-icons/lia";
 import Loader from "../components/Loader";
+import Header from "../components/core/Header";
+import Footer from "../components/core/Footer";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -14,6 +16,7 @@ const Cart = () => {
 
   return (
     <div className="h-screen w-screen relative">
+      <Header />
       {loading && <Loader />}
       <div className="max-w-7xl mx-auto px-5 relative">
         <div className="flex gap-2 items-center border-b border-orange-100 py-4">
@@ -58,6 +61,7 @@ const Cart = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

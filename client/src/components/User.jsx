@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../services/operations/authAPI";
+import { logout } from "../services/operations/AuthAPI";
 
 const User = ({ setUserProfile }) => {
   const dispatch = useDispatch();

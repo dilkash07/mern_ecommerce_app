@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { addProductCategory } from "../services/operations/ProductAPI";
+import { uploadProductCategory } from "../../services/operations/AdminAPI";
 
 const AddCategory = ({ setShowCategory }) => {
   const [categoryName, setCategoryName] = useState("");
@@ -23,7 +23,7 @@ const AddCategory = ({ setShowCategory }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(addProductCategory(categoryName, categoryImage));
+    dispatch(uploadProductCategory(categoryName, categoryImage));
   };
 
   return (

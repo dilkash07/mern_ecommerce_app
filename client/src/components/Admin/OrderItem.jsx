@@ -1,16 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { FiPackage } from "react-icons/fi";
 import {
   formattedDate,
   formattedNumericDate,
 } from "../../utils.jsx/dateFormatter";
 import { formattedDay } from "../../utils.jsx/dayFormatter";
-import { useDispatch } from "react-redux";
-import { updateOrderStatus } from "../../services/operations/AdminOrdersAPI";
+import { updateOrderStatus } from "../../services/operations/AdminAPI";
+import { formattedINR } from "../../utils.jsx/inrFormatter";
 
 const OrderItem = ({ order }) => {
   const dispatch = useDispatch();
-  const UPDATE_ORDER_STATUS_API = `http://localhost:4000/api/v1/order/updateOrderStatus/${order._id}`;
+  const UPDATE_ORDER_STATUS_API = `http://localhost:4000/api/v1/admin/updateOrderStatus/${order._id}`;
 
   const ChangeHandler = (event) => {
     dispatch(updateOrderStatus(event.target.value, UPDATE_ORDER_STATUS_API));
@@ -65,7 +66,7 @@ const OrderItem = ({ order }) => {
           </div>
 
           <div className="text-sm font-bold text-gray-500">
-            <p>₹ {order.orderItem.price}</p>
+            <p>₹ {formattedINR(order.orderItem.price)}</p>
           </div>
 
           <div>

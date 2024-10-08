@@ -2,9 +2,9 @@ const baseUrl = "http://localhost:4000/api/v1";
 
 // AUTH ENDPOINTS
 export const endPoints = {
-  SENDOTP_API: baseUrl + "/user/sendotp",
-  SIGNUP_API: baseUrl + "/user/signup",
-  LOGIN_API: baseUrl + "/user/login",
+  SENDOTP_API: baseUrl + "/auth/sendotp",
+  SIGNUP_API: baseUrl + "/auth/signup",
+  LOGIN_API: baseUrl + "/auth/login",
 };
 
 // PROFILE ENDPOINTS
@@ -16,9 +16,6 @@ export const profileEndPoints = {
 
 // PRODUCT ENDPOINTS
 export const productEndPoints = {
-  UPLOAD_PRODUCT_API: baseUrl + "/product/uploadProduct",
-  ADD_PRODUCT_CATEGORY_API: baseUrl + "/product/uploadProductCategory",
-  GET_PRODUCT_CATEGORY_API: baseUrl + "/product/getProductCategory",
   GET_ALL_PRODUCT_API: baseUrl + "/product/getAllProduct",
   GET_FILTERED_PRODUCT_API: baseUrl + "/product/getFilteredProduct",
   GET_RECOMMENDED_PRODUCT_API: baseUrl + "/product/getRecommendedProduct",
@@ -70,5 +67,10 @@ export const paymentEndpoints = {
 
 // ADMIN ENDPOINTS
 export const adminEndpoints = {
-  GET_ORDERS_API: baseUrl + "/order/getOrders",
+  GET_ORDERS_API: baseUrl + "/admin/getOrders",
+  GET_USERS_API: baseUrl + "/admin/getUsers",
+  GET_PRODUCTS_API: baseUrl + "/admin/getProducts",
+  UPLOAD_PRODUCT_API: baseUrl + "/admin/uploadProduct",
+  UPLOAD_PRODUCT_CATEGORY_API: baseUrl + "/admin/uploadProductCategory",
+  GET_PRODUCT_CATEGORY_API: baseUrl + "/admin/getProductCategory",
 };

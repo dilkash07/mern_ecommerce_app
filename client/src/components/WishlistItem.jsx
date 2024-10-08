@@ -1,10 +1,8 @@
 import React from "react";
 import { RxCross1 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
-import { setCart, setLoading } from "../redux/slice/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
-import { addCart, moveToCart } from "../services/operations/CartAPI";
+import { moveToCart } from "../services/operations/CartAPI";
 import { removeWishlist } from "../services/operations/WishlistAPI";
 import { formattedINR } from "../utils.jsx/inrFormatter";
 

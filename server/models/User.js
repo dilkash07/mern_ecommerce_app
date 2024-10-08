@@ -22,6 +22,12 @@ const userSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    role: {
+      type: String,
+      required: true,
+      default: "User",
+      enum: ["User", "Admin"],
+    },
     additionalDetails: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

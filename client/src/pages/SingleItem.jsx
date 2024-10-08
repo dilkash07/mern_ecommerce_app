@@ -18,6 +18,8 @@ import ReactImageMagnify from "react-image-magnify";
 import { formattedINR } from "../utils.jsx/inrFormatter";
 import Loader from "../components/Loader";
 import RecommendedCard from "../components/RecommendedCard";
+import Header from "../components/core/Header";
+import Footer from "../components/core/Footer";
 
 const SingleItem = () => {
   const { itemId } = useParams();
@@ -86,6 +88,7 @@ const SingleItem = () => {
   console.log();
   return (
     <div className="w-screen min-h-screen relative">
+      <Header />
       {loading && <Loader />}
       {showReview && (
         <div className="w-full h-screen flex justify-center items-center fixed top-0 right-0 bg-white bg-opacity-50">
@@ -249,6 +252,7 @@ const SingleItem = () => {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

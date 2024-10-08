@@ -6,7 +6,6 @@ const initialState = {
   productCategories: [],
   recommendedProduct: [],
   productDetails: [],
-  loading: false,
 };
 
 const productSlice = createSlice({
@@ -28,9 +27,6 @@ const productSlice = createSlice({
     setProductDetails: (state, action) => {
       state.productDetails = action.payload;
     },
-    setLoading: (state, action) => {
-      state.loading = action.payload;
-    },
   },
 });
 
@@ -40,6 +36,5 @@ export const {
   setProductCategories,
   setRecommendedProduct,
   setProductDetails,
-  setLoading,
 } = productSlice.actions;
 export default productSlice.reducer;

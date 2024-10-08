@@ -4,11 +4,11 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
-import { setQuery } from "../redux/slice/QuerySlice";
-import loginImg from "../assets/user_image.png";
-import Sidebar from "./Sidebar";
+import { setQuery } from "../../redux/slice/QuerySlice";
+import loginImg from "../../assets/user_image.png";
+import Sidebar from "../Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import User from "./User";
+import User from "../User";
 import { FaRegHeart } from "react-icons/fa";
 
 const Header = () => {

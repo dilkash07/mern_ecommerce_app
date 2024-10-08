@@ -3,8 +3,8 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import {
   getProductCategory,
   uploadProduct,
-} from "../services/operations/ProductAPI";
-import AddCategory from "../components/AddCategory";
+} from "../services/operations/AdminAPI";
+import AddCategory from "../components/admin/AddCategory";
 import { useDispatch, useSelector } from "react-redux";
 
 const Product = () => {

@@ -3,6 +3,8 @@ import WishlistItem from "../components/WishlistItem";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
+import Footer from "../components/core/Footer";
+import Header from "../components/core/Header";
 
 const Wishlist = () => {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -10,6 +12,7 @@ const Wishlist = () => {
 
   return (
     <div className="h-screen w-screen relative">
+      <Header />
       {loading && <Loader />}
       <div className=" min-h-screen max-w-7xl mx-auto px-5">
         <div className="flex gap-2 items-center border-b border-orange-100 py-4 mb-5">
@@ -38,6 +41,7 @@ const Wishlist = () => {
           </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 };

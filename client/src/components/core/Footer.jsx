@@ -5,10 +5,11 @@ import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { TfiYoutube } from "react-icons/tfi";
 import { FaPinterest } from "react-icons/fa";
-import madeInIndia from "../assets/footer-made-in-india-icon.svg";
-import assuredQuality from "../assets/footer-quality-icon.svg";
-import securePayment from "../assets/footer-secure-payment-icon.svg";
-import empoveringWeavers from "../assets/footer-customer-icon.svg";
+import madeInIndia from "../../assets/footer-made-in-india-icon.svg";
+import assuredQuality from "../../assets/footer-quality-icon.svg";
+import securePayment from "../../assets/footer-secure-payment-icon.svg";
+import empoveringWeavers from "../../assets/footer-customer-icon.svg";
+
 import { Link } from "react-router-dom";
 
 const Footer = () => {

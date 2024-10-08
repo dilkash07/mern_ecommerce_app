@@ -1,27 +1,22 @@
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header";
 import Home from "./pages/Home";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Footer from "./components/Footer";
 import SingleItem from "./pages/SingleItem";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import Product from "./pages/Product";
-import AdminDashboard from "./pages/AdminDashboard";
 import FilterProduct from "./pages/FilterProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUserDetails } from "./services/operations/ProfileAPI";
 import { getCartDetails } from "./services/operations/CartAPI";
 import { getWishlistDetails } from "./services/operations/WishlistAPI";
-import {
-  getAllProduct,
-  getProductCategory,
-} from "./services/operations/ProductAPI";
+import { getAllProduct } from "./services/operations/ProductAPI";
+import { getProductCategory } from "./services/operations/AdminAPI";
 import MyProfile from "./pages/MyProfile";
 import Setting from "./pages/Setting";
 import SavedAddress from "./pages/SavedAddress";
@@ -32,12 +27,12 @@ import OrderConfirm from "./pages/OrderConfirm";
 import Order from "./pages/Order";
 import OrderDetails from "./pages/OrderDetails";
 import { getOrder } from "./services/operations/OrderAPI";
-import Admin from "./pages/Admin/Admin";
-import Dashboard from "./pages/Admin/Dashboard";
-import AddItem from "./pages/Admin/AddItem";
-import ListItems from "./pages/Admin/ListItems";
-import Orders from "./pages/Admin/Orders";
-import Users from "./pages/Admin/Users";
+import Admin from "./pages/admin/Admin";
+import Dashboard from "./pages/admin/Dashboard";
+import AddItem from "./pages/admin/AddItem";
+import ListItems from "./pages/admin/ListItems";
+import Orders from "./pages/admin/Orders";
+import Users from "./pages/admin/Users";
 
 function App() {
   const navigate = useNavigate();
@@ -58,9 +53,6 @@ function App() {
 
   return (
     <div>
-      <div>
-        <Header />
-      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -89,9 +81,6 @@ function App() {
         <Route path="/order/confirm" element={<OrderConfirm />} />
         <Route path="/order/details/:id" element={<OrderDetails />} />
       </Routes>
-      <div>
-        <Footer />
-      </div>
     </div>
   );
 }

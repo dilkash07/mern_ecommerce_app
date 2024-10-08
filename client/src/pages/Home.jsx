@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { getFilteredProduct } from "../services/operations/ProductAPI";
 import CategorySlider from "../components/CategorySlider";
 import BannerSlider from "../components/BannerSlider";
+import Header from "../components/core/Header";
+import Footer from "../components/core/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen w-screen">
+      <Header />
       {loading ? (
         <div className="h-screen w-full grid place-items-center">
           <div className="loader"></div>
@@ -46,6 +49,7 @@ const Home = () => {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   );
 };

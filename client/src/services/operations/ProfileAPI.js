@@ -3,7 +3,7 @@ import { profileEndPoints } from "../apis";
 import { setUser } from "../../redux/slice/UserSlice";
 import { setLoading } from "../../redux/slice/LoaderSlice";
 import toast from "react-hot-toast";
-import { logout } from "./authAPI";
+import { logout } from "./AuthAPI";
 
 const { GET_USER_DETAILS_API, UPDATE_PROFILE_PICTURE_API, UPDATE_PROFILE_API } =
   profileEndPoints;

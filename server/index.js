@@ -1,8 +1,13 @@
 const express = require("express");
+const app = express();
 require("dotenv").config();
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
 const database = require("./config/database");
 const cloudinary = require("./config/cloudinary");
-const userRoutes = require("./router/User");
+const authRoutes = require("./router/Auth");
 const profileRoutes = require("./router/Profile");
 const productRoutes = require("./router/Product");
 const cartRoutes = require("./router/Cart");
@@ -10,12 +15,7 @@ const wishlistRoutes = require("./router/Wishlist");
 const addressRoutes = require("./router/Address");
 const orderRoutes = require("./router/Order");
 const paymentRoutes = require("./router/Payment");
-const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const fileUpload = require("express-fileupload");
-
-const app = express();
+const adminRoutes = require("./router/Admin");
 
 app.use(express.json());
 app.use(cookieParser());
@@ -34,7 +34,7 @@ app.use(
   })
 );
 
-app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
@@ -42,6 +42,7 @@ app.use("/api/v1/wishlist", wishlistRoutes);
 app.use("/api/v1/address", addressRoutes);
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 database.connect();
 cloudinary.connect();

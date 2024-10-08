@@ -10,7 +10,7 @@ import { TfiYoutube } from "react-icons/tfi";
 import { FaPinterest } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../services/operations/authAPI";
+import { logout } from "../services/operations/AuthAPI";
 
 const Sidenav = ({ user }) => {
   // const { signupData } = useSelector((state) => state.auth);

@@ -5,7 +5,8 @@ import { RxCountdownTimer } from "react-icons/rx";
 import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { sendOtp, signup } from "../services/operations/authAPI";
+import { sendOtp, signup } from "../services/operations/AuthAPI";
+import Header from "../components/core/Header";
 
 const VerifyEmail = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const VerifyEmail = () => {
   };
   return (
     <div className="h-screen min-h-[calc(100vh-3.5rem)] flex justify-center mt-16">
+      <Header />
       {loading ? (
         <div>
           <div className="loader"></div>

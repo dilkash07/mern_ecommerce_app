@@ -4,7 +4,7 @@ const initialState = {
   user: sessionStorage.getItem("user")
     ? JSON.parse(sessionStorage.getItem("user"))
     : null,
-  loading: false,
+
   address: [],
 };
 
@@ -18,11 +18,8 @@ const userSlice = createSlice({
     setAddress(state, action) {
       state.address = action.payload;
     },
-    setLoading(state, action) {
-      state.loading = action.payload;
-    },
   },
 });
 
-export const { setUser, setAddress, setLoading } = userSlice.actions;
+export const { setUser, setAddress } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,7 +1,7 @@
 import { settingEndPoints } from "../apis";
 import { apiConnector } from "../apiConnector";
 import toast from "react-hot-toast";
-import { logout } from "./authAPI";
+import { logout } from "./AuthAPI";
 
 const { UPDATE_PASSWORD_API, DELETE_ACCOUNT_API } = settingEndPoints;
 
