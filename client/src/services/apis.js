@@ -70,6 +70,7 @@ export const adminEndpoints = {
   GET_ORDERS_API: baseUrl + "/admin/getOrders",
   GET_USERS_API: baseUrl + "/admin/getUsers",
   GET_PRODUCTS_API: baseUrl + "/admin/getProducts",
+  GET_PRODUCT_API: baseUrl + "/admin/getProduct/",
   UPLOAD_PRODUCT_API: baseUrl + "/admin/uploadProduct",
   UPLOAD_PRODUCT_CATEGORY_API: baseUrl + "/admin/uploadProductCategory",
   GET_PRODUCT_CATEGORY_API: baseUrl + "/admin/getProductCategory",

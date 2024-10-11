@@ -3,6 +3,7 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { uploadProduct } from "../../services/operations/AdminAPI";
 import AddCategory from "../../components/admin/AddCategory";
 import { useSelector } from "react-redux";
+import { RxCross1, RxCross2 } from "react-icons/rx";
 
 const AddItem = () => {
   const { categories } = useSelector((state) => state.admin);
@@ -52,13 +53,28 @@ const AddItem = () => {
     }
   };
 
+  const deleteProductImageHandler = (key) => {
+    const newImages = [...formData.images];
+    newImages.splice(key, 1);
+
+    const newImagesPreview = [...imagesPreview];
+    newImagesPreview.splice(key, 1);
+
+    setFormData((prev) => ({
+      ...prev,
+      images: [...newImages],
+    }));
+
+    setImagesPreview(newImagesPreview);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     uploadProduct(formData);
   };
 
   return (
-    <div className="h-screen w-full overflow-scroll scrollbar-none mx-auto mb-5 px-5">
+    <div className="h-screen w-full overflow-scroll scrollbar-none mx-auto pb-20 px-5">
       <div className="border-b border-orange-100 py-4 mb-10">
         <h1 className="italic text-3xl mb-3">Add Item</h1>
       </div>
@@ -85,14 +101,21 @@ const AddItem = () => {
         </label>
         <div className="flex flex-wrap gap-2">
           {imagesPreview.map((image, key) => (
-            <img
-              src={image}
-              alt="Product review"
-              height={80}
-              width={80}
-              className="rounded-md"
-              key={key}
-            />
+            <div className="relative group" key={key}>
+              <img
+                src={image}
+                alt="Product review"
+                height={80}
+                width={80}
+                className="rounded-md"
+                key={key}
+              />
+              <RxCross2
+                size={20}
+                className="absolute right-0.5 top-0.5 hidden group-hover:block bg-white bg-opacity-50 rounded-full p-0.5 cursor-pointer"
+                onClick={() => deleteProductImageHandler(key)}
+              />
+            </div>
           ))}
         </div>
         <label className="w-full">

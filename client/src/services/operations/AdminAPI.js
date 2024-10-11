@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import {
   setCategories,
   setOrders,
+  setProduct,
   setProducts,
   setUsers,
 } from "../../redux/slice/AdminSlice";
@@ -16,6 +17,7 @@ const {
   UPLOAD_PRODUCT_API,
   UPLOAD_PRODUCT_CATEGORY_API,
   GET_PRODUCTS_API,
+  GET_PRODUCT_API,
   GET_PRODUCT_CATEGORY_API,
 } = adminEndpoints;
 

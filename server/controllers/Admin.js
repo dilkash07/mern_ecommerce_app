@@ -2,7 +2,10 @@ const User = require("../models/User");
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 const Category = require("../models/Category");
-const { uploadImageToCloudinary } = require("../utils/imageUploader");
+const {
+  uploadImageToCloudinary,
+  removeImageFromCloudinary,
+} = require("../utils/imageUploader");
 
 exports.getUsers = async (req, res) => {
   try {
@@ -253,6 +256,23 @@ exports.updateOrderStatus = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while updating status",
+    });
+  }
+};
+
+// abhi isme bahut kaam baanki hai guru
+exports.deleteProductImage = async (req, res) => {
+  try {
+    const { public_id } = req.body;
+    await removeImageFromCloudinary(public_id);
+    const product = await Product.findById(req.params.id);
+
+    product.images.find();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while updating product",
     });
   }
 };

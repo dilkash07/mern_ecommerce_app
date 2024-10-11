@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  orders: [],
-  users: [],
-  products: [],
-  categories: [],
+  orders: null,
+  users: null,
+  products: null,
+  product: null,
+  categories: null,
 };
 
 const adminSlice = createSlice({
@@ -20,12 +21,15 @@ const adminSlice = createSlice({
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+    setProduct: (state, action) => {
+      state.product = action.payload;
+    },
     setCategories: (state, action) => {
       state.categories = action.payload;
     },
   },
 });
 
-export const { setOrders, setUsers, setProducts, setCategories } =
+export const { setOrders, setUsers, setProducts, setProduct, setCategories } =
   adminSlice.actions;
 export default adminSlice.reducer;
