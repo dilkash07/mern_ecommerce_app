@@ -72,6 +72,7 @@ export const adminEndpoints = {
   GET_PRODUCTS_API: baseUrl + "/admin/getProducts",
   GET_PRODUCT_API: baseUrl + "/admin/getProduct/",
   UPLOAD_PRODUCT_API: baseUrl + "/admin/uploadProduct",
+  UPDATE_PRODUCT_API: baseUrl + "/admin/updateProduct/",
   UPLOAD_PRODUCT_CATEGORY_API: baseUrl + "/admin/uploadProductCategory",
   GET_PRODUCT_CATEGORY_API: baseUrl + "/admin/getProductCategory",
 };

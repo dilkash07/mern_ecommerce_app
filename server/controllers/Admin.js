@@ -145,6 +145,75 @@ exports.uploadProduct = async (req, res) => {
   }
 };
 
+exports.updateProduct = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      brand,
+      category,
+      price,
+      sellingPrice,
+      quantity,
+      warranty,
+      returnPolicy,
+    } = req.body;
+
+    const product = await Product.findById(req.params.id);
+
+    if (req.files) {
+      const images = req.files["images[]"];
+
+      for (let i = 0; i < product.images.length; i++) {
+        await removeImageFromCloudinary(product.images[i].public_id);
+      }
+
+      const imagesLink = [];
+      for (let i = 0; i < images.length; i++) {
+        const response = await uploadImageToCloudinary(
+          images[i],
+          "MansuriMart/Product"
+        );
+        imagesLink.push({
+          public_id: response.public_id,
+          image_url: response.secure_url,
+        });
+      }
+
+      product.thumbnail = imagesLink[0];
+      product.images = imagesLink;
+    }
+
+    const discountPrecentage = ((price - sellingPrice) / price) * 100;
+
+    product.title = title;
+    product.description = description;
+    product.brand = brand;
+    product.category = category;
+    product.price = price;
+    product.sellingPrice = sellingPrice;
+    product.discount = discountPrecentage;
+    product.stock = quantity;
+    product.warrantyInformation = warranty;
+    product.returnPolicy = returnPolicy;
+
+    await product.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Product updated successfully",
+      response: product,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while updating product",
+      error: error.message,
+    });
+  }
+};
+
 exports.uploadProductCategory = async (req, res) => {
   try {
     const { categoryName } = req.body;

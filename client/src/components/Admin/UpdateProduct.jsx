@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import AddCategory from "./AddCategory";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { useForm } from "react-hook-form";
+import { updateProduct } from "../../services/operations/AdminAPI";
 
 const UpdateProduct = ({ setUpdateProduct }) => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -48,7 +50,7 @@ const UpdateProduct = ({ setUpdateProduct }) => {
   };
 
   const submitHandler = (data) => {
-    console.log("form data: ", data);
+    dispatch(updateProduct(data, product._id));
   };
 
   return (
@@ -139,7 +141,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             name="description"
             placeholder="Enter description..."
             rows={4}
-            // onChange={changeHandler}
             defaultValue={product?.description}
             {...register("description", { required: true })}
           ></textarea>
@@ -158,7 +159,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             placeholder="Enter brand"
             type="text"
             name="brand"
-            // onChange={changeHandler}
             defaultValue={product?.brand}
             {...register("brand", { required: true })}
           />
@@ -201,7 +201,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             placeholder="Enter price"
             type="number"
             name="price"
-            // onChange={changeHandler}
             defaultValue={product?.price}
             {...register("price", { required: true })}
           />
@@ -220,7 +219,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             placeholder="Enter selling price"
             type="number"
             name="sellingPrice"
-            // onChange={changeHandler}
             defaultValue={product?.sellingPrice}
             {...register("sellingPrice", { required: true })}
           />
@@ -239,7 +237,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             placeholder="Enter quantity"
             type="number"
             name="quantity"
-            // onChange={changeHandler}
             defaultValue={product?.stock}
             {...register("quantity", { required: true })}
           />
@@ -256,7 +253,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             placeholder="Enter warranty"
             type="text"
             name="warranty"
-            // onChange={changeHandler}
             defaultValue={product?.warrantyInformation}
             {...register("warranty", { required: true })}
           />
@@ -274,7 +270,6 @@ const UpdateProduct = ({ setUpdateProduct }) => {
             type="text"
             name="returnPolicy"
             id="returnPolicy"
-            // onChange={changeHandler}
             {...register("returnPolicy", { required: true })}
             defaultValue={product?.returnPolicy}
           />

@@ -15,9 +15,9 @@ const {
   GET_USERS_API,
   GET_ORDERS_API,
   UPLOAD_PRODUCT_API,
+  UPDATE_PRODUCT_API,
   UPLOAD_PRODUCT_CATEGORY_API,
   GET_PRODUCTS_API,
-  GET_PRODUCT_API,
   GET_PRODUCT_CATEGORY_API,
 } = adminEndpoints;
 
@@ -107,6 +107,31 @@ export async function uploadProduct(formData) {
   }
 
   toast.dismiss(toastId);
+}
+
+export function updateProduct(data, id) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Product updating...");
+    try {
+      const response = await apiConnector(
+        "Put",
+        UPDATE_PRODUCT_API + id,
+        data,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      toast.success(response.data.message);
+      dispatch(setProduct(response.data.response));
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+    toast.dismiss(toastId);
+  };
 }
 
 export function getProducts() {
