@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../services/operations/AuthAPI";
+import { ACCOUNT_TYPE } from "../utils.jsx/constance";
 
 const User = ({ setUserProfile }) => {
   const dispatch = useDispatch();
@@ -64,16 +65,19 @@ const User = ({ setUserProfile }) => {
             <Link to={"/savedAddress"}>Saved Address</Link>
           </p>
         </div>
-        <div className="border-t border-yellow-600 py-2">
-          <div className="hover:font-bold">
-            <Link to={"/admin/"}>Login for Admin</Link>
-          </div>
-          {user && (
+        {user && (
+          <div className="border-t border-yellow-600 py-2">
+            {user.role === ACCOUNT_TYPE.ADMIN && (
+              <div className="hover:font-bold">
+                <Link to={"/admin/"}>Admin Dashboard</Link>
+              </div>
+            )}
+
             <button className="hover:font-bold" onClick={logoutHandler}>
               Logout
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

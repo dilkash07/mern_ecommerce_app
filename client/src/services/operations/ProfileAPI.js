@@ -21,6 +21,7 @@ export function getUserDetails(token, navigate) {
       }
 
       dispatch(setUser(response.data.data));
+      sessionStorage.setItem("user", JSON.stringify(response.data.data));
     } catch (error) {
       dispatch(logout(navigate));
       console.log(error.response.data.message);

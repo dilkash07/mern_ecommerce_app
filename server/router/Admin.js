@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+const { auth, admin } = require("../middleware/Auth");
+
 const {
   getUsers,
   updateOrderStatus,
@@ -9,16 +11,14 @@ const {
   uploadProductCategory,
   uploadProduct,
   updateProduct,
-  getProductCategory,
 } = require("../controllers/Admin");
 
-router.get("/getUsers", getUsers);
-router.get("/getOrders", getOrders);
-router.get("/getProducts", getProducts);
-router.post("/uploadProduct", uploadProduct);
-router.put("/updateProduct/:id", updateProduct);
-router.post("/uploadProductCategory", uploadProductCategory);
-router.get("/getProductCategory", getProductCategory);
-router.put("/updateOrderStatus/:id", updateOrderStatus);
+router.get("/getUsers", auth, admin, getUsers);
+router.get("/getOrders", auth, admin, getOrders);
+router.get("/getProducts", auth, admin, getProducts);
+router.post("/uploadProduct", auth, admin, uploadProduct);
+router.put("/updateProduct/:id", auth, admin, updateProduct);
+router.post("/uploadProductCategory", auth, admin, uploadProductCategory);
+router.put("/updateOrderStatus/:id", auth, admin, updateOrderStatus);
 
 module.exports = router;

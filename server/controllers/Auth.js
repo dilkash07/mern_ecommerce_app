@@ -64,9 +64,6 @@ exports.signup = async (req, res) => {
       });
     }
 
-    // password hashed
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // create the additional details
     const profileDetails = await Profile.create({
       gender: null,
@@ -131,15 +128,34 @@ exports.login = async (req, res) => {
         email: user.email,
         id: user._id,
         name: `${user.firstName} ${user.lastName}`,
+        role: user.role,
       };
 
       const token = await jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: process.env.TOKEN_EXPIRY,
+        expiresIn:
+          user.role === "User"
+            ? process.env.TOKEN_EXPIRY
+            : process.env.ADMIN_TOKEN_EXPIRY,
       });
 
       // save token to user document in database
       user.token = token;
       user.password = undefined;
+
+      if (user.role === "Admin") {
+        // send token in response
+        const options = {
+          expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+          httpOnly: true,
+        };
+
+        return res.cookie("token", token, options).status(200).json({
+          success: true,
+          message: "Admin logged in successfully",
+          user,
+          token,
+        });
+      }
 
       // send token in response
       const options = {
@@ -156,7 +172,7 @@ exports.login = async (req, res) => {
     } else {
       return res.status(401).json({
         success: false,
-        message: "Password not match",
+        message: "user or password not valid",
       });
     }
   } catch (error) {

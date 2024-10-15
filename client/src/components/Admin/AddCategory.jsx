@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uploadProductCategory } from "../../services/operations/AdminAPI";
 
 const AddCategory = ({ setShowCategory }) => {
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState("");
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   const removeCategoryHandler = () => {
     setShowCategory(false);
@@ -23,7 +24,7 @@ const AddCategory = ({ setShowCategory }) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(uploadProductCategory(categoryName, categoryImage));
+    dispatch(uploadProductCategory(categoryName, categoryImage, token));
   };
 
   return (

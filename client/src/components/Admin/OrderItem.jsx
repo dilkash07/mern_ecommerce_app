@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FiPackage } from "react-icons/fi";
 import {
   formattedDate,
@@ -11,10 +11,10 @@ import { formattedINR } from "../../utils.jsx/inrFormatter";
 
 const OrderItem = ({ order }) => {
   const dispatch = useDispatch();
-  const UPDATE_ORDER_STATUS_API = `http://localhost:4000/api/v1/admin/updateOrderStatus/${order._id}`;
+  const { token } = useSelector((state) => state.auth);
 
   const ChangeHandler = (event) => {
-    dispatch(updateOrderStatus(event.target.value, UPDATE_ORDER_STATUS_API));
+    dispatch(updateOrderStatus(event.target.value, order._id, token));
   };
 
   return (

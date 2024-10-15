@@ -70,7 +70,9 @@ const SingleItem = () => {
   }
 
   function addToCart() {
-    dispatch(addCart(productId, quantity, token));
+    if (token) {
+      dispatch(addCart(productId, quantity, token));
+    }
   }
 
   function moveToCart() {
@@ -78,7 +80,9 @@ const SingleItem = () => {
   }
 
   function addToWishlist() {
-    dispatch(addWishlist(productId, token));
+    if (token) {
+      dispatch(addWishlist(productId, token));
+    }
   }
 
   function removeToWishlist() {

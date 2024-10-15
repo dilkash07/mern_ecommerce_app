@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import AddCategory from "./AddCategory";
+import AddCategory from "../../components/admin/AddCategory";
 import { useDispatch, useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { useForm } from "react-hook-form";
 import { updateProduct } from "../../services/operations/AdminAPI";
+import { useNavigate } from "react-router-dom";
 
-const UpdateProduct = ({ setUpdateProduct }) => {
+const UpdateProduct = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -18,6 +21,7 @@ const UpdateProduct = ({ setUpdateProduct }) => {
   const [imagesPreview, setImagesPreview] = useState([]);
   const [showCategory, setShowCategory] = useState(false);
   const { product, categories } = useSelector((state) => state.admin);
+  const { token } = useSelector((state) => state.auth);
 
   const imageHandler = (event) => {
     const files = event.target.files;
@@ -50,13 +54,13 @@ const UpdateProduct = ({ setUpdateProduct }) => {
   };
 
   const submitHandler = (data) => {
-    dispatch(updateProduct(data, product._id));
+    dispatch(updateProduct(data, product._id, token));
   };
 
   return (
     <div className="h-screen w-full overflow-scroll scrollbar-none mx-auto pb-20 px-5 bg-white">
       <div className="border-b border-orange-100 py-4 mb-10">
-        <h1 className="italic text-3xl mb-3">Update Item</h1>
+        <h1 className="italic text-3xl mb-3">Update Product</h1>
       </div>
 
       <form
@@ -284,7 +288,7 @@ const UpdateProduct = ({ setUpdateProduct }) => {
         </button>
         <button
           className="text-orange-500 border border-orange-500 rounded-lg px-4 py-2"
-          onClick={() => setUpdateProduct(false)}
+          onClick={() => navigate("/admin/listProducts")}
         >
           Cancel
         </button>

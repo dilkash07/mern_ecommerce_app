@@ -82,9 +82,10 @@ export function login(email, password, navigate) {
 
       toast.success(response.data.message);
 
-      localStorage.setItem("token", JSON.stringify(response.data.token));
-
+      dispatch(setToken(response.data.token));
       dispatch(setUser(response.data.user));
+      localStorage.setItem("token", JSON.stringify(response.data.token));
+      sessionStorage.setItem("user", JSON.stringify(response.data.user));
 
       navigate("/");
     } catch (error) {

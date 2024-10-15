@@ -3,20 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdEditNote } from "react-icons/md";
 import { formattedINR } from "../../utils.jsx/inrFormatter";
 import { setProduct } from "../../redux/slice/AdminSlice";
+import { useNavigate } from "react-router-dom";
 
-const ListItem = ({ setUpdateProduct }) => {
+const ListProducts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { products } = useSelector((state) => state.admin);
 
   const updateProductHandler = (item) => {
     dispatch(setProduct(item));
-    setUpdateProduct(true);
+    navigate(`/admin/updateProduct/${item._id}`);
   };
 
   return (
-    <div>
+    <div className="h-screen w-full overflow-scroll scrollbar-none max-w-7xl mx-auto px-5 relative">
       <div className="border-b border-orange-100 py-4 mb-10">
-        <h1 className="italic text-3xl mb-3">All Items List</h1>
+        <h1 className="italic text-3xl mb-3">All Products List</h1>
       </div>
 
       <div className="w-full">
@@ -60,4 +62,4 @@ const ListItem = ({ setUpdateProduct }) => {
   );
 };
 
-export default ListItem;
+export default ListProducts;

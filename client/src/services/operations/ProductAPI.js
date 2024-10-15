@@ -5,14 +5,13 @@ import { setLoading } from "../../redux/slice/LoaderSlice";
 import {
   setProduct,
   setFilteredProduct,
-  setProductCategories,
   setRecommendedProduct,
   setProductDetails,
+  setProductCategories,
 } from "../../redux/slice/ProductSlice";
+import { setCategories } from "../../redux/slice/AdminSlice";
 
 const {
-  UPLOAD_PRODUCT_API,
-  ADD_PRODUCT_CATEGORY_API,
   GET_PRODUCT_CATEGORY_API,
   GET_ALL_PRODUCT_API,
   GET_FILTERED_PRODUCT_API,
@@ -36,6 +35,25 @@ export function getAllProduct() {
       toast.error(error.response.data.message);
     }
     dispatch(setLoading(false));
+  };
+}
+
+// get product category
+export function getProductCategory() {
+  return async (dispatch) => {
+    try {
+      const response = await apiConnector("Get", GET_PRODUCT_CATEGORY_API);
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      dispatch(setProductCategories(response.data.response));
+      dispatch(setCategories(response.data.response));
+    } catch (error) {
+      // toast.error(error.response.data.message);
+      console.log("error : ", error);
+    }
   };
 }
 

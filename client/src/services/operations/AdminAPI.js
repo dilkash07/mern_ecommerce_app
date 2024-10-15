@@ -9,23 +9,24 @@ import {
 import { setLoading } from "../../redux/slice/LoaderSlice";
 import { apiConnector } from "../apiConnector";
 import { adminEndpoints } from "../apis";
-import axios from "axios";
 
 const {
   GET_USERS_API,
   GET_ORDERS_API,
+  UPDATE_ORDER_STATUS_API,
   UPLOAD_PRODUCT_API,
   UPDATE_PRODUCT_API,
   UPLOAD_PRODUCT_CATEGORY_API,
   GET_PRODUCTS_API,
-  GET_PRODUCT_CATEGORY_API,
 } = adminEndpoints;
 
-export function getUsers() {
+export function getUsers(token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Get", GET_USERS_API);
+      const response = await apiConnector("Get", GET_USERS_API, null, {
+        Authorization: `Bearer ${token}`,
+      });
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -39,11 +40,13 @@ export function getUsers() {
   };
 }
 
-export function getOrders() {
+export function getOrders(token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Get", GET_ORDERS_API, null);
+      const response = await apiConnector("Get", GET_ORDERS_API, null, {
+        Authorization: `Bearer ${token}`,
+      });
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -58,13 +61,20 @@ export function getOrders() {
   };
 }
 
-export function updateOrderStatus(status, UPDATE_ORDER_STATUS_API) {
+export function updateOrderStatus(status, id, token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Put", UPDATE_ORDER_STATUS_API, {
-        status,
-      });
+      const response = await apiConnector(
+        "Put",
+        UPDATE_ORDER_STATUS_API + id,
+        {
+          status,
+        },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -78,7 +88,7 @@ export function updateOrderStatus(status, UPDATE_ORDER_STATUS_API) {
   };
 }
 
-export async function uploadProduct(formData) {
+export async function uploadProduct(formData, token) {
   const toastId = toast.loading("Product uploading...");
   const newForm = new FormData();
   newForm.set("title", formData.title);
@@ -94,8 +104,9 @@ export async function uploadProduct(formData) {
   formData.images.forEach((image) => newForm.append("images", image));
 
   try {
-    const response = await axios.post(UPLOAD_PRODUCT_API, newForm, {
-      headers: { "Content-Type": "multipart/form-data" },
+    const response = await apiConnector("Post", UPLOAD_PRODUCT_API, newForm, {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
     });
 
     if (!response.data.success) {
@@ -109,7 +120,7 @@ export async function uploadProduct(formData) {
   toast.dismiss(toastId);
 }
 
-export function updateProduct(data, id) {
+export function updateProduct(data, id, token) {
   return async (dispatch) => {
     const toastId = toast.loading("Product updating...");
     try {
@@ -118,7 +129,8 @@ export function updateProduct(data, id) {
         UPDATE_PRODUCT_API + id,
         data,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         }
       );
 
@@ -134,11 +146,13 @@ export function updateProduct(data, id) {
   };
 }
 
-export function getProducts() {
+export function getProducts(token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("Get", GET_PRODUCTS_API);
+      const response = await apiConnector("Get", GET_PRODUCTS_API, null, {
+        Authorization: `Bearer ${token}`,
+      });
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -152,7 +166,7 @@ export function getProducts() {
   };
 }
 
-export function uploadProductCategory(categoryName, categoryImage) {
+export function uploadProductCategory(categoryName, categoryImage, token) {
   const newForm = new FormData();
   newForm.set("categoryName", categoryName);
   newForm.append("categoryImage", categoryImage);
@@ -166,7 +180,8 @@ export function uploadProductCategory(categoryName, categoryImage) {
         UPLOAD_PRODUCT_CATEGORY_API,
         newForm,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         }
       );
 
@@ -181,21 +196,5 @@ export function uploadProductCategory(categoryName, categoryImage) {
     }
     dispatch(setLoading(false));
     toast.remove(toastId);
-  };
-}
-
-export function getProductCategory() {
-  return async (dispatch) => {
-    try {
-      const response = await apiConnector("Get", GET_PRODUCT_CATEGORY_API);
-
-      if (!response.data.success) {
-        throw new Error(response.data.message);
-      }
-
-      dispatch(setCategories(response.data.response));
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
   };
 }

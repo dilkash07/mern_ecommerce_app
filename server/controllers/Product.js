@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const Category = require("../models/Category");
 
 // get all product
 exports.getAllProduct = async (req, res) => {
@@ -16,6 +17,25 @@ exports.getAllProduct = async (req, res) => {
       success: false,
       message: "Something went wrong while fetching product",
       error: error.message,
+    });
+  }
+};
+
+// get product category
+exports.getProductCategory = async (req, res) => {
+  try {
+    const response = await Category.find({});
+
+    res.status(200).json({
+      success: true,
+      message: "Product category fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching product category",
     });
   }
 };

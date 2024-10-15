@@ -17,6 +17,7 @@ export const profileEndPoints = {
 // PRODUCT ENDPOINTS
 export const productEndPoints = {
   GET_ALL_PRODUCT_API: baseUrl + "/product/getAllProduct",
+  GET_PRODUCT_CATEGORY_API: baseUrl + "/product/getProductCategory",
   GET_FILTERED_PRODUCT_API: baseUrl + "/product/getFilteredProduct",
   GET_RECOMMENDED_PRODUCT_API: baseUrl + "/product/getRecommendedProduct",
   ADD_REVIEWS_API: baseUrl + "/product/addReviews",
@@ -68,11 +69,11 @@ export const paymentEndpoints = {
 // ADMIN ENDPOINTS
 export const adminEndpoints = {
   GET_ORDERS_API: baseUrl + "/admin/getOrders",
+  UPDATE_ORDER_STATUS_API: baseUrl + "/admin/updateOrderStatus/",
   GET_USERS_API: baseUrl + "/admin/getUsers",
   GET_PRODUCTS_API: baseUrl + "/admin/getProducts",
   GET_PRODUCT_API: baseUrl + "/admin/getProduct/",
   UPLOAD_PRODUCT_API: baseUrl + "/admin/uploadProduct",
   UPDATE_PRODUCT_API: baseUrl + "/admin/updateProduct/",
   UPLOAD_PRODUCT_CATEGORY_API: baseUrl + "/admin/uploadProductCategory",
-  GET_PRODUCT_CATEGORY_API: baseUrl + "/admin/getProductCategory",
 };

@@ -261,24 +261,6 @@ exports.uploadProductCategory = async (req, res) => {
   }
 };
 
-exports.getProductCategory = async (req, res) => {
-  try {
-    const response = await Category.find({});
-
-    res.status(200).json({
-      success: true,
-      message: "Product category fetched successfully",
-      response,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong while fetching product category",
-    });
-  }
-};
-
 exports.updateOrderStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -325,23 +307,6 @@ exports.updateOrderStatus = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while updating status",
-    });
-  }
-};
-
-// abhi isme bahut kaam baanki hai guru
-exports.deleteProductImage = async (req, res) => {
-  try {
-    const { public_id } = req.body;
-    await removeImageFromCloudinary(public_id);
-    const product = await Product.findById(req.params.id);
-
-    product.images.find();
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      success: false,
-      message: "Something went wrong while updating product",
     });
   }
 };

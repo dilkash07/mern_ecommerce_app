@@ -3,13 +3,12 @@ require("dotenv").config;
 
 exports.auth = async (req, res, next) => {
   try {
-    // get token from req body || req.params || req header ||
+    // get token
     const token =
       req.cookies.token ||
       req.body.token ||
       req.header("Authorization").replace("Bearer ", "");
 
-    // console.log("Token:    ", token);
     // check jwt token missing
     if (!token) {
       return res.status(401).json({
@@ -23,14 +22,6 @@ exports.auth = async (req, res, next) => {
       const decode = await jwt.verify(token, process.env.JWT_SECRET);
 
       req.user = decode;
-
-      // console.log("Token vaildate successfull", decode);
-      // console.log(decode);
-      // res.status(200).json({
-      //   success: true,
-      //   message: "Token validate successfully",
-      //   decode,
-      // });
     } catch (error) {
       console.error(error);
       res.status(401).json({
@@ -44,6 +35,28 @@ exports.auth = async (req, res, next) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while validating token",
+      error: error.message,
+    });
+  }
+};
+
+// user middleware
+exports.admin = async (req, res, next) => {
+  try {
+    const { role } = req.user;
+
+    if (role !== "Admin") {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid User",
+      });
+    }
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while validating user",
       error: error.message,
     });
   }

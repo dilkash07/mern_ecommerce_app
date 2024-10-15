@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../../components/admin/Header";
 import Sidenav from "../../components/admin/Sidenav";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getUsers,
   getOrders,
@@ -11,11 +11,12 @@ import {
 
 const Admin = () => {
   const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getOrders());
-    dispatch(getUsers());
-    dispatch(getProducts());
+    dispatch(getOrders(token));
+    dispatch(getUsers(token));
+    dispatch(getProducts(token));
   }, []);
 
   return (

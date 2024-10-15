@@ -21,16 +21,18 @@ const Card = ({ item }) => {
   const productId = item?._id;
   const quantity = 1;
 
-  function addToCart() {
-    dispatch(addCart(productId, quantity, token));
-  }
+  // function addToCart() {
+  //   dispatch(addCart(productId, quantity, token));
+  // }
 
-  function removeFromCart() {
-    dispatch(removeCart(productId, token));
-  }
+  // function removeFromCart() {
+  //   dispatch(removeCart(productId, token));
+  // }
 
   function addToWishlist() {
-    dispatch(addWishlist(productId, token));
+    if (token) {
+      dispatch(addWishlist(productId, token));
+    }
   }
 
   function removeFromWishlist() {
@@ -40,8 +42,8 @@ const Card = ({ item }) => {
   return (
     <div
       className="p-5 w-72 border rounded-md hover:scale-105 transition duration-300 shadow-md"
-      onMouseEnter={() => setShowCart(true)}
-      onMouseLeave={() => setShowCart(false)}
+      // onMouseEnter={() => setShowCart(true)}
+      // onMouseLeave={() => setShowCart(false)}
     >
       <div className="relative">
         {wishlist?.items?.some((p) => p.product._id == item._id) ? (

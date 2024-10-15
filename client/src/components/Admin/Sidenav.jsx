@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
@@ -9,10 +10,14 @@ import { FiPlusCircle } from "react-icons/fi";
 import { BsBoxSeam } from "react-icons/bs";
 import { MdOutlineFactCheck } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
+import { FiLogOut } from "react-icons/fi";
+import { logout } from "../../services/operations/AuthAPI";
 
 const Sidenav = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       <div className="min-w-64 min-h-screen font-bold py-10 pl-5 flex flex-col bg-orange-200 justify-between border-r border-r-orange-500">
@@ -29,7 +34,7 @@ const Sidenav = () => {
             Dashboard
           </NavLink>
           <NavLink
-            to={"/admin/addItems"}
+            to={"/admin/addProduct"}
             className={({ isActive }) =>
               `flex gap-2 items-center border border-r-0 rounded-md rounded-r-none border-orange-500 px-4 py-2 ${
                 isActive && "bg-orange-500 bg-opacity-40"
@@ -37,10 +42,10 @@ const Sidenav = () => {
             }
           >
             <FiPlusCircle size={20} />
-            Add Items
+            Add Products
           </NavLink>
           <NavLink
-            to={"/admin/listItems"}
+            to={"/admin/listProducts"}
             className={({ isActive }) =>
               `flex gap-2 items-center border border-r-0 rounded-md rounded-r-none border-orange-500 px-4 py-2 ${
                 isActive && "bg-orange-500 bg-opacity-40"
@@ -48,7 +53,7 @@ const Sidenav = () => {
             }
           >
             <MdOutlineFactCheck size={20} />
-            List Items
+            List Products
           </NavLink>
           <NavLink
             to={"/admin/orders"}
@@ -72,6 +77,13 @@ const Sidenav = () => {
             <FiUsers size={20} />
             Users
           </NavLink>
+          <button
+            className="flex gap-2 items-center border border-r-0 rounded-md rounded-r-none border-orange-500 px-4 py-2 "
+            onClick={() => dispatch(logout(navigate))}
+          >
+            <FiLogOut size={20} />
+            Logout
+          </button>
         </div>
         <div className="flex text-orange-600 py-10 justify-around ">
           <div className="px-1 py-1.5 w-6 bg-orange-200 rounded-sm ">

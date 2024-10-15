@@ -24,31 +24,27 @@ const Home = () => {
   }, [query]);
 
   return (
-    <div className="min-h-screen w-screen">
+    <div className="min-h-screen w-screen relative">
       <Header />
-      {loading ? (
-        <div className="h-screen w-full grid place-items-center">
-          <div className="loader"></div>
+      {loading && <Loader />}
+      <div>
+        <div className="w-full flex justify-between overflow-x-scroll scrollbar-none gap-5 mt-5 px-10">
+          {productCategories?.map((item) => (
+            <CategorySlider item={item} key={item._id} />
+          ))}
         </div>
-      ) : (
         <div>
-          <div className="w-full flex justify-between overflow-x-scroll scrollbar-none gap-5 mt-5 px-10">
-            {productCategories?.map((item) => (
-              <CategorySlider item={item} key={item._id} />
-            ))}
-          </div>
-          <div>
-            <BannerSlider />
-          </div>
-          <div className=" w-full flex justify-center items-center flex-wrap gap-5 py-5 -z-10">
-            {product.length > 0 ? (
-              product.map((item) => <Card item={item} key={item._id} />)
-            ) : (
-              <div>Data Not Found</div>
-            )}
-          </div>
+          <BannerSlider />
         </div>
-      )}
+        <div className=" w-full flex justify-center items-center flex-wrap gap-5 py-5 -z-10">
+          {product.length > 0 ? (
+            product.map((item) => <Card item={item} key={item._id} />)
+          ) : (
+            <div>Data Not Found</div>
+          )}
+        </div>
+      </div>
+
       <Footer />
     </div>
   );

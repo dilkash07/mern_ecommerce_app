@@ -3,10 +3,11 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { uploadProduct } from "../../services/operations/AdminAPI";
 import AddCategory from "../../components/admin/AddCategory";
 import { useSelector } from "react-redux";
-import { RxCross1, RxCross2 } from "react-icons/rx";
+import { RxCross2 } from "react-icons/rx";
 
-const AddItem = () => {
+const AddProduct = () => {
   const { categories } = useSelector((state) => state.admin);
+  const { token } = useSelector((state) => state.auth);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -70,13 +71,13 @@ const AddItem = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    uploadProduct(formData);
+    uploadProduct(formData, token);
   };
 
   return (
     <div className="h-screen w-full overflow-scroll scrollbar-none mx-auto pb-20 px-5">
       <div className="border-b border-orange-100 py-4 mb-10">
-        <h1 className="italic text-3xl mb-3">Add Item</h1>
+        <h1 className="italic text-3xl mb-3">Add Product</h1>
       </div>
 
       <form
@@ -168,7 +169,7 @@ const AddItem = () => {
             onChange={changeHandler}
             onClick={changeHandler}
           >
-            <option disabled>Select Category</option>
+            <option>Select Category</option>
             {categories?.map((item) => (
               <option key={item._id}>{item.categoryName}</option>
             ))}
@@ -249,4 +250,4 @@ const AddItem = () => {
   );
 };
 
-export default AddItem;
+export default AddProduct;
