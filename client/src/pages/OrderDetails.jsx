@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails } from "../services/operations/OrderAPI";
 import { RxCross1 } from "react-icons/rx";
-import { deliveryDate } from "../utils.jsx/dateFormatter";
+import { deliveryDate, formattedDate } from "../utils.jsx/dateFormatter";
 import RecommendedCard from "../components/RecommendedCard";
 import { formattedINR } from "../utils.jsx/inrFormatter";
 import { IoMdCash } from "react-icons/io";
@@ -57,11 +57,8 @@ const OrderDetails = () => {
                   Order {orderItem?.orderStatus}
                 </p>
                 <p>
-                  order deliverd on{" "}
-                  {deliveryDate(
-                    orderItem?.createdAt,
-                    orderItem?.orderItem?.product?.estimatedDelivery
-                  )}
+                  order {orderItem?.orderStatus?.toLowerCase()} on{" "}
+                  {formattedDate(orderItem?.updatedAt)}
                 </p>
               </div>
             )}

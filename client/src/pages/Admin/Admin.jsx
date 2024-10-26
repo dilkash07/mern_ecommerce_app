@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getUsers,
   getOrders,
+  getOrdersAndRevenue,
   getProducts,
 } from "../../services/operations/AdminAPI";
 
@@ -14,6 +15,7 @@ const Admin = () => {
   const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    dispatch(getOrdersAndRevenue(token));
     dispatch(getOrders(token));
     dispatch(getUsers(token));
     dispatch(getProducts(token));

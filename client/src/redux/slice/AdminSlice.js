@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   orders: null,
+  ordersAndRevenue: null,
   users: null,
+  user: null,
   products: null,
   product: null,
   categories: null,
@@ -15,8 +17,14 @@ const adminSlice = createSlice({
     setOrders: (state, action) => {
       state.orders = action.payload;
     },
+    setOrdersAndRevenue: (state, action) => {
+      state.ordersAndRevenue = action.payload;
+    },
     setUsers: (state, action) => {
       state.users = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
     setProducts: (state, action) => {
       state.products = action.payload;
@@ -30,6 +38,13 @@ const adminSlice = createSlice({
   },
 });
 
-export const { setOrders, setUsers, setProducts, setProduct, setCategories } =
-  adminSlice.actions;
+export const {
+  setOrders,
+  setOrdersAndRevenue,
+  setUsers,
+  setUser,
+  setProducts,
+  setProduct,
+  setCategories,
+} = adminSlice.actions;
 export default adminSlice.reducer;

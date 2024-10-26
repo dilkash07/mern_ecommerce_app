@@ -5,10 +5,10 @@ const {
   getAllProduct,
   getProductCategory,
   getRecommendedProduct,
+  getFilteredProduct,
   getProductDetails,
 } = require("../controllers/Product");
 
-const { getFilteredProduct } = require("../controllers/FilteredProduct");
 const { addReviews } = require("../controllers/Review");
 const { auth } = require("../middleware/Auth");
 

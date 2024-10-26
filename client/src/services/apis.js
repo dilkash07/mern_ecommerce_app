@@ -69,8 +69,10 @@ export const paymentEndpoints = {
 // ADMIN ENDPOINTS
 export const adminEndpoints = {
   GET_ORDERS_API: baseUrl + "/admin/getOrders",
+  GET_ORDERS_AND_REVENUE_API: baseUrl + "/admin/getOrdersAndRevenue",
   UPDATE_ORDER_STATUS_API: baseUrl + "/admin/updateOrderStatus/",
   GET_USERS_API: baseUrl + "/admin/getUsers",
+  UPDATE_USER_API: baseUrl + "/admin/updateUser/",
   GET_PRODUCTS_API: baseUrl + "/admin/getProducts",
   GET_PRODUCT_API: baseUrl + "/admin/getProduct/",
   UPLOAD_PRODUCT_API: baseUrl + "/admin/uploadProduct",

@@ -76,6 +76,8 @@ const AddProduct = () => {
 
   return (
     <div className="h-screen w-full overflow-scroll scrollbar-none mx-auto pb-20 px-5">
+      {showCategory && <AddCategory setShowCategory={setShowCategory} />}
+
       <div className="border-b border-orange-100 py-4 mb-10">
         <h1 className="italic text-3xl mb-3">Add Product</h1>
       </div>
@@ -241,11 +243,6 @@ const AddProduct = () => {
           Upload Product
         </button>
       </form>
-      {showCategory && (
-        <div className="h-screen w-screen grid place-items-center bg-white bg-opacity-50 fixed top-0 right-0">
-          <AddCategory setShowCategory={setShowCategory} />
-        </div>
-      )}
     </div>
   );
 };

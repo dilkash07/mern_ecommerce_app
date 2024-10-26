@@ -1,13 +1,23 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { MdEditNote } from "react-icons/md";
 import { formattedDate } from "../../utils.jsx/dateFormatter";
+import UpdateUser from "../../components/admin/UpdateUser";
+import { setUser } from "../../redux/slice/AdminSlice";
 
 const Users = () => {
+  const dispatch = useDispatch();
   const { users } = useSelector((state) => state.admin);
+  const [updateUser, setUpdateUser] = useState(false);
+
+  const updateUserHandler = (user) => {
+    dispatch(setUser(user));
+    setUpdateUser(true);
+  };
 
   return (
-    <div className="h-screen w-full overflow-scroll scrollbar-none max-w-7xl mx-auto px-5 relative">
+    <div className="h-screen w-full overflow-scroll scrollbar-none max-w-7xl mx-auto px-5">
+      {updateUser && <UpdateUser setUpdateUser={setUpdateUser} />}
       <div className="border-b border-orange-100 py-4 mb-10">
         <h1 className="italic text-3xl mb-3">Users</h1>
       </div>
@@ -40,7 +50,11 @@ const Users = () => {
             <p>{user.role}</p>
             <p>{formattedDate(user.createdAt)}</p>
             <p className="grid place-items-center">
-              <MdEditNote size={25} />
+              <MdEditNote
+                size={25}
+                className="cursor-pointer"
+                onClick={() => updateUserHandler(user)}
+              />
             </p>
           </div>
         ))}

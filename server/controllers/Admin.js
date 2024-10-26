@@ -6,6 +6,7 @@ const {
   uploadImageToCloudinary,
   removeImageFromCloudinary,
 } = require("../utils/imageUploader");
+const { getDateRange } = require("../utils/dateRangeFinder");
 
 exports.getUsers = async (req, res) => {
   try {
@@ -23,6 +24,26 @@ exports.getUsers = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while fetching users",
+    });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { role } = req.body;
+
+    const user = await User.findOneAndUpdate({ _id: req.params.id }, { role });
+
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while updating user",
     });
   }
 };
@@ -307,6 +328,45 @@ exports.updateOrderStatus = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong while updating status",
+    });
+  }
+};
+
+exports.getOrdersAndRevenue = async (req, res) => {
+  try {
+    const periods = ["day", "week", "month"];
+
+    const response = {};
+
+    for (const period of periods) {
+      const { startDate, endDate } = getDateRange(period);
+
+      const orders = await Order.find({
+        createdAt: {
+          $gte: startDate.toDate(),
+          $lte: endDate.toDate(),
+        },
+      });
+
+      const totalOrders = orders.length;
+      const totalRevenue = orders.reduce(
+        (sum, order) => sum + order.orderItem.price,
+        0
+      );
+
+      response[period] = { totalOrders, totalRevenue };
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Orders and revenue details fetched successfully",
+      response,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong while fetching orders and revenue details",
     });
   }
 };

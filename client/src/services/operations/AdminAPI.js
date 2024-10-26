@@ -2,8 +2,10 @@ import toast from "react-hot-toast";
 import {
   setCategories,
   setOrders,
+  setOrdersAndRevenue,
   setProduct,
   setProducts,
+  setUser,
   setUsers,
 } from "../../redux/slice/AdminSlice";
 import { setLoading } from "../../redux/slice/LoaderSlice";
@@ -12,7 +14,9 @@ import { adminEndpoints } from "../apis";
 
 const {
   GET_USERS_API,
+  UPDATE_USER_API,
   GET_ORDERS_API,
+  GET_ORDERS_AND_REVENUE_API,
   UPDATE_ORDER_STATUS_API,
   UPLOAD_PRODUCT_API,
   UPDATE_PRODUCT_API,
@@ -40,6 +44,32 @@ export function getUsers(token) {
   };
 }
 
+export function updateUser(role, id, token) {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "Put",
+        UPDATE_USER_API + id,
+        { role },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      toast.success(response.data.message);
+      dispatch(setUser(response.data.data));
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+    dispatch(setLoading(false));
+  };
+}
+
 export function getOrders(token) {
   return async (dispatch) => {
     dispatch(setLoading(true));
@@ -56,6 +86,31 @@ export function getOrders(token) {
     } catch (error) {
       toast.error(error.response.data.message);
       console.log("error: ", error);
+    }
+    dispatch(setLoading(false));
+  };
+}
+
+export function getOrdersAndRevenue(token) {
+  return async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      const response = await apiConnector(
+        "Get",
+        GET_ORDERS_AND_REVENUE_API,
+        null,
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      dispatch(setOrdersAndRevenue(response.data.response));
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
     dispatch(setLoading(false));
   };

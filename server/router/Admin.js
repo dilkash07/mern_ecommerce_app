@@ -11,10 +11,14 @@ const {
   uploadProductCategory,
   uploadProduct,
   updateProduct,
+  getOrdersAndRevenue,
+  updateUser,
 } = require("../controllers/Admin");
 
 router.get("/getUsers", auth, admin, getUsers);
+router.put("/updateUser/:id", auth, admin, updateUser);
 router.get("/getOrders", auth, admin, getOrders);
+router.get("/getOrdersAndRevenue", getOrdersAndRevenue);
 router.get("/getProducts", auth, admin, getProducts);
 router.post("/uploadProduct", auth, admin, uploadProduct);
 router.put("/updateProduct/:id", auth, admin, updateProduct);

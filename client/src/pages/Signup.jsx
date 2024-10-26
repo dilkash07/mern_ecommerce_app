@@ -15,12 +15,6 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const { signupData } = useSelector((state) => state.auth);
-
-  // useEffect(() => {
-  //   console.log("this is signup data: ", signupData);
-  // }, [signupData]);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -187,7 +181,7 @@ const Signup = () => {
             <p>
               Already have Account ?{" "}
               <Link
-                to={"/login"}
+                to={"login"}
                 className=" font-medium text-red-500 hover:text-red-600 hover:underline cursor-pointer"
               >
                 Login
