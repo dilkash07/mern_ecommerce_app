@@ -15,14 +15,14 @@ const {
   updateUser,
 } = require("../controllers/Admin");
 
-router.get("/getUsers", auth, admin, getUsers);
-router.put("/updateUser/:id", auth, admin, updateUser);
-router.get("/getOrders", auth, admin, getOrders);
-router.get("/getOrdersAndRevenue", getOrdersAndRevenue);
-router.get("/getProducts", auth, admin, getProducts);
-router.post("/uploadProduct", auth, admin, uploadProduct);
-router.put("/updateProduct/:id", auth, admin, updateProduct);
-router.post("/uploadProductCategory", auth, admin, uploadProductCategory);
-router.put("/updateOrderStatus/:id", auth, admin, updateOrderStatus);
+router.get("/get-users", auth, admin, getUsers);
+router.put("/update-user/:id", auth, admin, updateUser);
+router.get("/get-orders", auth, admin, getOrders);
+router.get("/get-orders-and-revenue", getOrdersAndRevenue);
+router.get("/get-products", auth, admin, getProducts);
+router.post("/upload-product", auth, admin, uploadProduct);
+router.put("/update-product/:id", auth, admin, updateProduct);
+router.post("/upload-product-category", auth, admin, uploadProductCategory);
+router.put("/update-order-status/:id", auth, admin, updateOrderStatus);
 
 module.exports = router;

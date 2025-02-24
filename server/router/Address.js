@@ -9,10 +9,10 @@ const {
   makeDefaultAddress,
 } = require("../controllers/Address");
 
-router.post("/addAddress", auth, addAddress);
-router.get("/getAddress", auth, getAddress);
-router.delete("/removeAddress", auth, removeAddress);
-router.put("/updateAddress", auth, updateAddress);
-router.put("/makeDefaultAddress", auth, makeDefaultAddress);
+router.post("/add-address", auth, addAddress);
+router.get("/get-address", auth, getAddress);
+router.delete("/remove-address", auth, removeAddress);
+router.put("/update-address", auth, updateAddress);
+router.put("/make-default-address", auth, makeDefaultAddress);
 
 module.exports = router;

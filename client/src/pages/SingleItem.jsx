@@ -23,7 +23,6 @@ import Footer from "../components/core/Footer";
 
 const SingleItem = () => {
   const { itemId } = useParams();
-  const API_URL = `http://localhost:4000/api/v1/product/getProductDetails/${itemId}`;
   const [activeImage, setActiveImage] = useState("");
   const [showReview, setShowReview] = useState(false);
   const [updateReview, setUpdateReview] = useState(false);
@@ -49,7 +48,7 @@ const SingleItem = () => {
   }, [productDetails]);
 
   useEffect(() => {
-    dispatch(getProductDetails(API_URL, itemId));
+    dispatch(getProductDetails(itemId));
   }, [itemId]);
 
   useEffect(() => {
@@ -251,7 +250,7 @@ const SingleItem = () => {
           <h1 className="text-xl font-bold my-2 mt-4">Recommended Products</h1>
           <div className="w-full flex gap-5 overflow-x-scroll py-2">
             {recommendedProduct?.map((item) => (
-              <RecommendedCard item={item} />
+              <RecommendedCard item={item} key={item._id} />
             ))}
           </div>
         </div>

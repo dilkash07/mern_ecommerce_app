@@ -9,9 +9,9 @@ const {
   moveToCart,
 } = require("../controllers/Cart");
 
-router.post("/addCart", auth, addCart);
-router.delete("/removeCart", auth, removeCart);
-router.get("/getCartDetails", auth, getCartDetails);
-router.put("/moveToCart", auth, moveToCart);
+router.post("/add-cart", auth, addCart);
+router.delete("/remove-cart", auth, removeCart);
+router.get("/get-cart-details", auth, getCartDetails);
+router.put("/move-to-cart", auth, moveToCart);
 
 module.exports = router;

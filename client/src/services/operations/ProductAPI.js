@@ -14,6 +14,7 @@ import { setCategories } from "../../redux/slice/AdminSlice";
 const {
   GET_PRODUCT_CATEGORY_API,
   GET_ALL_PRODUCT_API,
+  GET_PRODUCT_DETAILS_API,
   GET_FILTERED_PRODUCT_API,
   GET_RECOMMENDED_PRODUCT_API,
   ADD_REVIEWS_API,
@@ -103,13 +104,16 @@ export function getFilteredProduct(
 }
 
 //  get product details
-export function getProductDetails(API_URL, itemId) {
+export function getProductDetails(itemId) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     dispatch(setProductDetails([]));
     dispatch(setRecommendedProduct([]));
     try {
-      const productDetails = await apiConnector("Get", API_URL);
+      const productDetails = await apiConnector(
+        "Get",
+        GET_PRODUCT_DETAILS_API + itemId
+      );
       const category = productDetails.data.response.category;
       const recommendedProduct = await apiConnector(
         "Post",

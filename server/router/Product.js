@@ -12,11 +12,11 @@ const {
 const { addReviews } = require("../controllers/Review");
 const { auth } = require("../middleware/Auth");
 
-router.post("/addReviews", auth, addReviews);
-router.get("/getAllProduct", getAllProduct);
-router.get("/getProductCategory", getProductCategory);
-router.get("/getProductDetails/:id", getProductDetails);
-router.get("/getFilteredProduct", getFilteredProduct);
-router.post("/getRecommendedProduct", getRecommendedProduct);
+router.post("/add-reviews", auth, addReviews);
+router.get("/get-all-product", getAllProduct);
+router.get("/get-product-category", getProductCategory);
+router.get("/get-product-details/:id", getProductDetails);
+router.get("/get-filtered-product", getFilteredProduct);
+router.post("/get-recommended-product", getRecommendedProduct);
 
 module.exports = router;

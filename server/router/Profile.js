@@ -8,8 +8,8 @@ const {
 } = require("../controllers/Profile");
 const { auth } = require("../middleware/Auth");
 
-router.get("/getUserDetails", auth, getUserDetails);
-router.put("/updateProfilePicture", auth, updateProfilePricture);
-router.put("/updateProfile", auth, updateProfile);
+router.get("/get-user-details", auth, getUserDetails);
+router.put("/update-profile-picture", auth, updateProfilePricture);
+router.put("/update-profile", auth, updateProfile);
 
 module.exports = router;

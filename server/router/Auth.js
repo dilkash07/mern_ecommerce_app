@@ -20,9 +20,9 @@ router.post("/login", login);
 router.post("/sendotp", sendOtp);
 
 // update password
-router.put("/changePassword", auth, changePassword);
+router.put("/change-password", auth, changePassword);
 
 // delete account
-router.delete("/deleteAccount", auth, deleteAccount);
+router.delete("/delete-account", auth, deleteAccount);
 
 module.exports = router;
