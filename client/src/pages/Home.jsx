@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import Card from "../components/Card";
-import Loader from "../components/Loader";
+import ProductCard from "../components/product/ProductCard";
+import Loader from "../components/core/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getFilteredProduct } from "../services/operations/ProductAPI";
-import CategorySlider from "../components/CategorySlider";
-import BannerSlider from "../components/BannerSlider";
+import CategorySlider from "../components/core/CategorySlider";
+import BannerSlider from "../components/core/BannerSlider";
 import Header from "../components/core/Header";
 import Footer from "../components/core/Footer";
 
@@ -38,7 +38,7 @@ const Home = () => {
         </div>
         <div className=" w-full flex justify-center items-center flex-wrap gap-5 py-5 -z-10">
           {product.length > 0 ? (
-            product.map((item) => <Card item={item} key={item._id} />)
+            product.map((item) => <ProductCard item={item} key={item._id} />)
           ) : (
             <div>Data Not Found</div>
           )}

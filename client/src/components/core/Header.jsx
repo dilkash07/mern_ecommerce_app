@@ -6,9 +6,9 @@ import { RxCross1 } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import { setQuery } from "../../redux/slice/QuerySlice";
 import loginImg from "../../assets/user_image.png";
-import Sidebar from "../Sidebar";
+import Sidebar from "./Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import User from "../User";
+import UserBar from "./UserBar";
 import { FaRegHeart } from "react-icons/fa";
 
 const Header = () => {
@@ -89,7 +89,7 @@ const Header = () => {
             {/* user Profile */}
             <div className="absolute top-8 -right-12 z-10">
               {(profile || userProfile) && (
-                <User setUserProfile={setUserProfile} />
+                <UserBar setUserProfile={setUserProfile} />
               )}
             </div>
 

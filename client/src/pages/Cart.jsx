@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CartItem from "../components/CartItem";
+import CartItem from "../components/cart/CartItem";
 import { Link, useNavigate } from "react-router-dom";
-import PriceDetails from "../components/PriceDetails";
+import PriceDetails from "../components/product/PriceDetails";
 import { IoIosArrowForward } from "react-icons/io";
 import { LiaBookmark } from "react-icons/lia";
-import Loader from "../components/Loader";
+import Loader from "../components/core/Loader";
 import Header from "../components/core/Header";
 import Footer from "../components/core/Footer";
 

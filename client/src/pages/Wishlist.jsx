@@ -1,8 +1,8 @@
 import React from "react";
-import WishlistItem from "../components/WishlistItem";
+import WishlistItem from "../components/wishlist/WishlistItem";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Loader from "../components/Loader";
+import Loader from "../components/core/Loader";
 import Footer from "../components/core/Footer";
 import Header from "../components/core/Header";
 

@@ -10,16 +10,17 @@ import {
 } from "../services/operations/WishlistAPI";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../services/operations/ProductAPI";
-import AddReview from "../components/AddReview";
-import ReviewsDetails from "../components/ReviewsDetails";
+import AddReview from "../components/review/AddReview";
+import ReviewsDetails from "../components/review/ReviewsDetails";
 // import ReactImageMagnify from "react-image-magnify"; isko use karne ke liye packege download karna hoga!
-import ImageMagnify from "../components/ImageMagnify";
+import ImageMagnify from "../components/core/ImageMagnify";
 import ReactImageMagnify from "react-image-magnify";
 import { formattedINR } from "../utils.jsx/inrFormatter";
-import Loader from "../components/Loader";
-import RecommendedCard from "../components/RecommendedCard";
+import Loader from "../components/core/Loader";
+import RecommendedCard from "../components/product/RecommendedCard";
 import Header from "../components/core/Header";
 import Footer from "../components/core/Footer";
+import ProductImageMagnifier from "../components/product/ProductImageMagnifier";
 
 const SingleItem = () => {
   const { itemId } = useParams();
@@ -103,9 +104,9 @@ const SingleItem = () => {
           />
         </div>
       )}
-      <div className="max-w-7xl p-2 md:py-5 md:px-10  flex flex-col md:flex-row mx-auto">
-        <div className="md:min-w-[450px] flex items-center md:items-start flex-col-reverse md:flex-row mt-4 ">
-          <div className="flex w-20 h-20 md:h-96 pt-4 gap-2 md:flex-col  items-center overflow-scroll scrollbar-none ">
+      <div className="max-w-7xl p-2 md:py-5 md:px-10  flex flex-col md:flex-row gap-1">
+        <div className="md:min-w-[450px] flex items-center md:items-start flex-col-reverse md:flex-row mt-4 mx-2 ">
+          <div className="flex shrink-0 md:h-96 pt-4 gap-2 md:flex-col items-center overflow-scroll scrollbar-none ">
             {productDetails?.images?.map((image, key) => (
               <div
                 className="h-20 w-20 hover:border-2 border-orange-600 flex justify-center items-center"
@@ -121,30 +122,7 @@ const SingleItem = () => {
             ))}
           </div>
           <div className="mx-auto md:px-5">
-            <div className="h-96 w-96 flex justify-center items-center">
-              <img src={activeImage} alt="ecommerce" className="max-h-full" />
-            </div>
-
-            {/* <ImageMagnify imageSrc={activeImage} imageAlt={"ecommerce"} /> */}
-
-            {/* <div className="h-96 flex justify-center items-center">
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    alt: "Product Image",
-                    isFluidWidth: true,
-                    src: activeImage,
-                  },
-                  largeImage: {
-                    src: activeImage,
-                    width: 1200,
-                    height: 1200,
-                  },
-                  lensStyle: { backgroundColor: "rgba(0,0,0,.6)" },
-                }}
-                style={{ borderRadius: "0.5rem", overflow: "hidden" }}
-              />
-            </div> */}
+            <ProductImageMagnifier activeImage={activeImage} />
           </div>
         </div>
         <div className="min-w-[312px] md:max-w-[640px] mt-12">

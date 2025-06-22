@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
-import AddAddress from "../components/AddAddress";
+import AddAddress from "../components/address/AddAddress";
 import { useDispatch, useSelector } from "react-redux";
 import {
   makeDefaultAddress,
