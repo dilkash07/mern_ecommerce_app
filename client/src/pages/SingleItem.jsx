@@ -72,6 +72,8 @@ const SingleItem = () => {
   function addToCart() {
     if (token) {
       dispatch(addCart(productId, quantity, token));
+    } else {
+      navigate("/login");
     }
   }
 
@@ -82,6 +84,8 @@ const SingleItem = () => {
   function addToWishlist() {
     if (token) {
       dispatch(addWishlist(productId, token));
+    } else {
+      navigate("/login");
     }
   }
 

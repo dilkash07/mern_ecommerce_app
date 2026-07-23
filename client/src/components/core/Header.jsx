@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -14,20 +14,30 @@ import { FaRegHeart } from "react-icons/fa";
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
   const [Search, setSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { query } = useSelector((state) => state.query);
   const { user } = useSelector((state) => state.user);
+  const timerRef = useRef(null);
 
   function changeHandler(e) {
-    dispatch(setQuery(e.target.value));
-    navigate("/filteredProduct");
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    clearTimeout(timerRef.current);
+
+    timerRef.current = setTimeout(() => {
+      dispatch(setQuery(value));
+      navigate("/filteredProduct");
+    }, 500);
   }
 
   function queryHandler() {
     dispatch(setQuery(""));
+    setSearchQuery("");
     setSearch(false);
   }
 
@@ -58,13 +68,13 @@ const Header = () => {
           <div className="relative min-w-3 w-3/12 hidden md:block">
             <input
               type="text"
-              value={query}
+              value={searchQuery}
               placeholder="Search for products, brands and more"
               className="w-full text-xs px-2 pl-6 py-1.5 outline-none rounded-sm focus:shadow-sm focus:shadow-red-500"
               onChange={changeHandler}
             />
             <CiSearch className=" absolute top-1.5 left-1" />
-            {query.length > 0 && (
+            {searchQuery.length > 0 && (
               <RxCross1
                 size={14}
                 className=" absolute top-2 right-1.5 cursor-pointer"

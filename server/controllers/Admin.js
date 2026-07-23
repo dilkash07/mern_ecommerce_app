@@ -283,6 +283,7 @@ exports.uploadProductCategory = async (req, res) => {
 };
 
 exports.updateOrderStatus = async (req, res) => {
+  console.log("hello jee order me kuchh problem hai");
   try {
     const { status } = req.body;
     const response = (

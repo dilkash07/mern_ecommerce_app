@@ -94,13 +94,13 @@ class Server {
       cors({
         origin: "http://localhost:5173",
         credentials: true,
-      })
+      }),
     );
     this.app.use(
       fileUpload({
         useTempFiles: true,
         tempFileDir: "/tmp/",
-      })
+      }),
     );
   }
 

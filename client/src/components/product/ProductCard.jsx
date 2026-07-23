@@ -3,16 +3,18 @@ import { FaStar } from "react-icons/fa";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   addWishlist,
   removeWishlist,
 } from "../../services/operations/WishlistAPI";
 import { addCart, removeCart } from "../../services/operations/CartAPI";
 import { formattedINR } from "../../utils.jsx/inrFormatter";
+import toast from "react-hot-toast";
 
 const Card = ({ item }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showCart, setShowCart] = useState(false);
   const { token } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
@@ -32,6 +34,8 @@ const Card = ({ item }) => {
   function addToWishlist() {
     if (token) {
       dispatch(addWishlist(productId, token));
+    } else {
+      navigate("/login");
     }
   }
 
@@ -77,11 +81,11 @@ const Card = ({ item }) => {
         <p className=" font-bold">
           {item.title.split(" ").slice(0, 2).join(" ")}
         </p>
-        <p className=" font-normal text-sm text-gray-600">
-          {item.description.length > 60
-            ? item.description.split(" ").slice(0, 7).join(" ") + "..."
-            : item.description}
+
+        <p className=" font-normal text-sm text-gray-600 line-clamp-1">
+          {item.description}
         </p>
+
         <p className="text-sm font-semibold">
           ₹ {formattedINR(item.sellingPrice)}{" "}
           <span className="text-xs font-normal text-gray-600 line-through">

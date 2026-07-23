@@ -71,7 +71,7 @@ export const paymentEndpoints = {
 export const adminEndpoints = {
   GET_ORDERS_API: baseUrl + "/admin/get-orders",
   GET_ORDERS_AND_REVENUE_API: baseUrl + "/admin/get-orders-and-revenue",
-  UPDATE_ORDER_STATUS_API: baseUrl + "/admin/update-orrder-status/",
+  UPDATE_ORDER_STATUS_API: baseUrl + "/admin/update-order-status/",
   GET_USERS_API: baseUrl + "/admin/get-users",
   UPDATE_USER_API: baseUrl + "/admin/update-user/",
   GET_PRODUCTS_API: baseUrl + "/admin/get-products",
