@@ -1,6 +1,21 @@
-# 📸 Application Preview
-
 <div align="center">
+
+# 🛍️ MERN E-Commerce Application
+
+A modern **Full Stack E-Commerce Platform** built with the **MERN Stack (MongoDB, Express.js, React.js, Node.js)** featuring secure authentication, product management, shopping cart, wishlist, Stripe payments, order management, and a powerful admin dashboard.
+
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-Express-339933?logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white)
+![JWT](https://img.shields.io/badge/Auth-JWT-orange)
+![Stripe](https://img.shields.io/badge/Stripe-Payment-635BFF?logo=stripe&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+
+</div>
+
+---
+
+# 📸 Application Preview
 
 <p align="center">
   <img src="screenshots/home.png" width="48%" />
@@ -19,7 +34,7 @@
 
 <p align="center">
   <img src="screenshots/user-login.png" width="48%" />
-  <img src="screenshots/prfile.png" width="48%" />
+  <img src="screenshots/profile.png" width="48%" />
 </p>
 
 <p align="center">
@@ -28,29 +43,17 @@
 </p>
 
 <p align="center">
-  <img src="screenshots/user-managment.png" width="48%" />
+  <img src="screenshots/user-management.png" width="48%" />
   <img src="screenshots/order-management.png" width="48%" />
 </p>
 
-# 🛍️ MERN E-Commerce Application
-
-A modern, full-stack E-Commerce platform built using the **MERN Stack** (MongoDB, Express.js, React.js, Node.js). The application provides a complete online shopping experience with secure authentication, product management, shopping cart, order processing, and an admin dashboard.
-
-[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://react.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Database-green?logo=mongodb)](https://mongodb.com/)
-[![JWT](https://img.shields.io/badge/Auth-JWT-orange)]()
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)]()
-
-</div>
-
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-This project is a production-ready Full Stack E-Commerce application that enables users to browse products, search items, manage carts, place orders, and securely authenticate using JWT.
+This project is a complete Full Stack E-Commerce platform that allows users to browse products, search products, add items to their cart, manage wishlists, securely complete purchases, and track their orders.
 
-It also includes an Admin Panel where administrators can manage products, categories, users, and customer orders.
+Administrators have access to a powerful dashboard where they can manage products, categories, users, and customer orders.
 
 ---
 
@@ -59,18 +62,21 @@ It also includes an Admin Panel where administrators can manage products, catego
 ## 👤 User Features
 
 - User Registration & Login
-- Secure JWT Authentication
+- JWT Authentication
 - Email Verification
-- Forgot & Reset Password
+- Forgot Password
+- Reset Password
 - Browse Products
 - Search Products
 - Product Categories
-- Product Details Page
+- Product Filtering
+- Product Details
 - Shopping Cart
-- Wishlist (Optional)
-- Checkout Process
-- Stripe Payment Integration
+- Wishlist
+- Stripe Payment Gateway
+- Secure Checkout
 - Order History
+- User Profile
 - Responsive Design
 
 ---
@@ -78,13 +84,13 @@ It also includes an Admin Panel where administrators can manage products, catego
 ## 🛠️ Admin Features
 
 - Admin Dashboard
-- Manage Products
-- Manage Categories
-- Manage Orders
-- Manage Users
+- Product Management
+- Category Management
+- User Management
+- Order Management
 - Upload Product Images
 - Update Order Status
-- Sales Statistics
+- Dashboard Analytics
 
 ---
 
@@ -100,29 +106,23 @@ It also includes an Admin Panel where administrators can manage products, catego
 - ShadCN UI
 - React Hook Form
 
----
-
-## Backend
+### Backend
 
 - Node.js
 - Express.js
 - MongoDB
 - Mongoose
 - JWT Authentication
-- Bcrypt
+- Bcrypt.js
 - Multer
 - Cloudinary
 - Nodemailer
 
----
-
-## Payment
+### Payment
 
 - Stripe API
 
----
-
-## Tools
+### Tools
 
 - Git
 - GitHub
@@ -151,22 +151,35 @@ mern_ecommerce_app
 │   ├── utils
 │   └── package.json
 │
+├── screenshots
 ├── README.md
 └── package.json
 ```
 
 ---
 
+# 🌐 Live Demo
+
+### Frontend
+
+YOUR_LIVE_DEMO_LINK
+
+### Backend API
+
+YOUR_BACKEND_API_LINK
+
+---
+
 # 🔑 Environment Variables
 
-Create a `.env` file inside the **server** directory.
+Create a `.env` file inside the **server** folder.
 
 ```env
 PORT=5000
 
 MONGO_URI=your_mongodb_connection_string
 
-JWT_SECRET=your_secret
+JWT_SECRET=your_secret_key
 
 JWT_EXPIRE=7d
 
@@ -199,59 +212,51 @@ STRIPE_PUBLISHABLE_KEY=
 
 ```bash
 git clone https://github.com/dilkash07/mern_ecommerce_app.git
-
-cd mern_ecommerce_app
 ```
 
----
+```bash
+cd mern_ecommerce_app
+```
 
 ## Install Backend
 
 ```bash
 cd server
-
 npm install
 ```
-
----
 
 ## Install Frontend
 
 ```bash
-cd client
-
+cd ../client
 npm install
 ```
 
 ---
 
-# ▶️ Run the Project
+# ▶️ Run Locally
 
 ### Backend
 
 ```bash
 cd server
-
 npm run dev
 ```
 
-Backend runs on:
+Runs on:
 
 ```
 http://localhost:5000
 ```
 
----
-
 ### Frontend
 
 ```bash
 cd client
-
 npm run dev
 ```
 
-Frontend runs on:
+Runs on:
 
 ```
 http://localhost:5173
@@ -259,106 +264,14 @@ http://localhost:5173
 
 ---
 
-# 📸 Screenshots
-
-> Add screenshots here
-
-```
-screenshots/
-
-├── Home.png
-
-├── Product.png
-
-├── Cart.png
-
-├── Checkout.png
-
-├── AdminDashboard.png
-```
-
-```md
-# 📸 Screenshots
-
-## 🏠 Home Page
-
-![Home Page](screenshots/home.png)
-
----
-
-## 👤 User Login
-
-![User Login](screenshots/user-login.png)
-
----
-
-## 👤 User Profile
-
-![User Profile](screenshots/prfile.png)
-
----
-
-## 🔍 Product Details
-
-![Product Details](screenshots/product-details.png)
-
----
-
-## 🗂️ Product Filtering
-
-![Filter Product](screenshots/filter-product.png)
-
----
-
-## ❤️ Wishlist
-
-![Wishlist](screenshots/wishlist.png)
-
----
-
-## 🛒 Shopping Cart
-
-![Shopping Cart](screenshots/cart.png)
-
----
-
-## 💳 Checkout
-
-![Checkout](screenshots/checkout.png)
-
----
-
-## 📊 Admin Dashboard
-
-![Admin Dashboard](screenshots/admin-dashboard.png)
-
----
-
-## 📦 Product Management
-
-![Product Management](screenshots/product-management.png)
-
----
-
-## 👥 User Management
-
-![User Management](screenshots/user-managment.png)
-
----
-
-## 📋 Order Management
-
-![Order Management](screenshots/order-management.png)
-```
-
----
-
-# 🔒 Authentication
+# 🔒 Authentication & Security
 
 - JWT Authentication
-- Password Hashing using bcrypt
+- Password Hashing with Bcrypt
 - Protected Routes
-- Role Based Authorization
+- Role-Based Authorization
+- Secure Password Reset
+- Email Verification
 - Secure Cookies
 
 ---
@@ -366,42 +279,37 @@ screenshots/
 # 💳 Payment Flow
 
 ```
-Add Product
-
-↓
-
-Cart
-
-↓
-
+Browse Products
+       │
+       ▼
+Add to Cart
+       │
+       ▼
 Checkout
-
-↓
-
+       │
+       ▼
 Stripe Payment
-
-↓
-
+       │
+       ▼
 Order Created
-
-↓
-
+       │
+       ▼
 Order History
 ```
 
 ---
 
-# 📈 Future Improvements
+# 📈 Future Enhancements
 
-- Product Reviews
-- Product Ratings
-- Coupons & Discounts
-- Wishlist
-- Dark Mode
-- Multi-language Support
-- Notifications
+- Product Reviews & Ratings
+- Coupon System
+- Multiple Payment Gateways
+- Product Recommendations
 - Inventory Analytics
-- PWA Support
+- Dark Mode
+- Push Notifications
+- Multi-language Support
+- Progressive Web App (PWA)
 
 ---
 
@@ -411,22 +319,22 @@ Contributions are welcome.
 
 1. Fork the repository
 
-2. Create your feature branch
+2. Create a new branch
 
 ```bash
-git checkout -b feature/NewFeature
+git checkout -b feature/new-feature
 ```
 
-3. Commit changes
+3. Commit your changes
 
 ```bash
-git commit -m "Added New Feature"
+git commit -m "Add new feature"
 ```
 
-4. Push branch
+4. Push your branch
 
 ```bash
-git push origin feature/NewFeature
+git push origin feature/new-feature
 ```
 
 5. Open a Pull Request
@@ -435,36 +343,40 @@ git push origin feature/NewFeature
 
 # 👨‍💻 Author
 
-### Dilkash Raza
+## Dilkash Raza
 
 Full Stack MERN Developer
 
-GitHub
+**GitHub**
 
 https://github.com/dilkash07
 
-LinkedIn
+**LinkedIn**
 
-(Add your LinkedIn URL)
-
----
-
-# ⭐ Support
-
-If you like this project, don't forget to ⭐ the repository.
-
-It helps others discover the project and motivates further development.
+https://www.linkedin.com/in/dilkash-raza-2185ab261/
 
 ---
 
-## 📄 License
+# ⭐ Show Your Support
 
-This project is licensed under the MIT License.
+If you found this project helpful, please consider giving it a ⭐ on GitHub.
+
+It motivates me to build more open-source projects.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
 
 ---
 
 <div align="center">
 
-Made with ❤️ by **Dilkash Raza**
+### ❤️ Made with React, Node.js, MongoDB & Express
+
+**Developed by Dilkash Raza**
+
+⭐ Star this repository if you like it!
 
 </div>
