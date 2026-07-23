@@ -19,6 +19,11 @@ A modern **Full Stack E-Commerce Platform** built with the **MERN Stack (MongoDB
 
 <p align="center">
   <img src="screenshots/home.png" width="48%" />
+  <img src="screenshots/user-login.png" width="48%" />
+</p>
+
+<p align="center">
+  <img src="screenshots/user-profile.png" width="48%" />
   <img src="screenshots/filter-product.png" width="48%" />
 </p>
 
@@ -33,17 +38,12 @@ A modern **Full Stack E-Commerce Platform** built with the **MERN Stack (MongoDB
 </p>
 
 <p align="center">
-  <img src="screenshots/user-login.png" width="48%" />
-  <img src="screenshots/profile.png" width="48%" />
-</p>
-
-<p align="center">
   <img src="screenshots/admin-dashboard.png" width="48%" />
-  <img src="screenshots/product-management.png" width="48%" />
+  <img src="screenshots/listed-product.png" width="48%" />
 </p>
 
 <p align="center">
-  <img src="screenshots/user-management.png" width="48%" />
+  <img src="screenshots/listed-user.png" width="48%" />
   <img src="screenshots/order-management.png" width="48%" />
 </p>
 
