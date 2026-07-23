@@ -286,6 +286,18 @@ screenshots/
 
 ---
 
+## 👤 User Login
+
+![User Login](screenshots/user-login.png)
+
+---
+
+## 👤 User Profile
+
+![User Profile](screenshots/prfile.png)
+
+---
+
 ## 🔍 Product Details
 
 ![Product Details](screenshots/product-details.png)
@@ -313,18 +325,6 @@ screenshots/
 ## 💳 Checkout
 
 ![Checkout](screenshots/checkout.png)
-
----
-
-## 👤 User Login
-
-![User Login](screenshots/user-login.png)
-
----
-
-## 👤 User Profile
-
-![User Profile](screenshots/prfile.png)
 
 ---
 
