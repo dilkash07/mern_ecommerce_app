@@ -44,7 +44,7 @@ A modern **Full Stack E-Commerce Platform** built with the **MERN Stack (MongoDB
 
 <p align="center">
   <img src="screenshots/listed-user.png" width="48%" />
-  <img src="screenshots/order-management.png" width="48%" />
+  <img src="screenshots/listed-orders.png" width="48%" />
 </p>
 
 ---
