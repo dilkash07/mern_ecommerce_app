@@ -93,7 +93,7 @@ class Server {
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(
       cors({
-        origin: process.env.FRONTEND_ORIGIN,
+        origin: process.env.CLIENT_ORIGIN,
         credentials: true,
       }),
     );
