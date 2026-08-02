@@ -16,7 +16,7 @@ const AddReview = ({ setShowReview, productId, updateReview }) => {
 
   useEffect(() => {
     const isReviewed = productDetails.reviews.find(
-      (review) => review.user.toString() === user?._id?.toString()
+      (review) => review.user.toString() === user?._id?.toString(),
     );
     if (isReviewed) {
       setRating(isReviewed.rating);

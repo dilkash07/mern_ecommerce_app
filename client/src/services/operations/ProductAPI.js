@@ -68,7 +68,7 @@ export function getFilteredProduct(
   minDiscount = null,
   minRating = null,
   sortOrder = null,
-  navigate
+  navigate,
 ) {
   return async (dispatch) => {
     dispatch(setLoading(true));
@@ -87,7 +87,7 @@ export function getFilteredProduct(
           minDiscount,
           minRating,
           sortOrder,
-        }
+        },
       );
 
       if (!response.data.success) {
@@ -112,13 +112,13 @@ export function getProductDetails(itemId) {
     try {
       const productDetails = await apiConnector(
         "Get",
-        GET_PRODUCT_DETAILS_API + itemId
+        GET_PRODUCT_DETAILS_API + itemId,
       );
       const category = productDetails.data.response.category;
       const recommendedProduct = await apiConnector(
         "Post",
         GET_RECOMMENDED_PRODUCT_API,
-        { category, itemId }
+        { category, itemId },
       );
 
       if (!productDetails.data.success || !recommendedProduct.data.success) {
@@ -151,7 +151,7 @@ export function addReviews(productId, rating, comment, token, navigate) {
         { productId, rating, comment },
         {
           Authorization: `Bearer ${token}`,
-        }
+        },
       );
 
       if (!response.data.success) {

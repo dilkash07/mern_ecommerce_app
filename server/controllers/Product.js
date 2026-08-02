@@ -6,6 +6,11 @@ exports.getAllProduct = async (req, res) => {
   try {
     const response = await Product.find({});
 
+    console.log("----------------->");
+    console.log("----------------->");
+    console.log("----------------->");
+    console.log("---->  ", response);
+
     res.status(200).json({
       success: true,
       message: "Product fetched successfully",

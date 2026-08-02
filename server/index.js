@@ -75,6 +75,7 @@ const addressRoutes = require("./router/Address");
 const orderRoutes = require("./router/Order");
 const paymentRoutes = require("./router/Payment");
 const adminRoutes = require("./router/Admin");
+const dns = require("dns");
 
 class Server {
   constructor() {
@@ -96,6 +97,7 @@ class Server {
         credentials: true,
       }),
     );
+
     this.app.use(
       fileUpload({
         useTempFiles: true,
@@ -120,6 +122,7 @@ class Server {
   }
 
   databaseConnections() {
+    dns.setServers(["1.1.1.1", "8.8.8.8"]);
     database.connect();
     cloudinary.connect();
   }
